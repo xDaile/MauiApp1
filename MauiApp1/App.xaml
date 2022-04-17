@@ -7,19 +7,38 @@
         <ResourceDictionary>
 
             <Color x:Key="PrimaryColor">#512bdf</Color>
+            <Color x:Key="ButtonColor">#34179b</Color>
+            <Color x:Key="ButtonBorderColor">#25116f</Color>
             <Color x:Key="SecondaryColor">White</Color>
+            <Color x:Key="RunningColor">Green</Color>
+            <Color x:Key="RestColor">#e0f542</Color>
+            <Color x:Key="EndingRestColor">#c3eb3f</Color>
+            <Color x:Key="PauseColor">#f27107</Color>
 
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
+                <Setter Property="TextColor"
+                        Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="FontFamily"
+                        Value="OpenSansRegular" />
             </Style>
 
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="Padding" Value="14,10" />
+                <Setter Property="BorderColor"
+                        Value="{DynamicResource ButtonBorderColor}" />
+                <Setter Property="BorderWidth"
+                        Value="2" />
+                <Setter Property="TextColor"
+                        Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="FontFamily"
+                        Value="OpenSansRegular" />
+                <Setter Property="BackgroundColor"
+                        Value="{DynamicResource ButtonColor}" />
+                <Setter Property="Padding"
+                        Value="20,10" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
             </Style>
+
 
         </ResourceDictionary>
     </Application.Resources>

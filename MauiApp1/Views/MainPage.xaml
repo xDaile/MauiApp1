@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="{DynamicResource SecondaryColor}"
+             Title="Training list"
+             SemanticProperties.HeadingLevel="Level1">
+    <Grid RowDefinitions="70,*,70"
+          RowSpacing="25">
+
+        <ContentView Padding="15"
+                     Grid.Row="0">
+
+            <Button Text="Settings"
+                    FontAttributes="Bold"
+                    Clicked="GoToSettings"
+                    HorizontalOptions="EndAndExpand" />
+
+
+
+        </ContentView>
+        <ScrollView Grid.Row="1">
+
+            <CollectionView ItemsSource="{Binding trainingList}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding selectedTraining}"
+                            SelectionChangedCommand="{Binding TrainingSelected}">
+
+            </CollectionView>
+
+            <!--<Grid RowSpacing="25"
+                  RowDefinitions="Auto,Auto,Auto,Auto,AUto,Auto"
+                  Padding="{OnPlatform iOS='0,0,0,0', Default='0,0,0,0'}">
+
+
+                <Label Text="Welcome to .NET Multi-platform App UI"
+                       Grid.Row="1"
+                       SemanticProperties.HeadingLevel="Level1"
+                       SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                       FontSize="18"
+                       HorizontalOptions="Center" />
+
+               
+
+                <Button Text="Click me"
+                        FontAttributes="Bold"
+                        Grid.Row="3"
+                        SemanticProperties.Hint="Counts the number of times you click"
+                        Clicked="OnCounterClicked"
+                        HorizontalOptions="Center" />
+
+                <Image Grid.Row="4"
+                       Source="dotnet_bot.png"
+                       SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                       WidthRequest="250"
+                       HeightRequest="310"
+                       HorizontalOptions="Center" />
+                <Image Grid.Row="5"
+                       Source="dotnet_bot.png"
+                       SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                       WidthRequest="250"
+                       HeightRequest="310"
+                       HorizontalOptions="Center" />
+
+            </Grid>-->
+        </ScrollView>
+        <ContentView BackgroundColor="{DynamicResource PrimaryColor}"
+                     Padding="10"
+                     Margin="5,0"
+                     Grid.Row="2">
+
+            <Grid ColumnDefinitions="*, *, *"
+                  ColumnSpacing="60">
+                <Button Text="Edit"
+                        IsVisible="{Binding editButtonVisibility}"
+                        Grid.Column="0"
+                        SemanticProperties.Hint="Counts the number of times you click"
+                        Clicked="EditTraining"
+                        HorizontalOptions="StartAndExpand" />
+                <Button Text="+"
+                        FontAttributes="Bold"
+                        Grid.Column="1"
+                        SemanticProperties.Hint="Counts the number of times you click"
+                        Clicked="CreateNewTraining"
+                        HorizontalOptions="CenterAndExpand" />
+                <Button Text="Start"
+                        IsVisible="{Binding startButtonVisibility}"
+                        FontAttributes="Bold"
+                        Grid.Column="2"
+                        SemanticProperties.Hint="Counts the number of times you click"
+                        Clicked="OnCounterClicked"
+                        HorizontalOptions="EndAndExpand" />
+            </Grid>
+
+
+        </ContentView>
+    </Grid>
+</ContentPage>
