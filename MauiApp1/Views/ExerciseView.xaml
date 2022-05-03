@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.ExerciseView"
+             xmlns:models="clr-namespace:MauiApp1.Models"
+             xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
+             xmlns:resources="clr-namespace:MauiApp1.Resources"
+             xmlns:views="clr-namespace:MauiApp1.Views"
+             Title="{x:Static resources:Texts.Exercise_Page_Title}"
+             x:DataType="viewModels:ExerciseViewModel">
+    <StackLayout>
+        <Label Text="Welcome to .NET MAUI!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+    </StackLayout>
+</views:ContentPageBase>

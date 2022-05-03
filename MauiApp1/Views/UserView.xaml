@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="MauiApp1.Views.UserView"
+                       xmlns:models="clr-namespace:MauiApp1.Models"
+                       xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
+                       xmlns:resources="clr-namespace:MauiApp1.Resources"
+                       xmlns:views="clr-namespace:MauiApp1.Views"
+                       Title="UserView"
+                       x:DataType="viewModels:UserViewModel">
+
+    <Label Text="Welcome to .NET MAUI!"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+
+</views:ContentPageBase>

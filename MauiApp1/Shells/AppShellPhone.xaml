@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:resources="clr-namespace:MauiApp1.Resources"
+       xmlns:views="clr-namespace:MauiApp1.Views"
+       x:Class="MauiApp1.Shells.AppShellPhone"
+       BackgroundColor="{DynamicResource SecondaryColor}"
+       Shell.TabBarTitleColor="{DynamicResource PauseColor}"
+       Shell.UnselectedColor="{DynamicResource PauseColor}"
+       Shell.TabBarBackgroundColor="{DynamicResource PauseColor}"
+       FlyoutBackgroundColor="{DynamicResource PrimaryColor}">
+    <Shell.FlyoutHeader>
+        <Grid HorizontalOptions="Start">
+            <Image HeightRequest="50"
+                   HorizontalOptions="Start"
+                   Source="/Images/logo_text.png"
+                   Margin="0, 10, 0, 0" />
+            <Label Grid.Column="1"
+                   Text="Menu"
+                   FontSize="20"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource SecondaryColor}" />
+        </Grid>
+    </Shell.FlyoutHeader>
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="20, *"
+                  ColumnSpacing="10"
+                  Padding="10">
+
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource ButtonBorderColor}" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+   
+    <FlyoutItem Title="Settings">
+        <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"
+                      Route="settings" />
+    </FlyoutItem>
+    <FlyoutItem Title="Training Plans">
+        <ShellContent ContentTemplate="{DataTemplate views:TrainingPlansView}"
+                      Route="training_plans" />
+    </FlyoutItem>
+    <FlyoutItem Title="Exercises">
+        <ShellContent ContentTemplate="{DataTemplate views:ExerciseView}"
+                      Route="exercises" />
+    </FlyoutItem>
+    <FlyoutItem Title="User">
+        <ShellContent ContentTemplate="{DataTemplate views:UserView}"
+                      Route="user" />
+    </FlyoutItem>
+</Shell>

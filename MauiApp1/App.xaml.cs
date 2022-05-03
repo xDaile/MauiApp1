@@ -1,10 +1,13 @@
-﻿namespace MauiApp1;
+﻿using MauiApp1.Shells;
 
-public partial class App : Application
+namespace MauiApp1;
+
+public partial class App
 {
-	public App()
+	public App(IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
-		MainPage = new NavigationPage(new MainPage()) { Title = "Training list" };
+		MainPage = new AppShellPhone();
+		//		MainPage = new NavigationPage(new MainPageView()) { Title = "Training list" };
 	}
 }
