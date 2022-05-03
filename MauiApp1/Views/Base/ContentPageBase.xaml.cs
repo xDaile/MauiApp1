@@ -2,7 +2,7 @@ using MauiApp1.ViewModels;
 
 namespace MauiApp1.Views;
 
-public partial class ContentPageBase : ContentPage
+public abstract partial class ContentPageBase : ContentPage
 {
     protected IViewModel viewModel { get; }
 

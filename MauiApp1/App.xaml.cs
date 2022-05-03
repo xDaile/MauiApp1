@@ -7,7 +7,8 @@ public partial class App
 	public App(IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
-		MainPage = new AppShellPhone();
+		//MainPage = new AppShellPhone();
+		MainPage = serviceProvider.GetRequiredService<AppShellPhone>();
 		//		MainPage = new NavigationPage(new MainPageView()) { Title = "Training list" };
 	}
 }

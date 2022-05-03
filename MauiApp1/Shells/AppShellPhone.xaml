@@ -25,27 +25,22 @@
     </Shell.FlyoutHeader>
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid ColumnDefinitions="20, *"
-                  ColumnSpacing="10"
-                  Padding="10">
-
-                <Label Grid.Column="1"
-                       Text="{Binding Title}"
-                       VerticalOptions="Center"
-                       TextColor="{DynamicResource ButtonBorderColor}" />
-            </Grid>
+            <Label 
+                   Text="{Binding Title}"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource SecondaryColor}" />
         </DataTemplate>
     </Shell.ItemTemplate>
-
-   
+    <FlyoutItem Title="Training Plans">
+        
+        <ShellContent ContentTemplate="{DataTemplate views:TrainingPlansView}"
+                      Route="training_plans" />
+    </FlyoutItem>
     <FlyoutItem Title="Settings">
         <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"
                       Route="settings" />
     </FlyoutItem>
-    <FlyoutItem Title="Training Plans">
-        <ShellContent ContentTemplate="{DataTemplate views:TrainingPlansView}"
-                      Route="training_plans" />
-    </FlyoutItem>
+
     <FlyoutItem Title="Exercises">
         <ShellContent ContentTemplate="{DataTemplate views:ExerciseView}"
                       Route="exercises" />
@@ -54,4 +49,5 @@
         <ShellContent ContentTemplate="{DataTemplate views:UserView}"
                       Route="user" />
     </FlyoutItem>
+
 </Shell>
