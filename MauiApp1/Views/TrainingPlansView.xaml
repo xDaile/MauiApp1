@@ -25,38 +25,34 @@
                                 <SwipeItems Mode="Reveal">
                                     <SwipeItem Text="Favorite"
                                                IconImageSource="favorite.png"
-                                               BackgroundColor="LightGreen"
-                                                />
+                                               BackgroundColor="LightGreen" />
                                     <SwipeItem Text="Delete"
                                                IconImageSource="delete.png"
-                                               BackgroundColor="LightPink"
-                                                />
+                                               BackgroundColor="LightPink" />
                                 </SwipeItems>
                             </SwipeView.LeftItems>
-                            <Frame>
-                                <Frame.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="Auto,20,*">
+                                <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
                                                           CommandParameter="{Binding Id}" />
-                                </Frame.GestureRecognizers>
-                                <Grid ColumnDefinitions="Auto,20,*">
+                                </Grid.GestureRecognizers>
+                                <Image Grid.Column="0"
+                                       Source="/Images/training_plan_icon.svg"
+                                       Aspect="AspectFit"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="10,10"
+                                       MaximumHeightRequest="70"
+                                       MaximumWidthRequest="70"
+                                       HorizontalOptions="Center" />
 
-                                    <Image Grid.Column="0"
-                                           Source="/Images/training_plan_icon.svg"
-                                           Aspect="AspectFit"
-                                           VerticalOptions="CenterAndExpand"
-                                           Margin="10,10"
-                                           MaximumHeightRequest="70"
-                                           MaximumWidthRequest="70"
-                                           HorizontalOptions="Center" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding Name}"
+                                       FontSize="25"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center" />
+                            </Grid>
 
-                                    <Label Grid.Column="2"
-                                           Text="{Binding Name}"
-                                           FontSize="25"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center" />
-                                </Grid>
-
-                            </Frame>
                         </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
