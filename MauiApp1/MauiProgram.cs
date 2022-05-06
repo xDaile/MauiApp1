@@ -21,7 +21,8 @@ public static class MauiProgram
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-			});
+                fonts.AddFont("Montserrat-Regular.ttf", "MontserratRegular");
+            });
 		ConfigureShell(builder.Services);
 		ConfigureViews(builder.Services);
 		ConfigureViewModels(builder.Services);

@@ -2,15 +2,75 @@
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        x:Class="MauiApp1.Views.TrainingPlansView"
-                       Title="{x:Static resources:Texts.Training_List_Name}"
+                       Title="{x:Static resources:Texts.Training_Plans_Page_Title}"
                        xmlns:models="clr-namespace:MauiApp1.Models"
                        xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
                        xmlns:resources="clr-namespace:MauiApp1.Resources"
                        xmlns:views="clr-namespace:MauiApp1.Views"
-                       x:DataType="viewModels:TrainingPlansViewModel">
+                       x:DataType="viewModels:TrainingPlansViewModel"
+                       x:Name="Root">
 
-        <Label Text="Welcome to .NET MAUI!"
-               VerticalOptions="Center"
-               HorizontalOptions="Center" />
- 
+    <Grid RowDefinitions="15,*,10, 60">
+        <ScrollView Grid.Row="1"
+                    Margin="10">
+            <CollectionView ItemsSource="{Binding TrainingPlans}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="25" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TrainingListModel">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Favorite"
+                                               IconImageSource="favorite.png"
+                                               BackgroundColor="LightGreen"
+                                                />
+                                    <SwipeItem Text="Delete"
+                                               IconImageSource="delete.png"
+                                               BackgroundColor="LightPink"
+                                                />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <Frame>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
+                                                          CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,20,*">
+
+                                    <Image Grid.Column="0"
+                                           Source="/Images/training_plan_icon.svg"
+                                           Aspect="AspectFit"
+                                           VerticalOptions="CenterAndExpand"
+                                           Margin="10,10"
+                                           MaximumHeightRequest="70"
+                                           MaximumWidthRequest="70"
+                                           HorizontalOptions="Center" />
+
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Name}"
+                                           FontSize="25"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </ScrollView>
+        <Button Grid.Row="4"
+                Margin="5"
+                CornerRadius="60"
+                FontFamily="MontserratRegular"
+                FontSize="20"
+                Command="{Binding AddNewCommand}"
+                Text="{x:Static resources:Texts.Add_new_training_plan_button}"></Button>
+    </Grid>
+
 </views:ContentPageBase>

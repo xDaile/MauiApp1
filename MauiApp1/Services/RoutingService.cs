@@ -15,9 +15,11 @@ public class RoutingService : IRoutingService
     {
         new ("//settings", typeof(SettingsView), typeof(SettingsViewModel)),
         new ("//training_plans", typeof(TrainingPlansView), typeof(TrainingPlansViewModel)),
-        new ("//exercises", typeof(ExerciseView), typeof(ExerciseViewModel)),
-        new ("//user", typeof(UserView), typeof(UserViewModel))
-        
+        new ("//exercises", typeof(ExerciseListView), typeof(ExerciseListViewModel)),
+        new ("//user", typeof(UserView), typeof(UserViewModel)),
+        new ("//create_exercise", typeof(CreateExerciseView), typeof(CreateExerciseViewModel)),
+        new ("//create_training_plan", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel))
+
     };
 
     public string GetRouteByViewModel<TViewModel>()

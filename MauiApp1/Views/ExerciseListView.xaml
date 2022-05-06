@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="MauiApp1.Views.ExerciseListView"
+                       xmlns:models="clr-namespace:MauiApp1.Models"
+                       xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
+                       xmlns:resources="clr-namespace:MauiApp1.Resources"
+                       xmlns:views="clr-namespace:MauiApp1.Views"
+                       Title="{x:Static resources:Texts.Exercise_List_Page_Title}"
+                       x:DataType="viewModels:ExerciseListViewModel"
+                       x:Name="Root">
+    <Grid RowDefinitions="15,*,10, 60">
+        <ScrollView Grid.Row="1"
+                    Margin="10">
+            <CollectionView ItemsSource="{Binding Exercises}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="25" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ExerciseModel">
+
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
+                                                      CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,20,*">
+
+                                <Image Grid.Column="0"
+                                       Source="/Images/training_plan_icon.svg"
+                                       Aspect="AspectFit"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="10,10"
+                                       MaximumHeightRequest="70"
+                                       MaximumWidthRequest="70"
+                                       HorizontalOptions="Center" />
+
+                                <Label Grid.Column="2"
+                                       Text="{Binding Name}"
+                                       FontSize="25"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start" />
+                            </Grid>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </ScrollView>
+        <Button Grid.Row="4"
+                Margin="5"
+                CornerRadius="60"
+                FontFamily="MontserratRegular"
+                FontSize="20"
+                Command="{Binding AddNewCommand}"
+                Text="{x:Static resources:Texts.Add_new_exercise_button}"></Button>
+    </Grid>
+</views:ContentPageBase>

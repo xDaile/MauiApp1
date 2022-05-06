@@ -61,92 +61,92 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to +.
+        ///   Looks up a localized string similar to Add new exercise.
         /// </summary>
-        internal static string Add_Button {
+        internal static string Add_new_exercise_button {
             get {
-                return ResourceManager.GetString("Add_Button", resourceCulture);
+                return ResourceManager.GetString("Add_new_exercise_button", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add training.
+        ///   Looks up a localized string similar to Add new training plan.
         /// </summary>
-        internal static string Create_Training_Page_Title {
+        internal static string Add_new_training_plan_button {
             get {
-                return ResourceManager.GetString("Create_Training_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Add_new_training_plan_button", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add training program.
+        ///   Looks up a localized string similar to Create exercise.
         /// </summary>
-        internal static string Create_Training_Program_Page_Title {
+        internal static string Create_Exercise_Button {
             get {
-                return ResourceManager.GetString("Create_Training_Program_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Create_Exercise_Button", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit.
+        ///   Looks up a localized string similar to Create new exercise.
         /// </summary>
-        internal static string Edit_Button {
+        internal static string Create_Exercise_Page_Title {
             get {
-                return ResourceManager.GetString("Edit_Button", resourceCulture);
+                return ResourceManager.GetString("Create_Exercise_Page_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit training.
+        ///   Looks up a localized string similar to Create training plan.
         /// </summary>
-        internal static string Edit_Training_Page_Title {
+        internal static string Create_Training_Plan_Button {
             get {
-                return ResourceManager.GetString("Edit_Training_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Create_Training_Plan_Button", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit training program.
+        ///   Looks up a localized string similar to Create new training plan.
         /// </summary>
-        internal static string Edit_Training_Program_Page_Title {
+        internal static string Create_Training_Plan_Page_Title {
             get {
-                return ResourceManager.GetString("Edit_Training_Program_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Create_Training_Plan_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter exercise name.
+        /// </summary>
+        internal static string Enter_new_exercise_name {
+            get {
+                return ResourceManager.GetString("Enter_new_exercise_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter training plan name.
+        /// </summary>
+        internal static string Enter_new_training_plan_name {
+            get {
+                return ResourceManager.GetString("Enter_new_training_plan_name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Exercises.
         /// </summary>
-        internal static string Exercise_Page_Title {
+        internal static string Exercise_List_Page_Title {
             get {
-                return ResourceManager.GetString("Exercise_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Exercise_List_Page_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit .
+        ///   Looks up a localized string similar to Name:.
         /// </summary>
-        internal static string Main_Page_Edit_Training_Program_Button {
+        internal static string Name_label_double_quote {
             get {
-                return ResourceManager.GetString("Main_Page_Edit_Training_Program_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        internal static string Page_Title {
-            get {
-                return ResourceManager.GetString("Page_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        internal static string Settings_Button {
-            get {
-                return ResourceManager.GetString("Settings_Button", resourceCulture);
+                return ResourceManager.GetString("Name_label_double_quote", resourceCulture);
             }
         }
         
@@ -160,20 +160,20 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start.
+        ///   Looks up a localized string similar to Training plans.
         /// </summary>
-        internal static string Start_Button {
+        internal static string Training_Plans_Page_Title {
             get {
-                return ResourceManager.GetString("Start_Button", resourceCulture);
+                return ResourceManager.GetString("Training_Plans_Page_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Training List.
+        ///   Looks up a localized string similar to User.
         /// </summary>
-        internal static string Training_List_Name {
+        internal static string User_Page_Title {
             get {
-                return ResourceManager.GetString("Training_List_Name", resourceCulture);
+                return ResourceManager.GetString("User_Page_Title", resourceCulture);
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
-    public record ExerciseTrainingModel(ExerciseModel Exercise, int Reps, int Weight, int PauseDuration, int Order):TrainingItemModel
+    public record ExerciseTrainingModel(string ExerciseName, int Reps, int Weight, int PauseDuration, int Order): ModelBase
     {
     }
 }

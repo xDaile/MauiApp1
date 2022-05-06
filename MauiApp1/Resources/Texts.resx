@@ -117,43 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add_Button" xml:space="preserve">
-    <value>+</value>
+  <data name="Add_new_exercise_button" xml:space="preserve">
+    <value>Add new exercise</value>
   </data>
-  <data name="Create_Training_Page_Title" xml:space="preserve">
-    <value>Add training</value>
+  <data name="Add_new_training_plan_button" xml:space="preserve">
+    <value>Add new training plan</value>
   </data>
-  <data name="Create_Training_Program_Page_Title" xml:space="preserve">
-    <value>Add training program</value>
+  <data name="Create_Exercise_Button" xml:space="preserve">
+    <value>Create exercise</value>
   </data>
-  <data name="Edit_Button" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Create_Exercise_Page_Title" xml:space="preserve">
+    <value>Create new exercise</value>
   </data>
-  <data name="Edit_Training_Page_Title" xml:space="preserve">
-    <value>Edit training</value>
+  <data name="Create_Training_Plan_Button" xml:space="preserve">
+    <value>Create training plan</value>
   </data>
-  <data name="Edit_Training_Program_Page_Title" xml:space="preserve">
-    <value>Edit training program</value>
+  <data name="Create_Training_Plan_Page_Title" xml:space="preserve">
+    <value>Create new training plan</value>
   </data>
-  <data name="Exercise_Page_Title" xml:space="preserve">
+  <data name="Enter_new_exercise_name" xml:space="preserve">
+    <value>Enter exercise name</value>
+  </data>
+  <data name="Enter_new_training_plan_name" xml:space="preserve">
+    <value>Enter training plan name</value>
+  </data>
+  <data name="Exercise_List_Page_Title" xml:space="preserve">
     <value>Exercises</value>
   </data>
-  <data name="Main_Page_Edit_Training_Program_Button" xml:space="preserve">
-    <value>Edit </value>
-  </data>
-  <data name="Page_Title" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="Settings_Button" xml:space="preserve">
-    <value>Settings</value>
+  <data name="Name_label_double_quote" xml:space="preserve">
+    <value>Name:</value>
   </data>
   <data name="Settings_Page_Title" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Start_Button" xml:space="preserve">
-    <value>Start</value>
+  <data name="Training_Plans_Page_Title" xml:space="preserve">
+    <value>Training plans</value>
   </data>
-  <data name="Training_List_Name" xml:space="preserve">
-    <value>Training List</value>
+  <data name="User_Page_Title" xml:space="preserve">
+    <value>User</value>
   </data>
 </root>

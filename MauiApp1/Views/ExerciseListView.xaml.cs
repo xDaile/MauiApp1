@@ -2,9 +2,9 @@ using MauiApp1.ViewModels;
 
 namespace MauiApp1.Views;
 
-public partial class ExerciseView
+public partial class ExerciseListView
 {
-	public ExerciseView(ExerciseViewModel viewModel) 
+	public ExerciseListView(ExerciseListViewModel viewModel) 
 		: base(viewModel)
 	{
 		InitializeComponent();

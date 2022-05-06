@@ -21,7 +21,7 @@
                 <Setter Property="TextColor"
                         Value="{DynamicResource SecondaryColor}" />
                 <Setter Property="FontFamily"
-                        Value="OpenSansRegular" />
+                        Value="MontserratRegular" />
             </Style>
 
             <Style TargetType="Button">
@@ -32,7 +32,7 @@
                 <Setter Property="TextColor"
                         Value="{DynamicResource SecondaryColor}" />
                 <Setter Property="FontFamily"
-                        Value="OpenSansRegular" />
+                        Value="MontserratRegular" />
                 <Setter Property="BackgroundColor"
                         Value="{DynamicResource ButtonColor}" />
                 <Setter Property="Padding"
