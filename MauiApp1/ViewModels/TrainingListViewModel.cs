@@ -33,9 +33,9 @@ public partial class TrainingListViewModel: ViewModelBase
     private IList<ExerciseTrainingModel> SeedExerciseTraining()
     {
         List<ExerciseTrainingModel> exerciseTraining = new List<ExerciseTrainingModel>();
-        ExerciseTrainingModel a = new ExerciseTrainingModel("BP", 4, 40,60,1);
-        ExerciseTrainingModel b = new ExerciseTrainingModel("DL", 5, 80, 60, 2);
-        ExerciseTrainingModel c = new ExerciseTrainingModel("Squat", 5, 50, 60, 3);
+        ExerciseTrainingModel a = new ExerciseTrainingModel("BP", 4, 40,60,1,true,"");
+        ExerciseTrainingModel b = new ExerciseTrainingModel("DL", 5, 80, 60, 2,true, "");
+        ExerciseTrainingModel c = new ExerciseTrainingModel("Squat", 5, 50, 60, 3, true, "");
         exerciseTraining.Add(a);
         exerciseTraining.Add(b);
         exerciseTraining.Add(c);

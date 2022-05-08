@@ -7,6 +7,6 @@ using MauiApp1.Enums;
 
 namespace MauiApp1.Models
 {
-    public record ExerciseModel(Guid Id, string Name):ModelBase
+    public record ExerciseModel(Guid Id, string Name, string description):ModelBase
     {}
 }

@@ -31,11 +31,11 @@ public partial class ExerciseListViewModel:ViewModelBase
     private IList<ExerciseModel> SeedExercises()
     {
         List<ExerciseModel> exercises = new();
-        ExerciseModel a = new (System.Guid.NewGuid(), "Bench Press");
-        ExerciseModel b = new (System.Guid.NewGuid(), "Deadlift");
-        ExerciseModel c = new (System.Guid.NewGuid(), "Squat");
-        ExerciseModel d = new (System.Guid.NewGuid(), "Biceps curls");
-        ExerciseModel e = new (System.Guid.NewGuid(), "Triceps extensions");
+        ExerciseModel a = new (System.Guid.NewGuid(), "Bench Press", "");
+        ExerciseModel b = new (System.Guid.NewGuid(), "Deadlift", "");
+        ExerciseModel c = new (System.Guid.NewGuid(), "Squat","");
+        ExerciseModel d = new (System.Guid.NewGuid(), "Biceps curls","");
+        ExerciseModel e = new (System.Guid.NewGuid(), "Triceps extensions","");
         exercises.Add(a);
         exercises.Add(b);
         exercises.Add(c);
@@ -48,7 +48,6 @@ public partial class ExerciseListViewModel:ViewModelBase
     [ICommand]
     private async Task GoToDetailAsync(Guid id)
     {
-        Console.WriteLine("HEREEEEEEEEEEEEEEEEE");
         Console.WriteLine(id);
         var route = routingService.GetRouteByViewModel<ExerciseViewModel>();
         await Shell.Current.GoToAsync($"{route}?id={id}");
