@@ -9,17 +9,30 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
+using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
 public partial class CreateExerciseViewModel: ViewModelBase
 {
+    [ObservableProperty]
+    private ExerciseModel newExercise;
+
+    private readonly IExerciseFacade exerciseFacade;
+
+    public CreateExerciseViewModel(IExerciseFacade exerciseFacade)
+    {
+        //constructor bug TODO
+        this.exerciseFacade = exerciseFacade;
+        newExercise = new ExerciseModel(null,"","");
+
+    }
 
     [ICommand]
-    private async Task CreateExerciseAsync(String name)
+    private async Task CreateExerciseAsync()
     {
-        Console.WriteLine(name);
+        exerciseFacade.Create(newExercise);
         //createExercise
         await Shell.Current.GoToAsync("..");
         return;

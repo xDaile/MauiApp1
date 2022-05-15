@@ -52,11 +52,10 @@
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.3" />
-		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.1" />
+		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Models\PauseModel.cs" />
 	  <Compile Remove="Models\PauseTrainingModel.cs" />
 	  <Compile Remove="Models\RestTrainingModel.cs" />
 	</ItemGroup>
@@ -66,9 +65,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="11.0.1" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 	  <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 	  <PackageReference Include="Scrutor" Version="4.1.0" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
-    public record PauseModel(Guid Id, string Name, string Description, int secodns):ModelBase
+    public record PauseModel(int? Id, string Description, string Name, int Seconds, int Order):TrainingItemModel
     {
     }
 }

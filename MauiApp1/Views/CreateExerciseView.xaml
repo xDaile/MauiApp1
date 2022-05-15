@@ -13,7 +13,7 @@
         <ScrollView Grid.Row="1"
                     Margin="10">
 
-            <Grid RowDefinitions="Auto,*"
+            <Grid RowDefinitions="Auto,20,Auto,*"
                   ColumnDefinitions="Auto,15,*">
 
                 <Label Grid.Row="0"
@@ -28,6 +28,22 @@
                        MaxLength="20"
                        BackgroundColor="WhiteSmoke"
                        FontSize="25"
+                       Text="{Binding NewExercise.Name}"
+                       Placeholder="{x:Static resources:Texts.Enter_new_exercise_name}"
+                       ClearButtonVisibility="WhileEditing" />
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Text="{x:Static resources:Texts.Description_label_double_quote}"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Entry x:Name="entry_name2"
+                       Grid.Row="2"
+                       Grid.Column="2"
+                       MaxLength="20"
+                       BackgroundColor="WhiteSmoke"
+                       FontSize="25"
+                       Text="{Binding NewExercise.Description}"
                        Placeholder="{x:Static resources:Texts.Enter_new_exercise_name}"
                        ClearButtonVisibility="WhileEditing" />
             </Grid>
@@ -38,7 +54,6 @@
                 FontFamily="MontserratRegular"
                 FontSize="20"
                 Command="{Binding CreateExerciseCommand}"
-                CommandParameter="{Binding Source={x:Reference entry_name}, Path=Text}"
                 Text="{x:Static resources:Texts.Create_Exercise_Button}"></Button>
     </Grid>
 </views:ContentPageBase>

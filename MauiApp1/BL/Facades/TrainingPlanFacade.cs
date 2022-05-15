@@ -4,49 +4,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using MauiApp1.DAL.Repositories;
+using MauiApp1.DAL.Entities;
+using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.BL.Facades
 {
-    public class TrainingPlanFacade : IFacade<TrainingPlanListModel>
+    public class TrainingPlanFacade : ITrainingPlanFacade
     {
-        public Guid Create(TrainingPlanListModel model)
+        private readonly TrainingPlanRepository trainingPlanRepository;
+        private readonly IMapper mapper;
+
+        public TrainingPlanFacade(TrainingPlanRepository trainingPlanRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.trainingPlanRepository = trainingPlanRepository;
+            this.mapper = mapper;
+        }
+        public async Task<int> Create(TrainingPlanModel model)
+        {
+            return await trainingPlanRepository.Insert(mapper.Map<TrainingPlanEntity>(model));
         }
 
-        public void Delete(Guid id)
+        public void Delete(TrainingPlanModel model
+            )
         {
-            throw new NotImplementedException();
+            trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
         }
 
-        public List<TrainingPlanListModel> GetAll()
+        public async Task<List<TrainingPlanListModel>> GetAllList()
         {
-            throw new NotImplementedException();
+            return mapper.Map<List<TrainingPlanListModel>>(await trainingPlanRepository.GetAll());
         }
 
-        public TrainingPlanListModel GetById(Guid id)
+        public async Task<List<TrainingPlanModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<List<TrainingPlanModel>>(await trainingPlanRepository.GetAll());
         }
 
-        public Guid? Update(TrainingPlanListModel model)
+        public async Task<TrainingPlanModel?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return mapper.Map<TrainingPlanModel>(await trainingPlanRepository.GetById(id));
         }
 
-        public Guid AddTraining(TrainingModel training)
+        public async Task<int?> Update(TrainingPlanModel model)
         {
-            throw new NotImplementedException();
+            return await trainingPlanRepository.Update(mapper.Map<TrainingPlanEntity>(model));
         }
 
-        public Guid UpdateOrderTraining(TrainingModel training)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Guid RemoveTraining(TrainingModel training)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
