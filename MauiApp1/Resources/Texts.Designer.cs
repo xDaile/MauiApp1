@@ -115,6 +115,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string Description_label_double_quote {
+            get {
+                return ResourceManager.GetString("Description_label_double_quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter exercise name.
         /// </summary>
         internal static string Enter_new_exercise_name {

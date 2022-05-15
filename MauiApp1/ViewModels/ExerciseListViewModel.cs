@@ -31,11 +31,11 @@ public partial class ExerciseListViewModel:ViewModelBase
     private IList<ExerciseModel> SeedExercises()
     {
         List<ExerciseModel> exercises = new();
-        ExerciseModel a = new (System.Guid.NewGuid(), "Bench Press", "");
-        ExerciseModel b = new (System.Guid.NewGuid(), "Deadlift", "");
-        ExerciseModel c = new (System.Guid.NewGuid(), "Squat","");
-        ExerciseModel d = new (System.Guid.NewGuid(), "Biceps curls","");
-        ExerciseModel e = new (System.Guid.NewGuid(), "Triceps extensions","");
+        ExerciseModel a = new (1, "Bench Press", "Name");
+        ExerciseModel b = new (2, "Deadlift", "Name");
+        ExerciseModel c = new (3, "Squat","Name");
+        ExerciseModel d = new (4, "Biceps curls","Name");
+        ExerciseModel e = new (5, "Triceps extensions","Name");
         exercises.Add(a);
         exercises.Add(b);
         exercises.Add(c);

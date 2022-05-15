@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MauiApp1.Models
 {
     //Third page
-    public record TrainingModel(Guid Id, string Name, int Order, IList<TrainingItemModel> TrainingItems, string description):ModelBase
+    public record TrainingModel(int? Id, string Description, string Name, int Order, IList<TrainingItemModel> TrainingItems):ModelBase
     {
     }
 }

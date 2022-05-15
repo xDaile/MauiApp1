@@ -4,34 +4,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MauiApp1.Models;
+using AutoMapper;
+using MauiApp1.DAL.Repositories;
+using MauiApp1.DAL.Entities;
+using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.BL.Facades
 {
-    public class ExerciseFacade : IFacade<ExerciseModel>
+    public class ExerciseFacade : IExerciseFacade
     {
-        public Guid Create(ExerciseModel model)
+        private readonly ExerciseRepository exerciseRepository;
+        private readonly IMapper mapper;
+
+        public ExerciseFacade(ExerciseRepository exerciseRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.exerciseRepository = exerciseRepository;
+            this.mapper = mapper;
         }
 
-        public void Delete(Guid id)
+        public async Task<int> Create(ExerciseModel model)
         {
-            throw new NotImplementedException();
+            return await exerciseRepository.Insert(mapper.Map<ExerciseEntity>(model));
         }
 
-        public List<ExerciseModel> GetAll()
+        public void Delete(ExerciseModel model)
         {
-            throw new NotImplementedException();
+            exerciseRepository.Delete(mapper.Map<ExerciseEntity>(model));
         }
 
-        public ExerciseModel GetById(Guid id)
+        public async Task<List<ExerciseModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<List<ExerciseModel>>(await exerciseRepository.GetAll());
         }
 
-        public Guid? Update(ExerciseModel model)
+        public async Task<ExerciseModel?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return mapper.Map<ExerciseModel>(await exerciseRepository.GetById(id));
+        }
+
+        public async Task<int?> Update(ExerciseModel model)
+        {
+            return await exerciseRepository.Update(mapper.Map<ExerciseEntity>(model));
         }
     }
 }

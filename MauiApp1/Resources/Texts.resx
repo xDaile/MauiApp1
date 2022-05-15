@@ -135,6 +135,9 @@
   <data name="Create_Training_Plan_Page_Title" xml:space="preserve">
     <value>Create new training plan</value>
   </data>
+  <data name="Description_label_double_quote" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="Enter_new_exercise_name" xml:space="preserve">
     <value>Enter exercise name</value>
   </data>

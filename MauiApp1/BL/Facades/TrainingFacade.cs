@@ -4,64 +4,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using MauiApp1.DAL.Repositories;
+using MauiApp1.DAL.Entities;
+using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.BL.Facades
 {
-    public class TrainingFacade : IFacade<TrainingModel>
+
+    public class TrainingFacade : ITrainingFacade
     {
-        public Guid Create(TrainingModel model)
+        private readonly TrainingRepository trainingRepository;
+        private readonly IMapper mapper;
+
+        public TrainingFacade(TrainingRepository trainingRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.trainingRepository = trainingRepository;
+            this.mapper = mapper;
+        }
+        public async Task<int> Create(TrainingModel model)
+        {
+            return await trainingRepository.Insert(mapper.Map<TrainingEntity>(model));
         }
 
-        public void Delete(Guid id)
+        public void Delete(TrainingModel model)
         {
-            throw new NotImplementedException();
+            trainingRepository.Delete(mapper.Map<TrainingEntity>(model));
         }
 
-        public List<TrainingModel> GetAll()
+        public async Task<List<TrainingModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return mapper.Map<List<TrainingModel>>(await trainingRepository.GetAll());
         }
 
-        public TrainingModel GetById(Guid id)
+        public async Task<TrainingModel?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return mapper.Map<TrainingModel>(await trainingRepository.GetById(id));
         }
 
-        public Guid? Update(TrainingModel model)
+        public async Task<int?> Update(TrainingModel model)
         {
-            throw new NotImplementedException();
+            return await trainingRepository.Update(mapper.Map<TrainingEntity>(model));
         }
 
-        public Guid AddExercise(ExerciseTrainingModel exercise)
+        public async Task<int> AddExercise(ExerciseTrainingModel exercise)
         {
-            throw new NotImplementedException();
+            return await trainingRepository.AddExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
         }
 
-        public Guid UpdateOrderExercise(ExerciseTrainingModel exercise)
+        public async Task<int> UpdateExercise(ExerciseTrainingModel exercise)
         {
-            throw new NotImplementedException();
+            return await trainingRepository.UpdateExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
         }
 
-        public Guid RemoveExercise(ExerciseTrainingModel exercise)
+        public void DeleteExercise(ExerciseTrainingModel exercise)
         {
-            throw new NotImplementedException();
-        }
-
-        public Guid AddPause(PauseModel pause)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Guid UpdateOrderPause(PauseModel pause)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Guid RemovePause(PauseModel pause)
-        {
-            throw new NotImplementedException();
+            trainingRepository.DeleteExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
-
+using MauiApp1.BL.Facades;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
@@ -32,19 +32,19 @@ public partial class TrainingPlansViewModel : ViewModelBase
 
     private IList<TrainingPlanListModel> SeedTrainingPlans()
     {
-        List<TrainingPlanListModel> trainingPlans = new();
-        TrainingPlanListModel a = new TrainingPlanListModel(System.Guid.NewGuid(), "Korte");
-        TrainingPlanListModel b = new TrainingPlanListModel(System.Guid.NewGuid(), "GVT");
-        TrainingPlanListModel c = new TrainingPlanListModel(System.Guid.NewGuid(), "Roubik Full Body");
-        TrainingPlanListModel d = new TrainingPlanListModel(System.Guid.NewGuid(), "Tabata");
-        TrainingPlanListModel e = new TrainingPlanListModel(System.Guid.NewGuid(), "Zumba");
-        trainingPlans.Add(a);
-        trainingPlans.Add(b);
-        trainingPlans.Add(c);
-        trainingPlans.Add(d);
-        trainingPlans.Add(e);
-        return trainingPlans;
 
+        List<TrainingPlanListModel> trainingPlans = new List<TrainingPlanListModel>();
+        TrainingPlanListModel a = new TrainingPlanListModel(1, "Korte");
+//        TrainingPlanListModel b = new TrainingPlanListModel(2, "GVT");
+//        TrainingPlanListModel c = new TrainingPlanListModel(3, "Roubik Full Body");
+//        TrainingPlanListModel d = new TrainingPlanListModel(4, "Tabata");
+//        TrainingPlanListModel e = new TrainingPlanListModel(5, "Zumba");
+        trainingPlans.Add(a);
+//        trainingPlans.Add(b);
+//        trainingPlans.Add(c);
+//        trainingPlans.Add(d);
+//        trainingPlans.Add(e);
+        return trainingPlans;
     }
 
     [ICommand]
