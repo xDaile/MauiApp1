@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using MauiApp1.DAL.Repositories;
+using MauiApp1.DAL.Repositories.Interfaces;
 using MauiApp1.DAL.Entities;
 using MauiApp1.BL.Facades.Interfaces;
 
@@ -13,10 +13,10 @@ namespace MauiApp1.BL.Facades
 {
     public class TrainingPlanFacade : ITrainingPlanFacade
     {
-        private readonly TrainingPlanRepository trainingPlanRepository;
+        private readonly ITrainingPlanRepository trainingPlanRepository;
         private readonly IMapper mapper;
 
-        public TrainingPlanFacade(TrainingPlanRepository trainingPlanRepository, IMapper mapper)
+        public TrainingPlanFacade(ITrainingPlanRepository trainingPlanRepository, IMapper mapper)
         {
             this.trainingPlanRepository = trainingPlanRepository;
             this.mapper = mapper;

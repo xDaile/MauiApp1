@@ -16,21 +16,23 @@ namespace MauiApp1.ViewModels;
 [INotifyPropertyChanged]
 public partial class CreateExerciseViewModel: ViewModelBase
 {
-    public ExerciseModel newExercise;
+    [ObservableProperty]
+    private ExerciseModel newExercise;
+
     public IExerciseFacade ExerciseFacade;
 
     public CreateExerciseViewModel(IExerciseFacade exerciseFacade)
     {
         //constructor bug TODO
         ExerciseFacade = exerciseFacade;
-        newExercise = new ExerciseModel(null,"","");
+        NewExercise = new ExerciseModel(null,"","");
 
     }
 
     [ICommand]
     private async Task CreateExerciseAsync()
     {
-        ExerciseFacade.Create(newExercise);
+        ExerciseFacade.Create(NewExercise);
         //createExercise
         await Shell.Current.GoToAsync("..");
         return;

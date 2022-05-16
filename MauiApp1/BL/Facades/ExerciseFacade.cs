@@ -7,16 +7,17 @@ using MauiApp1.Models;
 using AutoMapper;
 using MauiApp1.DAL.Repositories;
 using MauiApp1.DAL.Entities;
+using MauiApp1.DAL.Repositories.Interfaces;
 using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.BL.Facades
 {
     public class ExerciseFacade : IExerciseFacade
     {
-        private readonly ExerciseRepository exerciseRepository;
+        private readonly IExerciseRepository exerciseRepository;
         private readonly IMapper mapper;
 
-        public ExerciseFacade(ExerciseRepository exerciseRepository, IMapper mapper)
+        public ExerciseFacade(IExerciseRepository exerciseRepository, IMapper mapper)
         {
             this.exerciseRepository = exerciseRepository;
             this.mapper = mapper;
