@@ -16,10 +16,6 @@ namespace MauiApp1.ViewModels;
 [INotifyPropertyChanged]
 public partial class CreateExerciseViewModel: ViewModelBase
 {
-    [ObservableProperty]
-    private ExerciseModel newExercise;
-
-    public IExerciseFacade ExerciseFacade { get; }
 
     public CreateExerciseViewModel(IExerciseFacade exerciseFacade)
     {
