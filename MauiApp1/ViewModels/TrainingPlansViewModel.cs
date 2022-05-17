@@ -48,7 +48,7 @@ public partial class TrainingPlansViewModel : ViewModelBase
     }
 
     [ICommand]
-    private async Task GoToDetailAsync(Guid id)
+    private async Task GoToDetailAsync(int id)
     {
         Console.WriteLine("HEREEEEEEEEEEEEEEEEE");
         Console.WriteLine(id);

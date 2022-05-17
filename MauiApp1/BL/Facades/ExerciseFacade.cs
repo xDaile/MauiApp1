@@ -25,7 +25,8 @@ namespace MauiApp1.BL.Facades
 
         public async Task<int> Create(ExerciseModel model)
         {
-            return await exerciseRepository.Insert(mapper.Map<ExerciseEntity>(model));
+            var entity = mapper.Map<ExerciseEntity>(model);
+            return await exerciseRepository.Insert(entity);
         }
 
         public void Delete(ExerciseModel model)
@@ -35,7 +36,15 @@ namespace MauiApp1.BL.Facades
 
         public async Task<List<ExerciseModel>> GetAll()
         {
-            return mapper.Map<List<ExerciseModel>>(await exerciseRepository.GetAll());
+            try { 
+                List<ExerciseEntity> entities = await exerciseRepository.GetAll();
+                return mapper.Map<List<ExerciseModel>>(entities);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
 
         public async Task<ExerciseModel?> GetById(int id)

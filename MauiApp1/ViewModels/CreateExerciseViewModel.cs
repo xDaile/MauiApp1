@@ -14,7 +14,7 @@ using MauiApp1.BL.Facades.Interfaces;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-public partial class CreateExerciseViewModel: ViewModelBase
+public partial class CreateExerciseViewModel : ViewModelBase
 {
     [ObservableProperty]
     private ExerciseModel newExercise;
@@ -25,15 +25,14 @@ public partial class CreateExerciseViewModel: ViewModelBase
     {
         //constructor bug TODO
         ExerciseFacade = exerciseFacade;
-        NewExercise = new ExerciseModel(null,"","");
+        NewExercise = new ExerciseModel(null, "", "");
 
     }
 
     [ICommand]
     private async Task CreateExerciseAsync()
     {
-        ExerciseFacade.Create(NewExercise);
-        //createExercise
+        var result = await ExerciseFacade.Create(NewExercise);
         await Shell.Current.GoToAsync("..");
         return;
     }

@@ -7,35 +7,43 @@ using MauiApp1.Models;
 using MauiApp1.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-public partial class ExerciseListViewModel:ViewModelBase
+public partial class ExerciseListViewModel : ViewModelBase
 {
+    [ObservableProperty]
+    private int id;
+
     private readonly IRoutingService routingService;
+
+    public IExerciseFacade ExerciseFacade;
 
     [ObservableProperty]
     private IList<ExerciseModel>? exercises;
 
+    public ExerciseListViewModel( IRoutingService routingService)
+    {
+        this.routingService = routingService;
+        //this.ExerciseFacade = exerciseFacade;
+    }
+
     public override async Task OnAppearingAsync()
     {
         Exercises = SeedExercises();
-    }
-
-    public ExerciseListViewModel(IRoutingService routingService)
-    {
-        this.routingService = routingService;
+        //Exercises = await ExerciseFacade.GetAll();
     }
 
     private IList<ExerciseModel> SeedExercises()
     {
         List<ExerciseModel> exercises = new();
-        ExerciseModel a = new (1, "Bench Press", "Name");
-        ExerciseModel b = new (2, "Deadlift", "Name");
-        ExerciseModel c = new (3, "Squat","Name");
-        ExerciseModel d = new (4, "Biceps curls","Name");
-        ExerciseModel e = new (5, "Triceps extensions","Name");
+        ExerciseModel a = new(1, "Bench Press", "Name");
+        ExerciseModel b = new(2, "Deadlift", "Name");
+        ExerciseModel c = new(3, "Squat", "Name");
+        ExerciseModel d = new(4, "Biceps curls", "Name");
+        ExerciseModel e = new(5, "Triceps extensions", "Name");
         exercises.Add(a);
         exercises.Add(b);
         exercises.Add(c);
@@ -46,7 +54,7 @@ public partial class ExerciseListViewModel:ViewModelBase
     }
 
     [ICommand]
-    private async Task GoToDetailAsync(Guid id)
+    private async Task GoToDetailAsync(int id)
     {
         Console.WriteLine(id);
         var route = routingService.GetRouteByViewModel<ExerciseViewModel>();
@@ -57,7 +65,14 @@ public partial class ExerciseListViewModel:ViewModelBase
     private async Task AddNewAsync()
     {
         var route = routingService.GetRouteByViewModel<CreateExerciseViewModel>();
-        await Shell.Current.GoToAsync($"{route}");
+        try
+        {
+            await Shell.Current.GoToAsync($"{route}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
         return;
     }
 }
