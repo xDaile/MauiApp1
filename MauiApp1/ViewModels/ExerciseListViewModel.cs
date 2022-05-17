@@ -24,7 +24,7 @@ public partial class ExerciseListViewModel : ViewModelBase
     [ObservableProperty]
     private IList<ExerciseModel>? exercises;
 
-    public ExerciseListViewModel( IRoutingService routingService)
+    public ExerciseListViewModel(IRoutingService routingService)
     {
         this.routingService = routingService;
         //this.ExerciseFacade = exerciseFacade;
@@ -61,18 +61,13 @@ public partial class ExerciseListViewModel : ViewModelBase
         await Shell.Current.GoToAsync($"{route}?id={id}");
     }
 
+
+    //Navigate to page for adding new exercise
     [ICommand]
     private async Task AddNewAsync()
     {
         var route = routingService.GetRouteByViewModel<CreateExerciseViewModel>();
-        try
-        {
-            await Shell.Current.GoToAsync($"{route}");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        await Shell.Current.GoToAsync($"{route}");
         return;
     }
 }

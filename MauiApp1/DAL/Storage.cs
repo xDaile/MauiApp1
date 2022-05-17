@@ -21,18 +21,14 @@ namespace MauiApp1.DAL
         {
             databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3");
             _storage = new SQLiteAsyncConnection(databasePath);
-            try
-            {
-                _storage.CreateTableAsync<ExerciseEntity>();
-                _storage.CreateTableAsync<TrainingPlanEntity>();
-                _storage.CreateTableAsync<TrainingEntity>();
-                _storage.CreateTableAsync<ExerciseTrainingEntity>();
-                _storage.CreateTableAsync<PauseEntity>();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+
+            _storage.CreateTableAsync<ExerciseEntity>();
+            _storage.CreateTableAsync<TrainingPlanEntity>();
+            _storage.CreateTableAsync<TrainingEntity>();
+            _storage.CreateTableAsync<ExerciseTrainingEntity>();
+            _storage.CreateTableAsync<PauseEntity>();
+
+
             _storage.CloseAsync();
 
 
@@ -70,16 +66,14 @@ namespace MauiApp1.DAL
         public async Task<int> SetAsync<T>(T entity)
             where T : EntityBase, new()
         {
-            GetAllTablesAsync();
+            // GetAllTablesAsync();
             int result = 0;
             var connection = new SQLiteAsyncConnection(databasePath);
             if (entity.Id < 1 || entity.Id == null)
             {
-                try
-                {
-                    result = await connection.InsertAsync(entity);
-                }
-                catch (Exception e) { Console.WriteLine(e); }
+
+                result = await connection.InsertAsync(entity);
+
             }
             else
             {
@@ -100,7 +94,7 @@ namespace MauiApp1.DAL
         {
             var _connection = new SQLiteAsyncConnection(databasePath);
             string queryString = $"SELECT name FROM sqlite_master WHERE type = 'table'";
-           var result = await _connection.QueryAsync<TableName>(queryString).ConfigureAwait(false);
+            var result = await _connection.QueryAsync<TableName>(queryString).ConfigureAwait(false);
             Console.WriteLine(result);
 
         }

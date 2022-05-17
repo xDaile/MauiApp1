@@ -82,7 +82,6 @@ public static class MauiProgram
         services.AddSingleton<IRoutingService, RoutingService>();
         services.AddSingleton<IStorage, Storage>();
         services.AddSingleton<IPauseFacade, PauseFacade>();
-       
         services.AddSingleton<IExerciseFacade, ExerciseFacade>();
         services.AddSingleton<ITrainingFacade, TrainingFacade>();
         services.AddSingleton<ITrainingPlanFacade, TrainingPlanFacade>();
