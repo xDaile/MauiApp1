@@ -13,12 +13,15 @@ public class RoutingService : IRoutingService
 {
     public ICollection<RouteModel> Routes => new List<RouteModel>
     {
+        new ("//exercises", typeof(ExerciseListView), typeof(ExerciseListViewModel)),
+        new ("//exercises/create", typeof(CreateExerciseView), typeof(CreateExerciseViewModel)),
+        new ("//exercises/detail", typeof(DetailExerciseView), typeof(DetailExerciseViewModel)),
+
         new ("//settings", typeof(SettingsView), typeof(SettingsViewModel)),
         new ("//training_plans", typeof(TrainingPlansView), typeof(TrainingPlansViewModel)),
-        new ("//exercises", typeof(ExerciseListView), typeof(ExerciseListViewModel)),
+
         new ("//user", typeof(UserView), typeof(UserViewModel)),
-        new ("//create_exercise", typeof(CreateExerciseView), typeof(CreateExerciseViewModel)),
-        new ("//create_training_plan", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel))
+        new ("//training_plans/create", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel))
 
     };
 

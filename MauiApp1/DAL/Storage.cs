@@ -20,15 +20,21 @@ namespace MauiApp1.DAL
         public Storage()
         {
             databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3");
-            _storage = new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+            _storage = new SQLiteAsyncConnection(databasePath);
 
-            CreateTableAsync<ExerciseEntity>();
-            CreateTableAsync<TrainingPlanEntity>();
-            CreateTableAsync<TrainingEntity>();
-            CreateTableAsync<ExerciseTrainingEntity>();
-            CreateTableAsync<PauseEntity>();
+            _storage.CreateTableAsync<ExerciseEntity>();
+            _storage.CreateTableAsync<TrainingPlanEntity>();
+            _storage.CreateTableAsync<TrainingEntity>();
+            _storage.CreateTableAsync<ExerciseTrainingEntity>();
+            _storage.CreateTableAsync<PauseEntity>();
+
+
+            _storage.CloseAsync();
+
 
         }
+
+
 
         public async Task<CreateTableResult> CreateTableAsync<T>()
             where T : EntityBase, new()
@@ -60,11 +66,14 @@ namespace MauiApp1.DAL
         public async Task<int> SetAsync<T>(T entity)
             where T : EntityBase, new()
         {
+            // GetAllTablesAsync();
             int result = 0;
             var connection = new SQLiteAsyncConnection(databasePath);
-            if (entity.Id <1)
+            if (entity.Id < 1 || entity.Id == null)
             {
+
                 result = await connection.InsertAsync(entity);
+
             }
             else
             {
@@ -81,5 +90,19 @@ namespace MauiApp1.DAL
             await connection.DeleteAsync(entity);
             await connection.CloseAsync();
         }
+        public async void GetAllTablesAsync()
+        {
+            var _connection = new SQLiteAsyncConnection(databasePath);
+            string queryString = $"SELECT name FROM sqlite_master WHERE type = 'table'";
+            var result = await _connection.QueryAsync<TableName>(queryString).ConfigureAwait(false);
+            Console.WriteLine(result);
+
+        }
     }
+    public class TableName
+    {
+        public TableName() { }
+        public string name { get; set; }
+    }
+
 }

@@ -7,16 +7,17 @@ using MauiApp1.Models;
 using AutoMapper;
 using MauiApp1.DAL.Repositories;
 using MauiApp1.DAL.Entities;
+using MauiApp1.DAL.Repositories.Interfaces;
 using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.BL.Facades
 {
     public class ExerciseFacade : IExerciseFacade
     {
-        private readonly ExerciseRepository exerciseRepository;
+        private readonly IExerciseRepository exerciseRepository;
         private readonly IMapper mapper;
 
-        public ExerciseFacade(ExerciseRepository exerciseRepository, IMapper mapper)
+        public ExerciseFacade(IExerciseRepository exerciseRepository, IMapper mapper)
         {
             this.exerciseRepository = exerciseRepository;
             this.mapper = mapper;
@@ -24,7 +25,8 @@ namespace MauiApp1.BL.Facades
 
         public async Task<int> Create(ExerciseModel model)
         {
-            return await exerciseRepository.Insert(mapper.Map<ExerciseEntity>(model));
+            var entity = mapper.Map<ExerciseEntity>(model);
+            return await exerciseRepository.Insert(entity);
         }
 
         public void Delete(ExerciseModel model)
@@ -34,7 +36,9 @@ namespace MauiApp1.BL.Facades
 
         public async Task<List<ExerciseModel>> GetAll()
         {
-            return mapper.Map<List<ExerciseModel>>(await exerciseRepository.GetAll());
+            List<ExerciseEntity> entities = await exerciseRepository.GetAll();
+            return mapper.Map<List<ExerciseModel>>(entities);
+
         }
 
         public async Task<ExerciseModel?> GetById(int id)

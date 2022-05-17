@@ -10,7 +10,7 @@ namespace MauiApp1.DAL.Entities
     public abstract record EntityBase
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; } 
-        public string Description { get; init; } 
+        public int Id { get; set; } 
+        public string Description { get; set; } 
     }
 }

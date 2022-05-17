@@ -11,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
+using MauiApp1.BL;
+using MauiApp1.DAL.Entities;
+using MauiApp1.Models;
 
 namespace MauiApp1;
 
@@ -32,10 +36,13 @@ public static class MauiProgram
         ConfigureServices(builder.Services);
 
 
+        builder.Services.AddAutoMapper(typeof(MapperProfile));
+
         var app = builder.Build();
         RegisterRoutes(app);
         return app;
     }
+
 
     private static void ConfigureShell(IServiceCollection services)
     {

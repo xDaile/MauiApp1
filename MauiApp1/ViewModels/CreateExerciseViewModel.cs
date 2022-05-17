@@ -14,24 +14,34 @@ using MauiApp1.BL.Facades.Interfaces;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-public partial class CreateExerciseViewModel: ViewModelBase
+public partial class CreateExerciseViewModel : ViewModelBase
 {
-    public ExerciseModel newExercise;
+    [ObservableProperty]
+    private ExerciseModel newExercise;
+
     public IExerciseFacade ExerciseFacade;
+
+    [ObservableProperty]
+    private string errorMessage;
 
     public CreateExerciseViewModel(IExerciseFacade exerciseFacade)
     {
         //constructor bug TODO
         ExerciseFacade = exerciseFacade;
-        newExercise = new ExerciseModel(null,"","");
+        NewExercise = new ExerciseModel(null, "", "");
+        ErrorMessage = "";
 
     }
 
     [ICommand]
     private async Task CreateExerciseAsync()
     {
-        ExerciseFacade.Create(newExercise);
-        //createExercise
+        if (newExercise.Name.Length < 1)
+        {
+            ErrorMessage = "Name of exercise is too short";
+            return;
+        }
+        var result = await ExerciseFacade.Create(NewExercise);
         await Shell.Current.GoToAsync("..");
         return;
     }
