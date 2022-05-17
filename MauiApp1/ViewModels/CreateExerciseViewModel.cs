@@ -21,17 +21,26 @@ public partial class CreateExerciseViewModel : ViewModelBase
 
     public IExerciseFacade ExerciseFacade;
 
+    [ObservableProperty]
+    private string errorMessage;
+
     public CreateExerciseViewModel(IExerciseFacade exerciseFacade)
     {
         //constructor bug TODO
         ExerciseFacade = exerciseFacade;
         NewExercise = new ExerciseModel(null, "", "");
+        ErrorMessage = "";
 
     }
 
     [ICommand]
     private async Task CreateExerciseAsync()
     {
+        if (newExercise.Name.Length < 1)
+        {
+            ErrorMessage = "Name of exercise is too short";
+            return;
+        }
         var result = await ExerciseFacade.Create(NewExercise);
         await Shell.Current.GoToAsync("..");
         return;

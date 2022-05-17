@@ -36,15 +36,9 @@ namespace MauiApp1.BL.Facades
 
         public async Task<List<ExerciseModel>> GetAll()
         {
-            try { 
-                List<ExerciseEntity> entities = await exerciseRepository.GetAll();
-                return mapper.Map<List<ExerciseModel>>(entities);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-                return null;
-            }
+            List<ExerciseEntity> entities = await exerciseRepository.GetAll();
+            return mapper.Map<List<ExerciseModel>>(entities);
+
         }
 
         public async Task<ExerciseModel?> GetById(int id)

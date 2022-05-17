@@ -115,11 +115,38 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Delete .
+        /// </summary>
+        internal static string Delete_Button {
+            get {
+                return ResourceManager.GetString("Delete_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description:.
         /// </summary>
         internal static string Description_label_double_quote {
             get {
                 return ResourceManager.GetString("Description_label_double_quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail of exercise.
+        /// </summary>
+        internal static string Detail_Exercise_Page_Title {
+            get {
+                return ResourceManager.GetString("Detail_Exercise_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter new exercise description.
+        /// </summary>
+        internal static string Enter_new_exercise_description {
+            get {
+                return ResourceManager.GetString("Enter_new_exercise_description", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace MauiApp1.Resources {
         internal static string Name_label_double_quote {
             get {
                 return ResourceManager.GetString("Name_label_double_quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save exercise.
+        /// </summary>
+        internal static string Save_Exercise_Button {
+            get {
+                return ResourceManager.GetString("Save_Exercise_Button", resourceCulture);
             }
         }
         

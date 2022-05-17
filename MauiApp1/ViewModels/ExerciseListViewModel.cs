@@ -14,8 +14,6 @@ namespace MauiApp1.ViewModels;
 [INotifyPropertyChanged]
 public partial class ExerciseListViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private int id;
 
     private readonly IRoutingService routingService;
 
@@ -24,40 +22,33 @@ public partial class ExerciseListViewModel : ViewModelBase
     [ObservableProperty]
     private IList<ExerciseModel>? exercises;
 
-    public ExerciseListViewModel(IRoutingService routingService)
+    public ExerciseListViewModel(IRoutingService routingService, IExerciseFacade exerciseFacade)
     {
         this.routingService = routingService;
-        //this.ExerciseFacade = exerciseFacade;
+        this.ExerciseFacade = exerciseFacade;
     }
 
     public override async Task OnAppearingAsync()
     {
-        Exercises = SeedExercises();
-        //Exercises = await ExerciseFacade.GetAll();
+        //Exercises = SeedExercises();
+        await base.OnAppearingAsync();
+        Exercises = await ExerciseFacade.GetAll();
     }
-
+    /*
     private IList<ExerciseModel> SeedExercises()
     {
         List<ExerciseModel> exercises = new();
         ExerciseModel a = new(1, "Bench Press", "Name");
         ExerciseModel b = new(2, "Deadlift", "Name");
-        ExerciseModel c = new(3, "Squat", "Name");
-        ExerciseModel d = new(4, "Biceps curls", "Name");
-        ExerciseModel e = new(5, "Triceps extensions", "Name");
         exercises.Add(a);
         exercises.Add(b);
-        exercises.Add(c);
-        exercises.Add(d);
-        exercises.Add(e);
         return exercises;
-
-    }
+    }*/
 
     [ICommand]
     private async Task GoToDetailAsync(int id)
     {
-        Console.WriteLine(id);
-        var route = routingService.GetRouteByViewModel<ExerciseViewModel>();
+        var route = routingService.GetRouteByViewModel<DetailExerciseViewModel>();
         await Shell.Current.GoToAsync($"{route}?id={id}");
     }
 
