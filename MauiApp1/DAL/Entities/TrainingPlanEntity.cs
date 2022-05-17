@@ -10,5 +10,6 @@ namespace MauiApp1.DAL.Entities
     public record TrainingPlanEntity:EntityBase
     {
         public string Name { get; set; }
+
     }
 }

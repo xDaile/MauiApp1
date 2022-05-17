@@ -17,11 +17,13 @@ public class RoutingService : IRoutingService
         new ("//exercises/create", typeof(CreateExerciseView), typeof(CreateExerciseViewModel)),
         new ("//exercises/detail", typeof(DetailExerciseView), typeof(DetailExerciseViewModel)),
 
-        new ("//settings", typeof(SettingsView), typeof(SettingsViewModel)),
         new ("//training_plans", typeof(TrainingPlansView), typeof(TrainingPlansViewModel)),
+        new ("//training_plans/create", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel)),
+        new ("//training_plans/detail", typeof(DetailTrainingPlanView), typeof(DetailTrainingPlanViewModel)),
 
+        new ("//settings", typeof(SettingsView), typeof(SettingsViewModel)),
         new ("//user", typeof(UserView), typeof(UserViewModel)),
-        new ("//training_plans/create", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel))
+        //DetailTrainingPlanViewModel
 
     };
 

@@ -14,17 +14,18 @@ namespace MauiApp1.BL
         public MapperProfile()
         {
 
-            CreateMap<ExerciseEntity, ExerciseEntity>();
-            CreateMap<ExerciseEntity, ExerciseModel>();
-            CreateMap<ExerciseModel, ExerciseEntity>();
+            CreateMap<ExerciseEntity, ExerciseModel>().ReverseMap();
+           
+            CreateMap<TrainingPlanEntity, TrainingPlanModel>().ReverseMap();
+            CreateMap<TrainingPlanEntity, TrainingPlanListModel>().ReverseMap();
+          //  CreateMap<List<TrainingPlanEntity>, List<TrainingPlanModel>>().ReverseMap();
 
             CreateMap<ExerciseTrainingEntity, ExerciseTrainingModel>();
             CreateMap<PauseEntity, PauseModel>();
-            CreateMap<TrainingEntity, TrainingListModel>();
+            CreateMap<TrainingEntity, TrainingListModel>().ReverseMap();
             CreateMap<TrainingEntity, TrainingModel>();
-            CreateMap<TrainingPlanEntity, TrainingPlanModel>();
-            CreateMap<TrainingPlanEntity, TrainingPlanListModel>();
             CreateMap<ExerciseModel, ExerciseEntity>();
+            
             //CreateMap<List<ExerciseEntity>, List<ExerciseModel>>();
 
             

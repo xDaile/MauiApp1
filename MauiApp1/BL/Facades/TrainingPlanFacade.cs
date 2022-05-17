@@ -14,20 +14,28 @@ namespace MauiApp1.BL.Facades
     public class TrainingPlanFacade : ITrainingPlanFacade
     {
         private readonly ITrainingPlanRepository trainingPlanRepository;
+        private readonly ITrainingRepository trainingRepository;
         private readonly IMapper mapper;
 
-        public TrainingPlanFacade(ITrainingPlanRepository trainingPlanRepository, IMapper mapper)
+        public TrainingPlanFacade(ITrainingPlanRepository trainingPlanRepository, IMapper mapper, ITrainingRepository trainingRepository)
         {
             this.trainingPlanRepository = trainingPlanRepository;
             this.mapper = mapper;
+            this.trainingRepository = trainingRepository;
         }
         public async Task<int> Create(TrainingPlanModel model)
         {
             return await trainingPlanRepository.Insert(mapper.Map<TrainingPlanEntity>(model));
         }
 
-        public void Delete(TrainingPlanModel model
-            )
+        public async Task<int> CreateFromListModel(TrainingPlanListModel model)
+        {
+            var entity = mapper.Map<TrainingPlanEntity>(model);
+            return await trainingPlanRepository.Insert(entity);
+        }
+
+        //TODO - check if delete works
+        public void Delete(TrainingPlanModel model)
         {
             trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
         }
@@ -42,9 +50,16 @@ namespace MauiApp1.BL.Facades
             return mapper.Map<List<TrainingPlanModel>>(await trainingPlanRepository.GetAll());
         }
 
+        //TODO map descendants - trainings
         public async Task<TrainingPlanModel?> GetById(int id)
         {
-            return mapper.Map<TrainingPlanModel>(await trainingPlanRepository.GetById(id));
+            var entity = await trainingPlanRepository.GetById(id);
+            var trainings = await trainingRepository.GetByTrainingPlanId(id);
+            var trainingListModels = mapper.Map<List<TrainingListModel>>(trainings);
+            TrainingPlanModel model = new TrainingPlanModel(entity.Id, entity.Description, entity.Name, trainingListModels);
+
+            return model;
+
         }
 
         public async Task<int?> Update(TrainingPlanModel model)

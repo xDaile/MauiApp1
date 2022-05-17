@@ -144,11 +144,17 @@
   <data name="Detail_Exercise_Page_Title" xml:space="preserve">
     <value>Detail of exercise</value>
   </data>
+  <data name="Detail_TrainingPlan_Page_Title" xml:space="preserve">
+    <value>Detail of training plan</value>
+  </data>
   <data name="Enter_new_exercise_description" xml:space="preserve">
-    <value>Enter new exercise description</value>
+    <value>Enter exercise description</value>
   </data>
   <data name="Enter_new_exercise_name" xml:space="preserve">
     <value>Enter exercise name</value>
+  </data>
+  <data name="Enter_new_training_plan_description" xml:space="preserve">
+    <value>Enter training plan description</value>
   </data>
   <data name="Enter_new_training_plan_name" xml:space="preserve">
     <value>Enter training plan name</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="Save_Exercise_Button" xml:space="preserve">
     <value>Save exercise</value>
+  </data>
+  <data name="Save_TrainingPlan_Button" xml:space="preserve">
+    <value>Save training plan</value>
   </data>
   <data name="Settings_Page_Title" xml:space="preserve">
     <value>Settings</value>

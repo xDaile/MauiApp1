@@ -9,37 +9,35 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
+using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
+[QueryProperty(nameof(Id), "id")]
 public partial class TrainingListViewModel: ViewModelBase
 {
     private readonly IRoutingService routingService;
+    public string? Id { private get; set; }
 
     [ObservableProperty]
-    private IList<ExerciseTrainingModel>? exerciseTraining;
+    private TrainingPlanModel trainingPlan;
 
-    public override async Task OnAppearingAsync()
-    {
-        ExerciseTraining = SeedExerciseTraining();
-    }
+    public ITrainingFacade TrainingFacade;
+    public ITrainingPlanFacade TrainingPlanFacade;
 
-    public TrainingListViewModel(IRoutingService routingService)
+    public TrainingListViewModel(IRoutingService routingService, ITrainingFacade trainingFacade, ITrainingPlanFacade trainingPlanFacade)
     {
+        this.TrainingFacade = trainingFacade;
+        this.TrainingPlanFacade = trainingPlanFacade;
         this.routingService = routingService;
     }
 
-    private IList<ExerciseTrainingModel> SeedExerciseTraining()
+    public override async Task OnAppearingAsync()
     {
-        List<ExerciseTrainingModel> exerciseTraining = new List<ExerciseTrainingModel>();
-        ExerciseTrainingModel a = new ExerciseTrainingModel(1,10, 4,5, 40,1,true,"descr","BP");
-        ExerciseTrainingModel b = new ExerciseTrainingModel(1,10, 5,5, 80, 2,true, "descr", "BP");
-        ExerciseTrainingModel c = new ExerciseTrainingModel(1,10, 5,5, 50, 60, true, "descr", "DP");
-        exerciseTraining.Add(a);
-        exerciseTraining.Add(b);
-        exerciseTraining.Add(c);
-        return exerciseTraining;
-
+        base.OnAppearingAsync();
+        int id = Convert.ToInt32(Id);
+        trainingPlan = await TrainingPlanFacade.GetById(id);
     }
+
 }

@@ -142,7 +142,16 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter new exercise description.
+        ///   Looks up a localized string similar to Detail of training plan.
+        /// </summary>
+        internal static string Detail_TrainingPlan_Page_Title {
+            get {
+                return ResourceManager.GetString("Detail_TrainingPlan_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter exercise description.
         /// </summary>
         internal static string Enter_new_exercise_description {
             get {
@@ -156,6 +165,15 @@ namespace MauiApp1.Resources {
         internal static string Enter_new_exercise_name {
             get {
                 return ResourceManager.GetString("Enter_new_exercise_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter training plan description.
+        /// </summary>
+        internal static string Enter_new_training_plan_description {
+            get {
+                return ResourceManager.GetString("Enter_new_training_plan_description", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace MauiApp1.Resources {
         internal static string Save_Exercise_Button {
             get {
                 return ResourceManager.GetString("Save_Exercise_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save training plan.
+        /// </summary>
+        internal static string Save_TrainingPlan_Button {
+            get {
+                return ResourceManager.GetString("Save_TrainingPlan_Button", resourceCulture);
             }
         }
         

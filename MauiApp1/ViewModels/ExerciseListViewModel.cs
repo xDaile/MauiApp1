@@ -34,16 +34,6 @@ public partial class ExerciseListViewModel : ViewModelBase
         await base.OnAppearingAsync();
         Exercises = await ExerciseFacade.GetAll();
     }
-    /*
-    private IList<ExerciseModel> SeedExercises()
-    {
-        List<ExerciseModel> exercises = new();
-        ExerciseModel a = new(1, "Bench Press", "Name");
-        ExerciseModel b = new(2, "Deadlift", "Name");
-        exercises.Add(a);
-        exercises.Add(b);
-        return exercises;
-    }*/
 
     [ICommand]
     private async Task GoToDetailAsync(int id)

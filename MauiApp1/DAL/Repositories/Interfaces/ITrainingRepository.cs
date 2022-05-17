@@ -12,6 +12,7 @@ namespace MauiApp1.DAL.Repositories.Interfaces
         Task<int> AddExercise(ExerciseTrainingEntity exerciseTraining);
         Task<int> UpdateExercise(ExerciseTrainingEntity exerciseTraining);
         void DeleteExercise(ExerciseTrainingEntity exerciseTraining);
+        Task<List<TrainingEntity>?> GetByTrainingPlanId(int id);
 
     }
 }

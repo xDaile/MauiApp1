@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models;
 
-public record TrainingPlanListModel(int? Id, string Name) : ModelBase
+public record TrainingPlanListModel(int? Id, string Name, string Description) : ModelBase
 {
 }

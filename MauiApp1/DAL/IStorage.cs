@@ -27,6 +27,7 @@ namespace MauiApp1.DAL
         Task<int> SetAsync<T>(T entity) where T : EntityBase, new();
 
         Task DeleteAsync<T>(T entity) where T : EntityBase, new();
+        Task<SQLiteAsyncConnection> GetConnection();
 
     }
 }

@@ -28,10 +28,7 @@ namespace MauiApp1.DAL
             _storage.CreateTableAsync<ExerciseTrainingEntity>();
             _storage.CreateTableAsync<PauseEntity>();
 
-
             _storage.CloseAsync();
-
-
         }
 
 
@@ -52,6 +49,12 @@ namespace MauiApp1.DAL
             var result = await connection.Table<T>().ToListAsync();
             await connection.CloseAsync();
             return result;
+        }
+
+        public async Task<SQLiteAsyncConnection> GetConnection()
+        {
+            return new SQLiteAsyncConnection(databasePath);
+           
         }
 
         public async Task<T> GetByIdAsync<T>(int id)

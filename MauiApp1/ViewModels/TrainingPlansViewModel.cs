@@ -10,7 +10,10 @@ using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
 using MauiApp1.BL.Facades;
+using MauiApp1.BL.Facades.Interfaces;
+
 namespace MauiApp1.ViewModels;
+
 
 [INotifyPropertyChanged]
 public partial class TrainingPlansViewModel : ViewModelBase
@@ -20,38 +23,26 @@ public partial class TrainingPlansViewModel : ViewModelBase
     [ObservableProperty]
     private IList<TrainingPlanListModel>? trainingPlans;
 
-    public override async Task OnAppearingAsync()
-    {
-        TrainingPlans = SeedTrainingPlans();
-    }
+    public ITrainingPlanFacade TrainingPlanFacade;
 
-    public TrainingPlansViewModel(IRoutingService routingService)
+
+
+    public TrainingPlansViewModel(IRoutingService routingService, ITrainingPlanFacade trainingPlanFacade)
     {
         this.routingService = routingService;
+        this.TrainingPlanFacade = trainingPlanFacade;
     }
 
-    private IList<TrainingPlanListModel> SeedTrainingPlans()
+    public override async Task OnAppearingAsync()
     {
-
-        List<TrainingPlanListModel> trainingPlans = new List<TrainingPlanListModel>();
-        TrainingPlanListModel a = new TrainingPlanListModel(1, "Korte");
-//        TrainingPlanListModel b = new TrainingPlanListModel(2, "GVT");
-//        TrainingPlanListModel c = new TrainingPlanListModel(3, "Roubik Full Body");
-//        TrainingPlanListModel d = new TrainingPlanListModel(4, "Tabata");
-//        TrainingPlanListModel e = new TrainingPlanListModel(5, "Zumba");
-        trainingPlans.Add(a);
-//        trainingPlans.Add(b);
-//        trainingPlans.Add(c);
-//        trainingPlans.Add(d);
-//        trainingPlans.Add(e);
-        return trainingPlans;
+        await base.OnAppearingAsync();
+        // TrainingPlans = SeedTrainingPlans();
+        TrainingPlans = await TrainingPlanFacade.GetAllList();
     }
 
     [ICommand]
     private async Task GoToDetailAsync(int id)
     {
-        Console.WriteLine("HEREEEEEEEEEEEEEEEEE");
-        Console.WriteLine(id);
         var route = routingService.GetRouteByViewModel<TrainingListViewModel>();
         await Shell.Current.GoToAsync($"{route}?id={id}");
     }
@@ -63,4 +54,14 @@ public partial class TrainingPlansViewModel : ViewModelBase
         await Shell.Current.GoToAsync($"{route}");
         return;
     }
+
+    [ICommand]
+    private async Task EditTrainingPlanAsync(int id)
+    {
+        var route = routingService.GetRouteByViewModel<DetailTrainingPlanViewModel>();
+        await Shell.Current.GoToAsync($"{route}?id={id}");
+        return;
+    }
+
+
 }

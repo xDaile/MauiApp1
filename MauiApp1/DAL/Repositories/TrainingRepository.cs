@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MauiApp1.DAL.Entities;
 using AutoMapper;
 using MauiApp1.DAL.Repositories.Interfaces;
+using SQLite;
 
 namespace MauiApp1.DAL.Repositories
 {
@@ -40,6 +41,17 @@ namespace MauiApp1.DAL.Repositories
         public async Task<TrainingEntity?> GetById(int id)
         {
             return await storage.GetByIdAsync<TrainingEntity>(id);
+            //string Query = String.Format("Select * from training where training.id = {0}", id);
+        }
+
+        public async Task<List<TrainingEntity>?> GetByTrainingPlanId(int id)
+        {
+            //TODO get list of training by trainingPlan id
+            SQLiteAsyncConnection connection = await storage.GetConnection();
+            var query =  connection.Table<TrainingEntity>().Where(training => training.Id.Equals(id));
+            var result = await query.ToListAsync();
+            await connection.CloseAsync();
+            return result;
             //string Query = String.Format("Select * from training where training.id = {0}", id);
         }
 
