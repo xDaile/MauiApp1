@@ -9,55 +9,50 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
-using MauiApp1.BL.Facades;
 using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.ViewModels;
 
-
 [INotifyPropertyChanged]
-public partial class TrainingPlansViewModel : ViewModelBase
+[QueryProperty(nameof(TrainingId), "trainingId")]
+public partial class TrainingViewModel: ViewModelBase
 {
     private readonly IRoutingService routingService;
+    public string? TrainingId { private get; set; }
+
 
     [ObservableProperty]
-    private IList<TrainingPlanListModel>? trainingPlans;
+    private TrainingModel training;
 
+    public ITrainingFacade TrainingFacade;
     public ITrainingPlanFacade TrainingPlanFacade;
 
-
-
-    public TrainingPlansViewModel(IRoutingService routingService, ITrainingPlanFacade trainingPlanFacade)
+    public TrainingViewModel(IRoutingService routingService, ITrainingFacade trainingFacade, ITrainingPlanFacade trainingPlanFacade)
     {
-        this.routingService = routingService;
+        this.TrainingFacade = trainingFacade;
         this.TrainingPlanFacade = trainingPlanFacade;
+        this.routingService = routingService;
+
     }
 
     public override async Task OnAppearingAsync()
     {
-        await base.OnAppearingAsync();
-        // TrainingPlans = SeedTrainingPlans();
-        TrainingPlans = await TrainingPlanFacade.GetAllLM();
+        base.OnAppearingAsync();
+        int id = Convert.ToInt32(TrainingId);
+        training = await TrainingFacade.GetById(id);
     }
 
     [ICommand]
     private async Task GoToDetailAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<TrainingsViewModel>();
-        try
-        {
-                    await Shell.Current.GoToAsync($"{route}?id={id}");
-        }catch(Exception e)
-        {
-            Console.WriteLine(e);
-        }
-        return;
+        var route = routingService.GetRouteByViewModel<TrainingViewModel>();
+        await Shell.Current.GoToAsync($"{route}?id={id}");
     }
 
     [ICommand]
     private async Task AddNewAsync()
     {
-        var route = routingService.GetRouteByViewModel<CreateTrainingPlanViewModel>();
+        var route = routingService.GetRouteByViewModel<CreateTrainingViewModel>();
         await Shell.Current.GoToAsync($"{route}");
         return;
     }
@@ -65,10 +60,11 @@ public partial class TrainingPlansViewModel : ViewModelBase
     [ICommand]
     private async Task EditTrainingPlanAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<DetailTrainingPlanViewModel>();
-        await Shell.Current.GoToAsync($"{route}?Id={id}");
+        var route = routingService.GetRouteByViewModel<DetailTrainingViewModel>();
+        await Shell.Current.GoToAsync($"{route}?id={id}");
         return;
     }
+
 
 
 }

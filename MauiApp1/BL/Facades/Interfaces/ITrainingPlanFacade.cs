@@ -9,8 +9,13 @@ namespace MauiApp1.BL.Facades.Interfaces
 {
     public interface ITrainingPlanFacade:IFacade<TrainingPlanModel>
     {
-        public Task<List<TrainingPlanListModel>> GetAllList();
-        public Task<int> CreateFromListModel(TrainingPlanListModel model);
+        Task<List<TrainingPlanListModel>> GetAllLM();
+        Task<TrainingPlanListModel> GetByIdLM(int id);
+        Task<int> CreateLM(TrainingPlanListModel model);
+        Task<int?> UpdateLM(TrainingPlanListModel model);
+        void DeleteLM(TrainingPlanListModel model);
+
+
 
     }
 }

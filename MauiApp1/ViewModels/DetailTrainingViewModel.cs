@@ -12,8 +12,8 @@ using Microsoft.Toolkit.Mvvm.Input;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-[QueryProperty(nameof(Id), "Id")]
-public partial class DetailTrainingPlanViewModel : ViewModelBase
+[QueryProperty(nameof(Id), "id")]
+public partial class DetailTrainingViewModel : ViewModelBase
 {
     public string? Id { private get; set; }
 
@@ -25,7 +25,7 @@ public partial class DetailTrainingPlanViewModel : ViewModelBase
     [ObservableProperty]
     private string errorMessage;
 
-    public DetailTrainingPlanViewModel(ITrainingPlanFacade trainingPlanFacade)
+    public DetailTrainingViewModel(ITrainingPlanFacade trainingPlanFacade)
     {
         TrainingPlanFacade = trainingPlanFacade;
     }

@@ -70,6 +70,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new training.
+        /// </summary>
+        internal static string Add_new_training_button {
+            get {
+                return ResourceManager.GetString("Add_new_training_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new training plan.
         /// </summary>
         internal static string Add_new_training_plan_button {

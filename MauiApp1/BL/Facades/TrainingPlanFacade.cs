@@ -28,7 +28,7 @@ namespace MauiApp1.BL.Facades
             return await trainingPlanRepository.Insert(mapper.Map<TrainingPlanEntity>(model));
         }
 
-        public async Task<int> CreateFromListModel(TrainingPlanListModel model)
+        public async Task<int> CreateLM(TrainingPlanListModel model)
         {
             var entity = mapper.Map<TrainingPlanEntity>(model);
             return await trainingPlanRepository.Insert(entity);
@@ -37,17 +37,27 @@ namespace MauiApp1.BL.Facades
         //TODO - check if delete works
         public void Delete(TrainingPlanModel model)
         {
+            //TODO
             trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
         }
 
-        public async Task<List<TrainingPlanListModel>> GetAllList()
+        public void DeleteLM(TrainingPlanListModel model)
         {
-            return mapper.Map<List<TrainingPlanListModel>>(await trainingPlanRepository.GetAll());
+            //TODO
+            trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
         }
+
 
         public async Task<List<TrainingPlanModel>> GetAll()
         {
+            //TODO
             return mapper.Map<List<TrainingPlanModel>>(await trainingPlanRepository.GetAll());
+        }
+
+        public async Task<List<TrainingPlanListModel>> GetAllLM()
+        {
+            List<TrainingPlanEntity> entity = await trainingPlanRepository.GetAll();
+            return mapper.Map<List<TrainingPlanListModel>>(entity);
         }
 
         //TODO map descendants - trainings
@@ -56,8 +66,16 @@ namespace MauiApp1.BL.Facades
             var entity = await trainingPlanRepository.GetById(id);
             var trainings = await trainingRepository.GetByTrainingPlanId(id);
             var trainingListModels = mapper.Map<List<TrainingListModel>>(trainings);
-            TrainingPlanModel model = new TrainingPlanModel(entity.Id, entity.Description, entity.Name, trainingListModels);
+            TrainingPlanModel model = new TrainingPlanModel(entity.Id, entity.Name, entity.Description, trainingListModels);
 
+            return model;
+
+        }
+
+        public async Task<TrainingPlanListModel?> GetByIdLM(int id)
+        {
+            var entity = await trainingPlanRepository.GetById(id);
+            TrainingPlanListModel model = new TrainingPlanListModel(entity.Id, entity.Name, entity.Description);
             return model;
 
         }
@@ -66,6 +84,12 @@ namespace MauiApp1.BL.Facades
         {
             return await trainingPlanRepository.Update(mapper.Map<TrainingPlanEntity>(model));
         }
+
+        public async Task<int?> UpdateLM(TrainingPlanListModel model)
+        {
+            return await trainingPlanRepository.Update(mapper.Map<TrainingPlanEntity>(model));
+        }
+
 
     }
 }

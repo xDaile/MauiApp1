@@ -9,32 +9,35 @@ using MauiApp1.BL.Facades.Interfaces;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-public partial class CreateTrainingPlanViewModel:ViewModelBase
+[QueryProperty(nameof(TrainingPlanId), "id")]
+public partial class CreateTrainingViewModel:ViewModelBase
 {
     [ObservableProperty]
-    private TrainingPlanListModel newTrainingPlan;
+    private TrainingListModel newTraining;
 
-    public ITrainingPlanFacade TrainingPlanFacade;
+    public string? TrainingPlanId { private get; set; }
+
+    public ITrainingFacade TrainingFacade;
 
     [ObservableProperty]
     private string errorMessage;
 
-    public CreateTrainingPlanViewModel(ITrainingPlanFacade trainingPlanFacade)
+    public CreateTrainingViewModel(ITrainingFacade trainingFacade)
     {
-        this.TrainingPlanFacade= trainingPlanFacade;
-        NewTrainingPlan = new TrainingPlanListModel(null,"","");
+        this.TrainingFacade= trainingFacade;
+        NewTraining = new TrainingListModel(null,"","",0);
     }
 
     [ICommand]
     private async Task CreateTrainingPlanAsync(String name)
     {
 
-        if (newTrainingPlan.Name.Length < 1)
+        if (newTraining.Name.Length < 1)
         {
             ErrorMessage = "Name of training plan is too short";
             return;
         }
-        var result = await TrainingPlanFacade.CreateLM(NewTrainingPlan);
+       // var result = await TrainingFacade.CreateLM(NewTraining);
         await Shell.Current.GoToAsync("..");
         return;
     }

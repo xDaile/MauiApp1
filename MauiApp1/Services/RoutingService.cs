@@ -21,6 +21,10 @@ public class RoutingService : IRoutingService
         new ("//training_plans/create", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel)),
         new ("//training_plans/detail", typeof(DetailTrainingPlanView), typeof(DetailTrainingPlanViewModel)),
 
+        new ("//trainings/", typeof(TrainingsView), typeof(TrainingsViewModel)),
+        //new ("//trainings/create", typeof(CreateTrainingView), typeof(CreateTrainingViewModel)),
+        //new ("//trainings/detail", typeof(DetailTrainingView), typeof(DetailTrainingViewModel)),
+
         new ("//settings", typeof(SettingsView), typeof(SettingsViewModel)),
         new ("//user", typeof(UserView), typeof(UserViewModel)),
         //DetailTrainingPlanViewModel

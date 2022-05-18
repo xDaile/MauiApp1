@@ -24,7 +24,6 @@ namespace MauiApp1.DAL.Repositories
         {
             await storage.DeleteAsync(trainingPlan);
             //string Query = String.Format("Delete from training_plan where training_plan.id ={0}", trainingPlan.Id);
-
         }
 
         public async Task<bool> Exists(TrainingPlanEntity trainingPlan)

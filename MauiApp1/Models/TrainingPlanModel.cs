@@ -8,7 +8,7 @@ using MauiApp1.Models;
 namespace MauiApp1.Models
 { 
     //page1 mainly
-    public record TrainingPlanModel(int? Id, string Description, string Name, IList<TrainingListModel>? Trainings) : ModelBase
+    public record TrainingPlanModel(int? Id, string Name, string Description, IList<TrainingListModel>? Trainings) : ModelBase
     {
     }
 }

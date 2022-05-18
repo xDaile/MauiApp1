@@ -25,7 +25,7 @@
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
                                                       CommandParameter="{Binding Id}" />
                             </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="5,65,15,*,10" RowDefinitions="5,Auto,8,Auto">
+                            <Grid ColumnDefinitions="5,65,15,*,45" RowDefinitions="5,Auto,8,Auto">
 
                                 <Image Grid.Column="1"
                                        Grid.RowSpan="4"
@@ -48,12 +48,23 @@
                                        HorizontalOptions="Start" />
                                 <Label Grid.Column="3"
                                        Grid.Row="3"
+                                       Grid.ColumnSpan="2"
                                        Text="{Binding Description}"
                                        FontSize="15"
                                        LineBreakMode="CharacterWrap"
                                        FontAttributes="Italic"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start" />
+                                <ImageButton Grid.Column="4"
+                                             Grid.Row="1"
+                                             Aspect="AspectFill"
+                                             MaximumHeightRequest="40"
+                                             MaximumWidthRequest="40"
+                                             Source="/Images/edit_button.png"
+                                             Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
+                                             CommandParameter="{Binding Id}"
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Start" />
                             </Grid>
 
                         </Frame>

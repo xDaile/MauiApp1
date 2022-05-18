@@ -120,6 +120,9 @@
   <data name="Add_new_exercise_button" xml:space="preserve">
     <value>Add new exercise</value>
   </data>
+  <data name="Add_new_training_button" xml:space="preserve">
+    <value>Add new training</value>
+  </data>
   <data name="Add_new_training_plan_button" xml:space="preserve">
     <value>Add new training plan</value>
   </data>

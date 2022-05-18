@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                       x:Class="MauiApp1.Views.TrainingPlansView"
-                       Title="{x:Static resources:Texts.Training_Plans_Page_Title}"
+                       x:Class="MauiApp1.Views.TrainingsView"
+                       Title="{Binding TrainingPlan.Name}"
                        xmlns:models="clr-namespace:MauiApp1.Models"
                        xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
                        xmlns:resources="clr-namespace:MauiApp1.Resources"
                        xmlns:views="clr-namespace:MauiApp1.Views"
-                       x:DataType="viewModels:TrainingPlansViewModel"
+                       x:DataType="viewModels:TrainingsViewModel"
                        x:Name="Root">
 
     <Grid RowDefinitions="15,*,10, 60">
         <ScrollView Grid.Row="1"
                     Margin="10">
-            <CollectionView ItemsSource="{Binding TrainingPlans}">
+            <CollectionView ItemsSource="{Binding TrainingPlan.Trainings}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"
                                        ItemSpacing="25" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:TrainingPlanListModel">
+                    <DataTemplate x:DataType="models:TrainingListModel">
 
                         <Frame>
                             <Frame.GestureRecognizers>
@@ -61,7 +61,7 @@
                                              MaximumHeightRequest="40"
                                              MaximumWidthRequest="40"
                                              Source="/Images/edit_button.png"
-                                             Command="{Binding Source={x:Reference Root}, Path=BindingContext.EditTrainingPlanCommand}"
+                                             Command="{Binding Source={x:Reference Root}, Path=BindingContext.EditTrainingCommand}"
                                              CommandParameter="{Binding Id}"
                                              HorizontalOptions="End"
                                              VerticalOptions="Start" />
@@ -81,7 +81,7 @@
                 FontFamily="MontserratRegular"
                 FontSize="20"
                 Command="{Binding AddNewCommand}"
-                Text="{x:Static resources:Texts.Add_new_training_plan_button}"></Button>
+                Text="{x:Static resources:Texts.Add_new_training_button}"></Button>
     </Grid>
 
 </views:ContentPageBase>
