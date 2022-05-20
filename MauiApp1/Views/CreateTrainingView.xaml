@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="MauiApp1.CreateTrainingView"
+                       xmlns:models="clr-namespace:MauiApp1.Models"
+                       xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
+                       xmlns:resources="clr-namespace:MauiApp1.Resources"
+                       xmlns:views="clr-namespace:MauiApp1.Views"
+                       Title="{x:Static resources:Texts.Create_Training_Page_Title}"
+                       x:DataType="viewModels:CreateTrainingViewModel"
+                       x:Name="Root">
+    <Grid RowDefinitions="45,*,30, 60">
+        <ScrollView Grid.Row="1"
+                    Margin="15">
+
+            <Grid RowDefinitions="Auto,10,Auto,20,Auto,10,Auto">
+
+                <Label Grid.Row="0"
+                       Text="{x:Static resources:Texts.Name_label_double_quote}"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Editor x:Name="entry_name"
+                        Grid.Row="2"
+                        MaxLength="75"
+                        HeightRequest="80"
+                        BackgroundColor="WhiteSmoke"
+                        FontSize="21"
+                        Text="{Binding NewTraining.Name}"
+                        Placeholder="{x:Static resources:Texts.Enter_new_exercise_name}" />
+                <Label Grid.Row="4"
+                       Text="{x:Static resources:Texts.Description_label_double_quote}"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Editor x:Name="entry_name2"
+                        Grid.Row="6"
+                        MaxLength="100"
+                        HeightRequest="110"
+                        BackgroundColor="WhiteSmoke"
+                        FontSize="21"
+                        Text="{Binding NewTraining.Description}"
+                        Placeholder="{x:Static resources:Texts.Enter_new_exercise_description}" />
+            </Grid>
+        </ScrollView>
+        <Label Grid.Row="2"
+               Text="{Binding ErrorMessage}"
+               FontSize="15"
+               TextColor="Red"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        <Button Grid.Row="4"
+                Margin="5"
+                CornerRadius="60"
+                FontFamily="MontserratRegular"
+                FontSize="20"
+                Command="{Binding CreateTrainingCommand}"
+                Text="{x:Static resources:Texts.Create_Training_Button}"></Button>
+    </Grid>
+</views:ContentPageBase>

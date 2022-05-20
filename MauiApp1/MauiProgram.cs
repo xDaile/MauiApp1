@@ -15,7 +15,7 @@ using AutoMapper;
 using MauiApp1.BL;
 using MauiApp1.DAL.Entities;
 using MauiApp1.Models;
-
+//await Shell.Current.DisplayPromptAsync("Are u sure?","");
 namespace MauiApp1;
 
 public static class MauiProgram

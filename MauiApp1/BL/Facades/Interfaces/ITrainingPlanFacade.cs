@@ -13,7 +13,7 @@ namespace MauiApp1.BL.Facades.Interfaces
         Task<TrainingPlanListModel> GetByIdLM(int id);
         Task<int> CreateLM(TrainingPlanListModel model);
         Task<int?> UpdateLM(TrainingPlanListModel model);
-        void DeleteLM(TrainingPlanListModel model);
+        Task DeleteLM(TrainingPlanListModel model);
 
 
 

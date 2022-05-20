@@ -19,7 +19,7 @@ namespace MauiApp1.DAL.Repositories
             this.storage = storage;
         }
 
-        public async void Delete(PauseEntity entity)
+        public async Task Delete(PauseEntity entity)
         {
             await storage.DeleteAsync(entity);
             //string Query = String.Format("Delete from pause where pause.id ={0}", entity.Id);

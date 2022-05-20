@@ -54,7 +54,7 @@ public partial class DetailTrainingPlanViewModel : ViewModelBase
     [ICommand]
     private async Task DeleteTrainingPlanAsync()
     {
-        TrainingPlanFacade.DeleteLM(existingTrainingPlan);
+        await TrainingPlanFacade.DeleteLM(existingTrainingPlan);
         await Shell.Current.GoToAsync("..");
         return;
     }

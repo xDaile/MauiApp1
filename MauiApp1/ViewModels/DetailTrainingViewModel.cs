@@ -12,49 +12,49 @@ using Microsoft.Toolkit.Mvvm.Input;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-[QueryProperty(nameof(Id), "id")]
+[QueryProperty(nameof(Id), "trainingPlanId")]
 public partial class DetailTrainingViewModel : ViewModelBase
 {
     public string? Id { private get; set; }
 
-    public ITrainingPlanFacade TrainingPlanFacade;
+    public ITrainingFacade TrainingFacade;
 
     [ObservableProperty]
-    private TrainingPlanListModel existingTrainingPlan;
+    private TrainingListModel existingTraining;
 
     [ObservableProperty]
     private string errorMessage;
 
-    public DetailTrainingViewModel(ITrainingPlanFacade trainingPlanFacade)
+    public DetailTrainingViewModel(ITrainingFacade trainingFacade)
     {
-        TrainingPlanFacade = trainingPlanFacade;
+        TrainingFacade = trainingFacade;
     }
 
     public override async Task OnAppearingAsync()
     {
         await base.OnAppearingAsync();
         int id = Convert.ToInt32(Id);
-        ExistingTrainingPlan = await TrainingPlanFacade.GetByIdLM(id);
+        ExistingTraining = await TrainingFacade.GetByIdLM(id);
     }
 
     [ICommand]
-    private async Task SaveTrainingPlanAsync()
+    private async Task SaveTrainingAsync()
     {
-        if (existingTrainingPlan.Name.Length < 1)
+        if (existingTraining.Name.Length < 1)
         {
-            ErrorMessage = "Name of the trainingPlan is too short";
+            ErrorMessage = "Name of the training is too short";
             return;
         }
-        await TrainingPlanFacade.UpdateLM(existingTrainingPlan);
+        await TrainingFacade.UpdateLM(existingTraining);
         await Shell.Current.GoToAsync("..");
         return;
     }
 
     //TODO remove descendants if there are some
     [ICommand]
-    private async Task DeleteTrainingPlanAsync()
+    private async Task DeleteTrainingAsync()
     {
-        TrainingPlanFacade.DeleteLM(existingTrainingPlan);
+        await TrainingFacade.DeleteLM(existingTraining);
         await Shell.Current.GoToAsync("..");
         return;
     }

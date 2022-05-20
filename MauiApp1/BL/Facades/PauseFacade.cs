@@ -25,9 +25,10 @@ namespace MauiApp1.BL.Facades
             return await exerciseRepository.Insert(mapper.Map<PauseEntity>(model));
         }
 
-        public void Delete(PauseModel model)
+        public async Task Delete(PauseModel model)
         {
-            exerciseRepository.Delete(mapper.Map<PauseEntity>(model));
+            await exerciseRepository.Delete(mapper.Map<PauseEntity>(model));
+            return;
         }
 
         public async Task<List<PauseModel>> GetAll()

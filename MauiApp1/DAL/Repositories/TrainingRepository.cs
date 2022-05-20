@@ -19,8 +19,21 @@ namespace MauiApp1.DAL.Repositories
             this.mapper = mapper;
             this.storage = storage;
         }
-        public async void Delete(TrainingEntity training)
+        public async Task Delete(TrainingEntity training)
         {
+            SQLiteAsyncConnection connection = await storage.GetConnection();
+            var query = connection.Table<TrainingEntity>().Where(trainingTable => trainingTable.TrainingPlanId.Equals(training.TrainingPlanId));
+            List<TrainingEntity> result = await query.ToListAsync();
+            await connection.CloseAsync();
+            foreach (TrainingEntity trainingForUpdate in result)
+            {
+                if (trainingForUpdate.Order > training.Order)
+                {
+                    trainingForUpdate.Order = trainingForUpdate.Order - 1;
+                    await storage.SetAsync(trainingForUpdate);
+                }
+            }
+
             await storage.DeleteAsync(training);
             //string Query = String.Format("Delete from training where training.id ={0}", training.Id);
             //throw new NotImplementedException();
@@ -48,24 +61,35 @@ namespace MauiApp1.DAL.Repositories
         {
             //TODO get list of training by trainingPlan id
             SQLiteAsyncConnection connection = await storage.GetConnection();
-            var query =  connection.Table<TrainingEntity>().Where(training => training.Id.Equals(id));
-            var result = await query.ToListAsync();
+            var query = connection.Table<TrainingEntity>().Where(training => training.TrainingPlanId.Equals(id));
+            List<TrainingEntity> result = await query.ToListAsync();
             await connection.CloseAsync();
+            result = result.OrderBy(x=> x.Order).ToList();
+            
             return result;
             //string Query = String.Format("Select * from training where training.id = {0}", id);
+        }
+
+        public async Task<int> GetExistingTrainingsOfTPCount(int trainingPlanId)
+        {
+            SQLiteAsyncConnection connection = await storage.GetConnection();
+            var query = connection.Table<TrainingEntity>().CountAsync(training => training.TrainingPlanId.Equals(trainingPlanId));
+            int result = await query;
+            await connection.CloseAsync();
+            return result;
         }
 
         public async Task<int> Insert(TrainingEntity training)
         {
             return await storage.SetAsync(training);
-            //string Query = String.Format("Insert into training (name, order, description, training_plan) values ('{0}', {1}, '{2}', {3})", training.Name, training.Order, training.Description, training.TraininPlangId);
+            //string Query = String.Format("Insert into training (name, order, description, training_plan) values ('{0}', {1}, '{2}', {3})", training.Name, training.Order, training.Description, training.TrainingPlanId);
 
         }
 
         public async Task<int?> Update(TrainingEntity training)
         {
             return await storage.SetAsync(training);
-            // string Query = String.Format("Update training (name, order, description, training_plan) values ('{0}', {1}, '{2}', {3}) where training.id={4}", training.Name, training.Order, training.Description, training.TraininPlangId, training.Id);
+            // string Query = String.Format("Update training (name, order, description, training_plan) values ('{0}', {1}, '{2}', {3}) where training.id={4}", training.Name, training.Order, training.Description, training.TrainingPlanId, training.Id);
         }
 
         public async Task<int> AddExercise(ExerciseTrainingEntity exerciseTraining)
@@ -76,9 +100,62 @@ namespace MauiApp1.DAL.Repositories
         {
             return await storage.SetAsync(exerciseTraining);
         }
-        public async void DeleteExercise(ExerciseTrainingEntity exerciseTraining)
+        public async Task DeleteExercise(ExerciseTrainingEntity exerciseTraining)
         {
+
             await storage.DeleteAsync(exerciseTraining);
+        }
+
+        public async Task MoveTrainingUp(int trainingId)
+        {
+            SQLiteAsyncConnection connection = await storage.GetConnection();
+
+            var queryGetTraining = connection.Table<TrainingEntity>().Where(trainingTable => trainingTable.Id.Equals(trainingId));
+            TrainingEntity originalTraining = await queryGetTraining.FirstAsync();
+            if (originalTraining.Order == 0) return;
+            var queryForOtherTrainings = connection.Table<TrainingEntity>().Where(trainingTable => trainingTable.TrainingPlanId.Equals(originalTraining.TrainingPlanId));
+            List<TrainingEntity> result = await queryForOtherTrainings.ToListAsync();
+
+
+            TrainingEntity trainingForUpdate = result.Find(x => x.Order.Equals(originalTraining.Order - 1));
+
+            trainingForUpdate.Order = trainingForUpdate.Order + 1;
+            originalTraining.Order = originalTraining.Order - 1;
+            await connection.UpdateAsync(trainingForUpdate);
+            await connection.UpdateAsync(originalTraining);
+            //await storage.SetAsync<TrainingEntity>(trainingForUpdate);
+            //await storage.SetAsync<TrainingEntity>(originalTraining);
+            await connection.CloseAsync();
+            return;
+        }
+
+        public async Task MoveTrainingDown(int trainingId)
+        {
+            SQLiteAsyncConnection connection = null;
+            while (connection == null)
+            {
+                connection = await storage.GetConnection();
+            }
+
+            var queryGetTraining = connection.Table<TrainingEntity>().Where(trainingTable => trainingTable.Id.Equals(trainingId));
+            TrainingEntity originalTraining = await queryGetTraining.FirstAsync();
+
+            var queryForOtherTrainings = connection.Table<TrainingEntity>().Where(trainingTable => trainingTable.TrainingPlanId.Equals(originalTraining.TrainingPlanId));
+            List<TrainingEntity> result = await queryForOtherTrainings.ToListAsync();
+            if (originalTraining.Order == result.Count() - 1) return;
+            TrainingEntity? trainingForUpdate = result.Find(x => x.Order.Equals(originalTraining.Order + 1));
+
+            if (trainingForUpdate == null) return;
+
+            originalTraining.Order = originalTraining.Order + 1;
+            trainingForUpdate.Order = trainingForUpdate.Order - 1;
+
+            await connection.UpdateAsync(trainingForUpdate);
+            await connection.UpdateAsync(originalTraining);
+            await connection.CloseAsync();
+            //await storage.SetAsync<TrainingEntity>(trainingForUpdate);
+            //await storage.SetAsync<TrainingEntity>(originalTraining);
+            return;
         }
     }
 }

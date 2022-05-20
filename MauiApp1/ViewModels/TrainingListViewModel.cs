@@ -19,9 +19,13 @@ public partial class TrainingListViewModel: ViewModelBase
 {
     private readonly IRoutingService routingService;
     public string? Id { private get; set; }
+    private int id;
 
     [ObservableProperty]
     private TrainingPlanModel trainingPlan;
+
+    //[ObservableProperty]
+    //private List<TrainingListModel> trainings;
 
     public ITrainingFacade TrainingFacade;
     public ITrainingPlanFacade TrainingPlanFacade;
@@ -35,9 +39,54 @@ public partial class TrainingListViewModel: ViewModelBase
 
     public override async Task OnAppearingAsync()
     {
-        base.OnAppearingAsync();
-        int id = Convert.ToInt32(Id);
-        trainingPlan = await TrainingPlanFacade.GetById(id);
+        
+        this.id = Convert.ToInt32(Id);
+        await this.RefreshTrainingPlan();
+        await base.OnAppearingAsync();
+    }
+    
+    public async Task RefreshTrainingPlan()
+    {
+        TrainingPlan = await TrainingPlanFacade.GetById(this.id);
+    }
+    
+    [ICommand]
+    private async Task GoToDetailAsync(int id)
+    {
+        //var route = routingService.GetRouteByViewModel<TrainingViewModel>();
+        //await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+    }
+    
+    [ICommand]
+    private async Task AddNewAsync()
+    {
+        var route = routingService.GetRouteByViewModel<CreateTrainingViewModel>();
+        int id = Convert.ToInt32(TrainingPlan.Id);
+        await Shell.Current.GoToAsync($"{route}?trainingPlanId={id}");
+        return;
     }
 
+    [ICommand]
+    private async Task EditTrainingAsync(int id)
+    {
+        var route = routingService.GetRouteByViewModel<DetailTrainingViewModel>();
+        await Shell.Current.GoToAsync($"{route}?trainingPlanId={id}");
+        return;
+    }
+
+    [ICommand]
+    private async Task MoveTrainingDownAsync(int id)
+    {
+        await TrainingFacade.MoveTrainingDown(id);
+        await RefreshTrainingPlan();
+        return;
+    }
+
+    [ICommand]
+    private async Task MoveTrainingUpAsync(int id)
+    {
+        await TrainingFacade.MoveTrainingUp(id);
+        await RefreshTrainingPlan();
+        return;
+    }
 }

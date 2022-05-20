@@ -53,7 +53,7 @@ public partial class DetailExerciseViewModel:ViewModelBase
     [ICommand]
     private async Task DeleteExerciseAsync()
     {
-        ExerciseFacade.Delete(existingExercise);
+        await ExerciseFacade.Delete(existingExercise);
         await Shell.Current.GoToAsync("..");
         return;
     }

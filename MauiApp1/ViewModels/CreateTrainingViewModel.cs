@@ -9,35 +9,41 @@ using MauiApp1.BL.Facades.Interfaces;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-[QueryProperty(nameof(TrainingPlanId), "id")]
-public partial class CreateTrainingViewModel:ViewModelBase
+[QueryProperty(nameof(TrainingPlanId), "trainingPlanId")]
+public partial class CreateTrainingViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private TrainingListModel newTraining;
 
-    public string? TrainingPlanId { private get; set; }
+    public string TrainingPlanId { private get; set; }
 
     public ITrainingFacade TrainingFacade;
 
     [ObservableProperty]
     private string errorMessage;
 
+    [ObservableProperty]
+    private TrainingListModel newTraining;
+
     public CreateTrainingViewModel(ITrainingFacade trainingFacade)
     {
-        this.TrainingFacade= trainingFacade;
-        NewTraining = new TrainingListModel(null,"","",0);
+        this.TrainingFacade = trainingFacade;
+        //Be aware that TrainingPlanID and Order are just temporary in the model, because they are not accessible during constructor
+        NewTraining = new TrainingListModel(null, "", "", 0, 0);
     }
 
     [ICommand]
-    private async Task CreateTrainingPlanAsync(String name)
+    private async Task CreateTrainingAsync()
     {
-
-        if (newTraining.Name.Length < 1)
+        
+        int trainingPlanId = Convert.ToInt32(TrainingPlanId);
+        var order = await TrainingFacade.GetExistingTrainingsCount(trainingPlanId);
+        TrainingListModel model = new TrainingListModel(null, NewTraining.Name, NewTraining.Description, order, trainingPlanId);
+        if (model.Name.Length < 1)
         {
-            ErrorMessage = "Name of training plan is too short";
+            ErrorMessage = "Name of training is too short";
             return;
         }
-       // var result = await TrainingFacade.CreateLM(NewTraining);
+
+        await TrainingFacade.CreateLM(model);
         await Shell.Current.GoToAsync("..");
         return;
     }

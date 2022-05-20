@@ -43,11 +43,12 @@ public partial class TrainingPlansViewModel : ViewModelBase
     [ICommand]
     private async Task GoToDetailAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<TrainingsViewModel>();
+        var route = routingService.GetRouteByViewModel<TrainingListViewModel>();
         try
         {
-                    await Shell.Current.GoToAsync($"{route}?id={id}");
-        }catch(Exception e)
+            await Shell.Current.GoToAsync($"{route}?id={id}");
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
         }

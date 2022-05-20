@@ -106,6 +106,24 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create training.
+        /// </summary>
+        internal static string Create_Training_Button {
+            get {
+                return ResourceManager.GetString("Create_Training_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Training.
+        /// </summary>
+        internal static string Create_Training_Page_Title {
+            get {
+                return ResourceManager.GetString("Create_Training_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create training plan.
         /// </summary>
         internal static string Create_Training_Plan_Button {
@@ -147,6 +165,15 @@ namespace MauiApp1.Resources {
         internal static string Detail_Exercise_Page_Title {
             get {
                 return ResourceManager.GetString("Detail_Exercise_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail of training.
+        /// </summary>
+        internal static string Detail_Training_Page_Title {
+            get {
+                return ResourceManager.GetString("Detail_Training_Page_Title", resourceCulture);
             }
         }
         
@@ -223,6 +250,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save training.
+        /// </summary>
+        internal static string Save_Training_Button {
+            get {
+                return ResourceManager.GetString("Save_Training_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save training plan.
         /// </summary>
         internal static string Save_TrainingPlan_Button {
@@ -237,6 +273,15 @@ namespace MauiApp1.Resources {
         internal static string Settings_Page_Title {
             get {
                 return ResourceManager.GetString("Settings_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training plan.
+        /// </summary>
+        internal static string Training_List_Page_Title {
+            get {
+                return ResourceManager.GetString("Training_List_Page_Title", resourceCulture);
             }
         }
         

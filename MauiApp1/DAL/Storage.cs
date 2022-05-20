@@ -19,8 +19,8 @@ namespace MauiApp1.DAL
         public IList<ExerciseTrainingEntity> ExerciseTraining { get; }
         public Storage()
         {
-            databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3");
-            _storage = new SQLiteAsyncConnection(databasePath);
+            databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database2.db3");
+            _storage = new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
 
             _storage.CreateTableAsync<ExerciseEntity>();
             _storage.CreateTableAsync<TrainingPlanEntity>();
@@ -74,9 +74,7 @@ namespace MauiApp1.DAL
             var connection = new SQLiteAsyncConnection(databasePath);
             if (entity.Id < 1 || entity.Id == null)
             {
-
                 result = await connection.InsertAsync(entity);
-
             }
             else
             {
@@ -93,6 +91,9 @@ namespace MauiApp1.DAL
             await connection.DeleteAsync(entity);
             await connection.CloseAsync();
         }
+
+
+        /*
         public async void GetAllTablesAsync()
         {
             var _connection = new SQLiteAsyncConnection(databasePath);
@@ -100,12 +101,13 @@ namespace MauiApp1.DAL
             var result = await _connection.QueryAsync<TableName>(queryString).ConfigureAwait(false);
             Console.WriteLine(result);
 
-        }
+        }*/
     }
+    /*
     public class TableName
     {
         public TableName() { }
         public string name { get; set; }
     }
-
+    */
 }

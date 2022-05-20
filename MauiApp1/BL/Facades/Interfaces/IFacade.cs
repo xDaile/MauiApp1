@@ -13,6 +13,6 @@ namespace MauiApp1.BL.Facades.Interfaces
         public Task<T?> GetById(int id);
         public Task<int> Create(T model);
         public Task<int?> Update(T model);
-        public void Delete(T model);
+        public Task Delete(T model);
     }
 }

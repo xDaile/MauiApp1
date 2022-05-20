@@ -20,7 +20,7 @@ namespace MauiApp1.DAL.Repositories
             this.storage = storage;
         }
 
-        public async void Delete(TrainingPlanEntity trainingPlan)
+        public async Task Delete(TrainingPlanEntity trainingPlan)
         {
             await storage.DeleteAsync(trainingPlan);
             //string Query = String.Format("Delete from training_plan where training_plan.id ={0}", trainingPlan.Id);

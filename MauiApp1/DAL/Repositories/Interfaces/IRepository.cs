@@ -12,7 +12,7 @@ namespace MauiApp1.DAL.Repositories.Interfaces
         Task<T?> GetById(int id);
         Task<int> Insert(T entity);
         Task<int?> Update(T entity);
-        void Delete(T entity);
+        Task Delete(T entity);
         Task<bool> Exists(T entity);
     }
 }

@@ -35,16 +35,28 @@ namespace MauiApp1.BL.Facades
         }
 
         //TODO - check if delete works
-        public void Delete(TrainingPlanModel model)
+        public async Task Delete(TrainingPlanModel model)
         {
-            //TODO
-            trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
+            //TODO delete descendants
+            foreach(TrainingListModel training in model.Trainings)
+            {
+                await trainingRepository.Delete(mapper.Map<TrainingEntity>(training));
+            }
+            await trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
+            return;
+            
         }
 
-        public void DeleteLM(TrainingPlanListModel model)
+        public async Task DeleteLM(TrainingPlanListModel model)
         {
-            //TODO
-            trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
+            //TODO descendats
+            List<TrainingEntity> trainings = await trainingRepository.GetByTrainingPlanId((int)model.Id);
+            foreach (TrainingEntity training in trainings)
+            {
+                await trainingRepository.Delete(training);
+            }
+            await trainingPlanRepository.Delete(mapper.Map<TrainingPlanEntity>(model));
+            return;
         }
 
 

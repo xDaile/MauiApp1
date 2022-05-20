@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="MauiApp1.Views.TrainingListView"
+                       Title="{x:Static resources:Texts.Training_List_Page_Title}"
+                       xmlns:models="clr-namespace:MauiApp1.Models"
+                       xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
+                       xmlns:resources="clr-namespace:MauiApp1.Resources"
+                       xmlns:views="clr-namespace:MauiApp1.Views"
+                       x:DataType="viewModels:TrainingListViewModel"
+                       x:Name="Root">
+    <Grid RowDefinitions="10,35,10,25,10,*,10, 60">
+        <Label Grid.Row="1"
+               LineBreakMode="CharacterWrap"
+               Text="{Binding TrainingPlan.Name}"
+               FontSize="25"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        <Label Grid.Row="3"
+               Text="{Binding TrainingPlan.Description}"
+               FontSize="15"
+               LineBreakMode="CharacterWrap"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        <ScrollView Grid.Row="5"
+                    BackgroundColor="Wheat"
+                    Margin="10">
+            <CollectionView ItemsSource="{Binding TrainingPlan.Trainings}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="25" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TrainingListModel">
+
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
+                                                      CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,45,5">
+                                <Grid HorizontalOptions="CenterAndExpand"
+                                    Grid.Column="0"
+                                      ColumnDefinitions="5,65,20,*"
+                                      RowDefinitions="10,Auto,8,Auto">
+                                    <Image Grid.Column="1"
+                                           Grid.RowSpan="4"
+                                           Source="/Images/training_plan.png"
+                                           Aspect="AspectFit"
+                                           VerticalOptions="CenterAndExpand"
+                                           Margin="10,10,10,10"
+                                           MaximumHeightRequest="70"
+                                           MaximumWidthRequest="70"
+                                           HorizontalOptions="CenterAndExpand" />
+
+                                    <Label Grid.Column="3"
+                                           Grid.Row="1"
+                                           LineBreakMode="CharacterWrap"
+                                           Text="{Binding Name}"
+                                           FontSize="22"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start" />
+                                    <Label Grid.Column="3"
+                                           Grid.Row="3"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding Description}"
+                                           FontSize="15"
+                                           LineBreakMode="CharacterWrap"
+                                           FontAttributes="Italic"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start" />
+                                </Grid>
+                                <Grid Grid.Column="1"
+                                      RowDefinitions="5,Auto,15,Auto,5,Auto"
+                                      HorizontalOptions="End">
+                                    <ImageButton Grid.Row="1"
+                                                 Aspect="AspectFill"
+                                                 MaximumHeightRequest="40"
+                                                 MaximumWidthRequest="40"
+                                                 Source="/Images/edit_button.png"
+                                                 Command="{Binding Source={x:Reference Root}, Path=BindingContext.EditTrainingCommand}"
+                                                 CommandParameter="{Binding Id}"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center" />
+                                    <ImageButton Grid.Row="3"
+                                                 Aspect="AspectFill"
+                                                 MaximumHeightRequest="40"
+                                                 MaximumWidthRequest="40"
+                                                 Source="/Images/up_button.png"
+                                                 Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingUpCommand}"
+                                                 CommandParameter="{Binding Id}"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="End" />
+                                    <ImageButton Grid.Row="5"
+                                                 Aspect="AspectFill"
+                                                 MaximumHeightRequest="40"
+                                                 MaximumWidthRequest="40"
+                                                 Source="/Images/down_button.png"
+                                                 Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingDownCommand}"
+                                                 CommandParameter="{Binding Id}"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="End" />
+                                </Grid>
+                            </Grid>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </ScrollView>
+        <Button Grid.Row="7"
+                Margin="5"
+                CornerRadius="60"
+                FontFamily="MontserratRegular"
+                FontSize="20"
+                Command="{Binding AddNewCommand}"
+                Text="{x:Static resources:Texts.Add_new_training_button}"></Button>
+    </Grid>
+
+
+</views:ContentPageBase>
