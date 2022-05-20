@@ -69,7 +69,7 @@ public partial class TrainingListViewModel: ViewModelBase
     [ICommand]
     private async Task EditTrainingAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<DetailTrainingViewModel>();
+        var route = routingService.GetRouteByViewModel<EditTrainingViewModel>();
         await Shell.Current.GoToAsync($"{route}?trainingPlanId={id}");
         return;
     }

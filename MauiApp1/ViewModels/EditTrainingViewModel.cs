@@ -12,48 +12,49 @@ using Microsoft.Toolkit.Mvvm.Input;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-[QueryProperty(nameof(Id), "id")]
-public partial class DetailExerciseViewModel:ViewModelBase
+[QueryProperty(nameof(Id), "trainingPlanId")]
+public partial class EditTrainingViewModel : ViewModelBase
 {
     public string? Id { private get; set; }
 
-    public IExerciseFacade ExerciseFacade;
+    public ITrainingFacade TrainingFacade;
 
     [ObservableProperty]
-    private ExerciseModel existingExercise;
+    private TrainingListModel existingTraining;
 
     [ObservableProperty]
     private string errorMessage;
 
-    public DetailExerciseViewModel(IExerciseFacade exerciseFacade)
+    public EditTrainingViewModel(ITrainingFacade trainingFacade)
     {
-        ExerciseFacade = exerciseFacade;
+        TrainingFacade = trainingFacade;
     }
 
     public override async Task OnAppearingAsync()
     {
         await base.OnAppearingAsync();
-        int id =Convert.ToInt32(Id);    
-        ExistingExercise = await ExerciseFacade.GetById(id); 
+        int id = Convert.ToInt32(Id);
+        ExistingTraining = await TrainingFacade.GetByIdLM(id);
     }
 
     [ICommand]
-    private async Task SaveExerciseAsync()
+    private async Task SaveTrainingAsync()
     {
-        if (existingExercise.Name.Length < 1)
+        if (existingTraining.Name.Length < 1)
         {
-            ErrorMessage = "Name of the exercise is too short";
+            ErrorMessage = "Name of the training is too short";
             return;
         }
-        await ExerciseFacade.Update(existingExercise);
+        await TrainingFacade.UpdateLM(existingTraining);
         await Shell.Current.GoToAsync("..");
         return;
     }
 
+    //TODO remove descendants if there are some
     [ICommand]
-    private async Task DeleteExerciseAsync()
+    private async Task DeleteTrainingAsync()
     {
-        await ExerciseFacade.Delete(existingExercise);
+        await TrainingFacade.DeleteLM(existingTraining);
         await Shell.Current.GoToAsync("..");
         return;
     }

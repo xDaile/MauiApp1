@@ -13,7 +13,7 @@ namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
 [QueryProperty(nameof(Id), "Id")]
-public partial class DetailTrainingPlanViewModel : ViewModelBase
+public partial class EditTrainingPlanViewModel : ViewModelBase
 {
     public string? Id { private get; set; }
 
@@ -25,7 +25,7 @@ public partial class DetailTrainingPlanViewModel : ViewModelBase
     [ObservableProperty]
     private string errorMessage;
 
-    public DetailTrainingPlanViewModel(ITrainingPlanFacade trainingPlanFacade)
+    public EditTrainingPlanViewModel(ITrainingPlanFacade trainingPlanFacade)
     {
         TrainingPlanFacade = trainingPlanFacade;
     }

@@ -162,27 +162,27 @@ namespace MauiApp1.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Detail of exercise.
         /// </summary>
-        internal static string Detail_Exercise_Page_Title {
+        internal static string Edit_Exercise_Page_Title {
             get {
-                return ResourceManager.GetString("Detail_Exercise_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Edit_Exercise_Page_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Detail of training.
         /// </summary>
-        internal static string Detail_Training_Page_Title {
+        internal static string Edit_Training_Page_Title {
             get {
-                return ResourceManager.GetString("Detail_Training_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Edit_Training_Page_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Detail of training plan.
         /// </summary>
-        internal static string Detail_TrainingPlan_Page_Title {
+        internal static string Edit_TrainingPlan_Page_Title {
             get {
-                return ResourceManager.GetString("Detail_TrainingPlan_Page_Title", resourceCulture);
+                return ResourceManager.GetString("Edit_TrainingPlan_Page_Title", resourceCulture);
             }
         }
         

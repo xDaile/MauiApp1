@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                       x:Class="MauiApp1.DetailTrainingView"
+                       x:Class="MauiApp1.EditTrainingPlanView"
                        xmlns:models="clr-namespace:MauiApp1.Models"
                        xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
                        xmlns:resources="clr-namespace:MauiApp1.Resources"
                        xmlns:views="clr-namespace:MauiApp1.Views"
-                       Title="{x:Static resources:Texts.Detail_Training_Page_Title}"
-                       x:DataType="viewModels:DetailTrainingViewModel"
+                       Title="{x:Static resources:Texts.Edit_TrainingPlan_Page_Title}"
+                       x:DataType="viewModels:EditTrainingPlanViewModel"
                        x:Name="Root">
     <Grid RowDefinitions="15,*,30, 60">
         <ScrollView Grid.Row="1"
@@ -27,8 +27,8 @@
                         BackgroundColor="WhiteSmoke"
                         FontSize="23"
                         
-                        Text="{Binding ExistingTraining.Name}"
-                        Placeholder="{Binding ExistingTraining.Name}" />
+                        Text="{Binding ExistingTrainingPlan.Name}"
+                        Placeholder="{Binding ExistingTrainingPlan.Name}" />
                 <Label Grid.Row="4"
                        Text="{x:Static resources:Texts.Description_label_double_quote}"
                        FontSize="25"
@@ -40,8 +40,8 @@
                         MaxLength="100"
                         BackgroundColor="WhiteSmoke"
                         FontSize="21"
-                        Text="{Binding ExistingTraining.Description}"
-                        Placeholder="{Binding ExistingTraining.Description}" />
+                        Text="{Binding ExistingTrainingPlan.Description}"
+                        Placeholder="{Binding ExistingTrainingPlan.Description}" />
             </Grid>
         </ScrollView>
         <Label Grid.Row="2"
@@ -57,8 +57,8 @@
                     CornerRadius="60"
                     FontFamily="MontserratRegular"
                     FontSize="20"
-                    Command="{Binding SaveTrainingCommand}"
-                    Text="{x:Static resources:Texts.Save_Training_Button}"></Button>
+                    Command="{Binding SaveTrainingPlanCommand}"
+                    Text="{x:Static resources:Texts.Save_TrainingPlan_Button}"></Button>
             <Button Grid.Column="2"
                     Margin="5"
                     CornerRadius="60"
@@ -66,7 +66,7 @@
                     BorderColor="DarkRed"
                     FontFamily="MontserratRegular"
                     FontSize="20"
-                    Command="{Binding DeleteTrainingCommand}"
+                    Command="{Binding DeleteTrainingPlanCommand}"
                     Text="{x:Static resources:Texts.Delete_Button}"></Button>
         </Grid>
 

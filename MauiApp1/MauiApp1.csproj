@@ -84,14 +84,17 @@
 	  <Compile Update="Views\CreateTrainingView.xaml.cs">
 	    <DependentUpon>CreateTrainingView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\DetailTrainingView.xaml.cs">
-	    <DependentUpon>DetailTrainingView.xaml</DependentUpon>
+	  <Compile Update="Views\EditTrainingPlanView.xaml.cs">
+	    <DependentUpon>EditTrainingPlanView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\DetailTrainingPlanView.xaml.cs">
-	    <DependentUpon>DetailTrainingPlanView.xaml</DependentUpon>
+	  <Compile Update="Views\EditTrainingView.xaml.cs">
+	    <DependentUpon>EditTrainingView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\DetailExerciseView.xaml.cs">
-	    <DependentUpon>DetailExerciseView.xaml</DependentUpon>
+	  <Compile Update="Views\EditTrainingPlanView.xaml.cs">
+	    <DependentUpon>EditTrainingPlanView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EditExerciseView.xaml.cs">
+	    <DependentUpon>EditExerciseView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\ExerciseListView.xaml.cs">
 	    <DependentUpon>ExerciseListView.xaml</DependentUpon>
@@ -124,13 +127,13 @@
 	  <MauiXaml Update="Views\CreateTrainingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DetailTrainingView.xaml">
+	  <MauiXaml Update="Views\EditTrainingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DetailTrainingPlanView.xaml">
+	  <MauiXaml Update="Views\EditTrainingPlanView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DetailExerciseView.xaml">
+	  <MauiXaml Update="Views\EditExerciseView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CreateExerciseView.xaml">

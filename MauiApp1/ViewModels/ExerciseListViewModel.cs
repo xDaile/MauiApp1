@@ -38,7 +38,7 @@ public partial class ExerciseListViewModel : ViewModelBase
     [ICommand]
     private async Task GoToDetailAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<DetailExerciseViewModel>();
+        var route = routingService.GetRouteByViewModel<EditExerciseViewModel>();
         await Shell.Current.GoToAsync($"{route}?id={id}");
     }
 
