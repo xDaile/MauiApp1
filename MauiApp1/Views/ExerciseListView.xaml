@@ -22,7 +22,7 @@
 
                         <Frame >
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.ShowMenuExerciseCommand}"
                                                       CommandParameter="{Binding Id}" />
                             </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="5,65,15,*,45" RowDefinitions="5,Auto,8,Auto">
@@ -61,7 +61,7 @@
                                              MaximumHeightRequest="40"
                                              MaximumWidthRequest="40"
                                              Source="/Images/edit_button.png"
-                                             Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToDetailCommand}"
+                                             Command="{Binding Source={x:Reference Root}, Path=BindingContext.ShowMenuExerciseCommand}"
                                              CommandParameter="{Binding Id}"
                                              HorizontalOptions="End"
                                              VerticalOptions="Start" />

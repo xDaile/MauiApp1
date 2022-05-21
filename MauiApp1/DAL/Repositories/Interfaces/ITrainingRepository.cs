@@ -18,5 +18,6 @@ namespace MauiApp1.DAL.Repositories.Interfaces
         Task MoveTrainingUp(int trainingId);
         Task MoveTrainingDown(int trainingId);
 
+        Task<List<ExerciseTrainingEntity>> GetAllExerciseTrainingByTrainingId(int trainingId);
     }
 }

@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add_new_exercise" xml:space="preserve">
+    <value>New exercise</value>
+  </data>
   <data name="Add_new_exercise_button" xml:space="preserve">
     <value>Add new exercise</value>
+  </data>
+  <data name="Add_new_pause" xml:space="preserve">
+    <value>New pause</value>
   </data>
   <data name="Add_new_training_button" xml:space="preserve">
     <value>Add new training</value>
@@ -176,6 +182,42 @@
   </data>
   <data name="Name_label_double_quote" xml:space="preserve">
     <value>Name:</value>
+  </data>
+  <data name="Prompt_Are_you_sure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="Prompt_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Prompt_Create_copy" xml:space="preserve">
+    <value>Create copy</value>
+  </data>
+  <data name="Prompt_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Prompt_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Prompt_exercise" xml:space="preserve">
+    <value>exercise</value>
+  </data>
+  <data name="Prompt_Exercise_options" xml:space="preserve">
+    <value>Exercise options</value>
+  </data>
+  <data name="Prompt_training" xml:space="preserve">
+    <value>training</value>
+  </data>
+  <data name="Prompt_Training_options" xml:space="preserve">
+    <value>Training options</value>
+  </data>
+  <data name="Prompt_Training_plan" xml:space="preserve">
+    <value>Training plan</value>
+  </data>
+  <data name="Prompt_training_plan_" xml:space="preserve">
+    <value>training plan</value>
+  </data>
+  <data name="Prompt_Training_plan_options" xml:space="preserve">
+    <value>Training plan options</value>
   </data>
   <data name="Save_Exercise_Button" xml:space="preserve">
     <value>Save exercise</value>

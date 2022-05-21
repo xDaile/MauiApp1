@@ -14,8 +14,8 @@ using MauiApp1.BL.Facades.Interfaces;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-[QueryProperty(nameof(Id), "id")]
-public partial class TrainingListViewModel: ViewModelBase
+[QueryProperty(nameof(Id), "Id")]
+public partial class TrainingListViewModel : ViewModelBase
 {
     private readonly IRoutingService routingService;
     public string? Id { private get; set; }
@@ -39,39 +39,63 @@ public partial class TrainingListViewModel: ViewModelBase
 
     public override async Task OnAppearingAsync()
     {
-        
+
         this.id = Convert.ToInt32(Id);
         await this.RefreshTrainingPlan();
         await base.OnAppearingAsync();
     }
-    
+
     public async Task RefreshTrainingPlan()
     {
         TrainingPlan = await TrainingPlanFacade.GetById(this.id);
     }
-    
+
     [ICommand]
     private async Task GoToDetailAsync(int id)
     {
-        //var route = routingService.GetRouteByViewModel<TrainingViewModel>();
-        //await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+        var route = routingService.GetRouteByViewModel<TrainingViewModel>();
+       await Shell.Current.GoToAsync($"{route}?trainingId={id}");
     }
-    
+
     [ICommand]
     private async Task AddNewAsync()
     {
         var route = routingService.GetRouteByViewModel<CreateTrainingViewModel>();
         int id = Convert.ToInt32(TrainingPlan.Id);
+        //we need trainingPlanId because it is referenced int training
         await Shell.Current.GoToAsync($"{route}?trainingPlanId={id}");
         return;
     }
 
     [ICommand]
-    private async Task EditTrainingAsync(int id)
+    private async Task ShowMenuTrainingAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<EditTrainingViewModel>();
-        await Shell.Current.GoToAsync($"{route}?trainingPlanId={id}");
-        return;
+        string promptActionResult = await Shell.Current.DisplayActionSheet(Resources.Texts.Prompt_Training_options, Resources.Texts.Prompt_Cancel, null, Resources.Texts.Prompt_Edit, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Create_copy);
+
+
+        if (promptActionResult.Equals(Resources.Texts.Prompt_Edit))
+        {
+            var route = routingService.GetRouteByViewModel<EditTrainingViewModel>();
+            await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+            return;
+        }
+
+        if (promptActionResult.Equals(Resources.Texts.Prompt_Delete))
+        {
+            TrainingListModel selectedTraining = await TrainingFacade.GetByIdLM(id);
+            bool promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Delete} {selectedTraining.Name} {Resources.Texts.Prompt_training}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
+            if (promptConfirmationResult.Equals(true))
+            {
+                await TrainingFacade.DeleteLM(selectedTraining);
+            }
+            await this.OnAppearingAsync();
+            return;
+        }
+        if (promptActionResult.Equals(Resources.Texts.Prompt_Create_copy))
+        {
+            return;
+        }
+
     }
 
     [ICommand]

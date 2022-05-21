@@ -9,5 +9,6 @@ namespace MauiApp1.DAL.Repositories.Interfaces
 {
     public interface IPauseRepository:IRepository<PauseEntity>
     {
+        Task<List<PauseEntity>?> GetByTrainingId(int id);
     }
 }
