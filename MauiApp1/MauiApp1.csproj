@@ -102,11 +102,14 @@
 	  <Compile Update="Views\SettingsView.xaml.cs">
 	    <DependentUpon>SettingsView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\TrainingView.xaml.cs">
+	    <DependentUpon>TrainingView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\TrainingListView.xaml.cs">
 	    <DependentUpon>TrainingListView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\TrainingPlansView.xaml.cs">
-	    <DependentUpon>TrainingPlansView.xaml</DependentUpon>
+	  <Compile Update="Views\TrainingPlanListView.xaml.cs">
+	    <DependentUpon>TrainingPlanListView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -157,10 +160,13 @@
 	  <MauiXaml Update="Views\TrainingEditPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\TrainingView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TrainingListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TrainingPlansView.xaml">
+	  <MauiXaml Update="Views\TrainingPlanListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\UserView.xaml">

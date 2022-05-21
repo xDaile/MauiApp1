@@ -36,10 +36,38 @@ public partial class ExerciseListViewModel : ViewModelBase
     }
 
     [ICommand]
-    private async Task GoToDetailAsync(int id)
+    private async Task ShowMenuExerciseAsync(int id)
     {
-        var route = routingService.GetRouteByViewModel<EditExerciseViewModel>();
-        await Shell.Current.GoToAsync($"{route}?id={id}");
+        //var route = routingService.GetRouteByViewModel<EditExerciseViewModel>();
+        //await Shell.Current.GoToAsync($"{route}?id={id}");
+
+        string promptActionResult = await Shell.Current.DisplayActionSheet(Resources.Texts.Prompt_Exercise_options, Resources.Texts.Prompt_Cancel, null, Resources.Texts.Prompt_Edit, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Create_copy);
+
+
+        if (promptActionResult.Equals(Resources.Texts.Prompt_Edit))
+        {
+            var route = routingService.GetRouteByViewModel<EditExerciseViewModel>();
+            await Shell.Current.GoToAsync($"{route}?Id={id}");
+            return;
+        }
+
+        if (promptActionResult.Equals(Resources.Texts.Prompt_Delete))
+        {
+            ExerciseModel selectedExercise = await ExerciseFacade.GetById(id);
+            bool promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Delete} {selectedExercise.Name} {Resources.Texts.Prompt_exercise}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
+            if (promptConfirmationResult.Equals(true))
+            {
+                await ExerciseFacade.Delete(selectedExercise);
+            }
+            await this.OnAppearingAsync();
+            return;
+        }
+        if (promptActionResult.Equals(Resources.Texts.Prompt_Create_copy))
+        {
+            return;
+        }
+
+
     }
 
 

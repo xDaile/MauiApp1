@@ -27,7 +27,7 @@
 
     <FlyoutItem Title="{x:Static resources:Texts.Training_Plans_Page_Title}">
 
-        <ShellContent ContentTemplate="{DataTemplate views:TrainingPlansView}"
+        <ShellContent ContentTemplate="{DataTemplate views:TrainingPlanListView}"
                       Route="training_plans" />
     </FlyoutItem>
 

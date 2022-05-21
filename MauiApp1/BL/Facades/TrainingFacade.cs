@@ -15,11 +15,13 @@ namespace MauiApp1.BL.Facades
     public class TrainingFacade : ITrainingFacade
     {
         private readonly ITrainingRepository trainingRepository;
+        private readonly IPauseRepository pauseRepository;
         private readonly IMapper mapper;
 
-        public TrainingFacade(ITrainingRepository trainingRepository, IMapper mapper)
+        public TrainingFacade(ITrainingRepository trainingRepository, IMapper mapper, IPauseRepository pauseRepository)
         {
             this.trainingRepository = trainingRepository;
+            this.pauseRepository = pauseRepository;
             this.mapper = mapper;
         }
         public async Task<int> Create(TrainingModel model)
@@ -65,7 +67,16 @@ namespace MauiApp1.BL.Facades
 
         public async Task<TrainingModel?> GetById(int id)
         {
-            return mapper.Map<TrainingModel>(await trainingRepository.GetById(id));
+            TrainingEntity trainingEntity = await trainingRepository.GetById(id);
+            List<ExerciseTrainingEntity> exerciseTrainingEntities = await trainingRepository.GetAllExerciseTrainingByTrainingId(id);
+            List<PauseEntity> pauseEntities = await pauseRepository.GetByTrainingId(id);
+            List<ExerciseTrainingModel> exerciseTrainingModels = mapper.Map<List<ExerciseTrainingModel>>(exerciseTrainingEntities);
+            List<PauseModel> pauseModels = mapper.Map < List<PauseModel>>(pauseEntities);
+            List<TrainingItemModel> trainingItems = new List<TrainingItemModel>();
+            trainingItems.Concat(pauseModels);
+            trainingItems.Concat(trainingItems);
+            TrainingModel result = new TrainingModel(trainingEntity.Id, trainingEntity.Name, trainingEntity.Description, trainingEntity.TrainingPlanId, trainingEntity.Order, trainingItems);
+            return result;
         }
 
         public async Task<TrainingListModel?> GetByIdLM(int id)

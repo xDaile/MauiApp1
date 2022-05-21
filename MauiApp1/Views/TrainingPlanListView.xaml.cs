@@ -16,21 +16,14 @@ using MauiApp1.BL.Facades.Interfaces;
 
 namespace MauiApp1.Views;
 
-public partial class TrainingPlansView: ContentPageBase
+public partial class TrainingPlanListView: ContentPageBase
 {
-	public TrainingPlansView(TrainingPlansViewModel trainingPlansViewModel)
-		:base(trainingPlansViewModel)
+	public TrainingPlanListView(TrainingPlanListViewModel TrainingPlanListViewModel)
+		:base(TrainingPlanListViewModel)
 	{
         InitializeComponent();
-        BindingContext = trainingPlansViewModel;
+        BindingContext = TrainingPlanListViewModel;
 		
 	}
-
-    public async void OnSupportTapped(object sender, EventArgs eventArgs)
-    {
-        string action = await DisplayActionSheet("Get Help", "Cancel", null, "Email", "Chat", "Phone");
-        await DisplayAlert("You Chose", action, "Okay");
-
-    }
 
 }

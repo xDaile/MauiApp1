@@ -102,8 +102,17 @@ namespace MauiApp1.DAL.Repositories
         }
         public async Task DeleteExercise(ExerciseTrainingEntity exerciseTraining)
         {
-
             await storage.DeleteAsync(exerciseTraining);
+        }
+
+        public async Task<List<ExerciseTrainingEntity>> GetAllExerciseTrainingByTrainingId(int trainingId)
+        {
+            SQLiteAsyncConnection connection = await storage.GetConnection();
+
+            var queryGetTraining = connection.Table<ExerciseTrainingEntity>().Where(exerciseTraining => exerciseTraining.TrainingId.Equals(trainingId));
+            List<ExerciseTrainingEntity> exerciseTrainingList = await queryGetTraining.ToListAsync();
+            await connection.CloseAsync();
+            return exerciseTrainingList;
         }
 
         public async Task MoveTrainingUp(int trainingId)

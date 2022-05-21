@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MauiApp1.DAL.Entities;
 using AutoMapper;
+using SQLite;
 using MauiApp1.DAL.Repositories.Interfaces;
 
 namespace MauiApp1.DAL.Repositories
@@ -53,6 +54,19 @@ namespace MauiApp1.DAL.Repositories
         {
             return await storage.SetAsync<PauseEntity>(pause);
             //string Query = String.Format("Update pause (name, seconds, training_id, order_, description) values ('{0}', {1}, {2}, {3}, '{4}') where pause.id={5}", pause.Name,pause.Seconds,pause.TrainingId,pause.Order,pause.Description, pause.Id);
+        }
+
+        public async Task<List<PauseEntity>?> GetByTrainingId(int trainingId)
+        {
+
+            SQLiteAsyncConnection connection = await storage.GetConnection();
+
+            var queryGetPause = connection.Table<PauseEntity>().Where(pause => pause.TrainingId.Equals(trainingId));
+            List<PauseEntity> pauseList = await queryGetPause.ToListAsync();
+            await connection.CloseAsync();
+            return pauseList;
+
+            
         }
     }
 }

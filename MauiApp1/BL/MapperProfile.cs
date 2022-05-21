@@ -20,8 +20,8 @@ namespace MauiApp1.BL
             CreateMap<TrainingPlanEntity, TrainingPlanListModel>().ReverseMap();
           //  CreateMap<List<TrainingPlanEntity>, List<TrainingPlanModel>>().ReverseMap();
 
-            CreateMap<ExerciseTrainingEntity, ExerciseTrainingModel>();
-            CreateMap<PauseEntity, PauseModel>();
+            CreateMap<ExerciseTrainingEntity, ExerciseTrainingModel>().ReverseMap();
+            CreateMap<PauseEntity, PauseModel>().ReverseMap();
             CreateMap<TrainingEntity, TrainingListModel>().ReverseMap();
             CreateMap<TrainingEntity, TrainingModel>().ReverseMap();
             

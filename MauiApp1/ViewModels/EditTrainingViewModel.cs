@@ -12,7 +12,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 namespace MauiApp1.ViewModels;
 
 [INotifyPropertyChanged]
-[QueryProperty(nameof(Id), "trainingPlanId")]
+[QueryProperty(nameof(Id), "trainingId")]
 public partial class EditTrainingViewModel : ViewModelBase
 {
     public string? Id { private get; set; }

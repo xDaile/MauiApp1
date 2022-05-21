@@ -61,11 +61,29 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New exercise.
+        /// </summary>
+        internal static string Add_new_exercise {
+            get {
+                return ResourceManager.GetString("Add_new_exercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new exercise.
         /// </summary>
         internal static string Add_new_exercise_button {
             get {
                 return ResourceManager.GetString("Add_new_exercise_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New pause.
+        /// </summary>
+        internal static string Add_new_pause {
+            get {
+                return ResourceManager.GetString("Add_new_pause", resourceCulture);
             }
         }
         
@@ -237,6 +255,114 @@ namespace MauiApp1.Resources {
         internal static string Name_label_double_quote {
             get {
                 return ResourceManager.GetString("Name_label_double_quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        internal static string Prompt_Are_you_sure {
+            get {
+                return ResourceManager.GetString("Prompt_Are_you_sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Prompt_Cancel {
+            get {
+                return ResourceManager.GetString("Prompt_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create copy.
+        /// </summary>
+        internal static string Prompt_Create_copy {
+            get {
+                return ResourceManager.GetString("Prompt_Create_copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Prompt_Delete {
+            get {
+                return ResourceManager.GetString("Prompt_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string Prompt_Edit {
+            get {
+                return ResourceManager.GetString("Prompt_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exercise.
+        /// </summary>
+        internal static string Prompt_exercise {
+            get {
+                return ResourceManager.GetString("Prompt_exercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exercise options.
+        /// </summary>
+        internal static string Prompt_Exercise_options {
+            get {
+                return ResourceManager.GetString("Prompt_Exercise_options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to training.
+        /// </summary>
+        internal static string Prompt_training {
+            get {
+                return ResourceManager.GetString("Prompt_training", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training options.
+        /// </summary>
+        internal static string Prompt_Training_options {
+            get {
+                return ResourceManager.GetString("Prompt_Training_options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training plan.
+        /// </summary>
+        internal static string Prompt_Training_plan {
+            get {
+                return ResourceManager.GetString("Prompt_Training_plan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to training plan.
+        /// </summary>
+        internal static string Prompt_training_plan_ {
+            get {
+                return ResourceManager.GetString("Prompt_training_plan_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training plan options.
+        /// </summary>
+        internal static string Prompt_Training_plan_options {
+            get {
+                return ResourceManager.GetString("Prompt_Training_plan_options", resourceCulture);
             }
         }
         

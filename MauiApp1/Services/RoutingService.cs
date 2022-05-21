@@ -17,7 +17,7 @@ public class RoutingService : IRoutingService
         new ("//exercises/create_e", typeof(CreateExerciseView), typeof(CreateExerciseViewModel)),
         new ("//exercises/edit_e", typeof(EditExerciseView), typeof(EditExerciseViewModel)),
 
-        new ("//training_plans", typeof(TrainingPlansView), typeof(TrainingPlansViewModel)),
+        new ("//training_plans", typeof(TrainingPlanListView), typeof(TrainingPlanListViewModel)),
         new ("//training_plans/create_tp", typeof(CreateTrainingPlanView), typeof(CreateTrainingPlanViewModel)),
         new ("//training_plans/edit_tp", typeof(EditTrainingPlanView), typeof(EditTrainingPlanViewModel)),
 
@@ -25,9 +25,10 @@ public class RoutingService : IRoutingService
         new ("//training_plans/trainings/create_t", typeof(CreateTrainingView), typeof(CreateTrainingViewModel)),
         new ("//training_plans/trainings/edit_t", typeof(EditTrainingView), typeof(EditTrainingViewModel)),
 
+        new ("//training_plans/trainings/training", typeof(TrainingView), typeof(TrainingViewModel)),
+
         new ("//settings", typeof(SettingsView), typeof(SettingsViewModel)),
         new ("//user", typeof(UserView), typeof(UserViewModel)),
-        //EditTrainingPlanViewModel
 
     };
 
