@@ -10,7 +10,9 @@ using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
 using MauiApp1.BL.Facades;
+
 using MauiApp1.BL.Facades.Interfaces;
+
 
 namespace MauiApp1.ViewModels;
 
@@ -70,6 +72,8 @@ public partial class TrainingPlansViewModel : ViewModelBase
         await Shell.Current.GoToAsync($"{route}?Id={id}");
         return;
     }
+
+
 
 
 }

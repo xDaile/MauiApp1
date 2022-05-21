@@ -37,7 +37,11 @@
                                        Margin="10,10,10,10"
                                        MaximumHeightRequest="70"
                                        MaximumWidthRequest="70"
-                                       HorizontalOptions="CenterAndExpand" />
+                                       HorizontalOptions="CenterAndExpand">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnSupportTapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <Label Grid.Column="3"
                                        Grid.Row="1"
