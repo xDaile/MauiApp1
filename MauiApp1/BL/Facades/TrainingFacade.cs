@@ -112,6 +112,54 @@ namespace MauiApp1.BL.Facades
             await trainingRepository.MoveTrainingDown(trainingId);
         }
 
+        public async Task MoveTrainingItemUp(TrainingItemModel model)
+        {
+            if (nameof(model).Equals("ExerciseTrainingModel"))
+            {
+                Console.WriteLine("ExerciseTraining");
+            }
+            if (nameof(model).Equals("PauseModel"))
+            {
+                Console.WriteLine("PauseModel");
+            }
+
+           
+        }
+
+        public async Task MoveTrainingItemDown(TrainingItemModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task CreateTrainingItem(TrainingItemModel model)
+        {
+            if (model.GetType().Equals(typeof(ExerciseTrainingModel)))
+            {
+                Console.WriteLine("ExerciseTraining");
+            }
+            if (model.GetType().Equals(typeof(PauseModel)))
+            {
+                Console.WriteLine("PauseModel");
+            }
+            Console.WriteLine(nameof(model));
+        }
+
+        public async Task UpdateTrainingItem(TrainingItemModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteTrainingItem(TrainingItemModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> GetExistingTrainingItemsCount(int trainingPlanId)
+        {//TODO
+            return 0;
+            throw new NotImplementedException();
+        }
+
         /*
         public async Task<int> AddExercise(ExerciseTrainingModel exercise)
         {

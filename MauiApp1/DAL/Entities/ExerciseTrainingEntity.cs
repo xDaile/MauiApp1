@@ -11,7 +11,8 @@ namespace MauiApp1.DAL.Entities
     public record ExerciseTrainingEntity : EntityBase
     {
 
-        public int Seconds { get; set; }
+        public TimeSpan RestSeconds { get; set; }
+        public TimeSpan ExerciseSeconds { get; set; }
         public int Reps { get; set; }
         public int Weight { get; set; }
         public int Sets { get; set; }

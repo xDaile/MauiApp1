@@ -23,5 +23,12 @@ namespace MauiApp1.BL.Facades.Interfaces
 
         Task MoveTrainingUp(int trainingId);
         Task MoveTrainingDown(int trainingId);
+
+        Task MoveTrainingItemUp(TrainingItemModel model);
+        Task MoveTrainingItemDown(TrainingItemModel model);
+        Task CreateTrainingItem(TrainingItemModel model);
+        Task UpdateTrainingItem(TrainingItemModel model);
+        Task DeleteTrainingItem(TrainingItemModel model);
+        Task<int> GetExistingTrainingItemsCount(int trainingPlanId);
     }
 }

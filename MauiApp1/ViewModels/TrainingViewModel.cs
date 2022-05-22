@@ -58,15 +58,17 @@ public partial class TrainingViewModel : ViewModelBase
     [ICommand]
     private async Task AddNewPauseAsync()
     {
+        var route = routingService.GetRouteByViewModel<CreatePauseViewModel>();
+        await Shell.Current.GoToAsync($"{route}?trainingId={id}");
         
-        return;
     }
 
     [ICommand]
     private async Task AddNewExerciseAsync()
     {
-        //we need trainingPlanId because it is referenced int training
-        return;
+        var route = routingService.GetRouteByViewModel<CreateExerciseTrainingViewModel>();
+        await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+        
     }
 
     [ICommand]

@@ -124,6 +124,24 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create pause.
+        /// </summary>
+        internal static string Create_Pause_Button {
+            get {
+                return ResourceManager.GetString("Create_Pause_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create pause.
+        /// </summary>
+        internal static string Create_Pause_Page_Title {
+            get {
+                return ResourceManager.GetString("Create_Pause_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create training.
         /// </summary>
         internal static string Create_Training_Button {
@@ -178,6 +196,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration:.
+        /// </summary>
+        internal static string Duration_label_double_quote {
+            get {
+                return ResourceManager.GetString("Duration_label_double_quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detail of exercise.
         /// </summary>
         internal static string Edit_Exercise_Page_Title {
@@ -223,6 +250,33 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter pause description.
+        /// </summary>
+        internal static string Enter_new_pause_description {
+            get {
+                return ResourceManager.GetString("Enter_new_pause_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter pause duration.
+        /// </summary>
+        internal static string Enter_new_pause_duration {
+            get {
+                return ResourceManager.GetString("Enter_new_pause_duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter pause name.
+        /// </summary>
+        internal static string Enter_new_pause_name {
+            get {
+                return ResourceManager.GetString("Enter_new_pause_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter training plan description.
         /// </summary>
         internal static string Enter_new_training_plan_description {
@@ -237,6 +291,15 @@ namespace MauiApp1.Resources {
         internal static string Enter_new_training_plan_name {
             get {
                 return ResourceManager.GetString("Enter_new_training_plan_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter pause duration in seconds.
+        /// </summary>
+        internal static string Enter_pause_duration {
+            get {
+                return ResourceManager.GetString("Enter_pause_duration", resourceCulture);
             }
         }
         
@@ -273,6 +336,15 @@ namespace MauiApp1.Resources {
         internal static string Prompt_Cancel {
             get {
                 return ResourceManager.GetString("Prompt_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        internal static string Prompt_confirm {
+            get {
+                return ResourceManager.GetString("Prompt_confirm", resourceCulture);
             }
         }
         
