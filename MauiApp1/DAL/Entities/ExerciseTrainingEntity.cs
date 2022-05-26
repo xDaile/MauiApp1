@@ -8,7 +8,7 @@ using SQLite;
 
 namespace MauiApp1.DAL.Entities
 {
-    public record ExerciseTrainingEntity : EntityBase
+    public record ExerciseTrainingEntity : TrainingItemEntity
     {
 
         public TimeSpan RestSeconds { get; set; }

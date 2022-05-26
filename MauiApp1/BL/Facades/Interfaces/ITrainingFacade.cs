@@ -26,8 +26,8 @@ namespace MauiApp1.BL.Facades.Interfaces
 
         Task MoveTrainingItemUp(TrainingItemModel model);
         Task MoveTrainingItemDown(TrainingItemModel model);
-        Task CreateTrainingItem(TrainingItemModel model);
-        Task UpdateTrainingItem(TrainingItemModel model);
+        Task<int> CreateTrainingItem(TrainingItemModel model);
+        Task<int> UpdateTrainingItem(TrainingItemModel model);
         Task DeleteTrainingItem(TrainingItemModel model);
         Task<int> GetExistingTrainingItemsCount(int trainingPlanId);
     }

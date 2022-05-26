@@ -48,8 +48,11 @@ namespace MauiApp1.BL.Facades
             return;
         }
 
+
+        //NOT USABLE - waste of time to write that
         public async Task<List<TrainingModel>> GetAll()
         {
+            throw new NotImplementedException();
             return mapper.Map<List<TrainingModel>>(await trainingRepository.GetAll());
         }
 
@@ -68,13 +71,14 @@ namespace MauiApp1.BL.Facades
         public async Task<TrainingModel?> GetById(int id)
         {
             TrainingEntity trainingEntity = await trainingRepository.GetById(id);
-            List<ExerciseTrainingEntity> exerciseTrainingEntities = await trainingRepository.GetAllExerciseTrainingByTrainingId(id);
-            List<PauseEntity> pauseEntities = await pauseRepository.GetByTrainingId(id);
-            List<ExerciseTrainingModel> exerciseTrainingModels = mapper.Map<List<ExerciseTrainingModel>>(exerciseTrainingEntities);
-            List<PauseModel> pauseModels = mapper.Map < List<PauseModel>>(pauseEntities);
+            List<TrainingItemEntity> trainingItemEntities = await trainingRepository.GetAllTrainingItemsByTrainingId(id);
             List<TrainingItemModel> trainingItems = new List<TrainingItemModel>();
-            trainingItems.Concat(pauseModels);
-            trainingItems.Concat(trainingItems);
+
+            foreach (TrainingItemEntity trainingItemEntity in trainingItemEntities)
+            {
+                trainingItems.Add(MapTrainingItemEntityToModel(trainingItemEntity));
+            }
+
             TrainingModel result = new TrainingModel(trainingEntity.Id, trainingEntity.Name, trainingEntity.Description, trainingEntity.TrainingPlanId, trainingEntity.Order, trainingItems);
             return result;
         }
@@ -114,67 +118,78 @@ namespace MauiApp1.BL.Facades
 
         public async Task MoveTrainingItemUp(TrainingItemModel model)
         {
-            if (nameof(model).Equals("ExerciseTrainingModel"))
-            {
-                Console.WriteLine("ExerciseTraining");
-            }
-            if (nameof(model).Equals("PauseModel"))
-            {
-                Console.WriteLine("PauseModel");
-            }
-
-           
+            await trainingRepository.MoveTrainingItemUp(MapTrainingItemModelToEntity(model));
         }
 
         public async Task MoveTrainingItemDown(TrainingItemModel model)
         {
-            throw new NotImplementedException();
+            await trainingRepository.MoveTrainingItemDown(MapTrainingItemModelToEntity(model));
         }
 
-        public async Task CreateTrainingItem(TrainingItemModel model)
+        public async Task<int> CreateTrainingItem(TrainingItemModel model)
         {
-            if (model.GetType().Equals(typeof(ExerciseTrainingModel)))
-            {
-                Console.WriteLine("ExerciseTraining");
-            }
-            if (model.GetType().Equals(typeof(PauseModel)))
-            {
-                Console.WriteLine("PauseModel");
-            }
-            Console.WriteLine(nameof(model));
+            return await trainingRepository.CreateTrainingItem(MapTrainingItemModelToEntity(model));
+
         }
 
-        public async Task UpdateTrainingItem(TrainingItemModel model)
+        public async Task<int> UpdateTrainingItem(TrainingItemModel model)
         {
-            throw new NotImplementedException();
+            return await trainingRepository.UpdateTrainingItem(MapTrainingItemModelToEntity(model));
         }
 
         public async Task DeleteTrainingItem(TrainingItemModel model)
         {
-            throw new NotImplementedException();
+            await trainingRepository.DeleteTrainingItem(MapTrainingItemModelToEntity(model));
         }
 
         public async Task<int> GetExistingTrainingItemsCount(int trainingPlanId)
-        {//TODO
-            return 0;
-            throw new NotImplementedException();
+        {
+            return await trainingRepository.GetExistingTrainingItemsCount(trainingPlanId);
         }
 
-        /*
-        public async Task<int> AddExercise(ExerciseTrainingModel exercise)
+        private TrainingItemEntity MapTrainingItemModelToEntity(TrainingItemModel model)
         {
-            return await trainingRepository.AddExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
+            if (model.GetType().Equals(typeof(ExerciseTrainingModel)))
+            {
+                return mapper.Map<ExerciseTrainingEntity>(model);
+            }
+            if (model.GetType().Equals(typeof(PauseModel)))
+            {
+                return mapper.Map<PauseEntity>(model);
+            }
+            else throw new Exception("Bad usage of MapTrainingItemModelToEntity method");
         }
 
-        public async Task<int> UpdateExercise(ExerciseTrainingModel exercise)
+        private TrainingItemModel MapTrainingItemEntityToModel(TrainingItemEntity entity)
         {
-            return await trainingRepository.UpdateExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
+            if (entity.GetType().Equals(typeof(ExerciseTrainingEntity)))
+            {
+                return mapper.Map<ExerciseTrainingModel>(entity);
+            }
+            if (entity.GetType().Equals(typeof(PauseEntity)))
+            {
+                return mapper.Map<PauseModel>(entity);
+            }
+            else throw new Exception("Bad usage of MapTrainingItemModelToEntity method");
         }
 
-        public void DeleteExercise(ExerciseTrainingModel exercise)
-        {
-            trainingRepository.DeleteExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
-        }
-        */
     }
+
+    /*
+    public async Task<int> AddExercise(ExerciseTrainingModel exercise)
+    {
+        return await trainingRepository.AddExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
+    }
+
+    public async Task<int> UpdateExercise(ExerciseTrainingModel exercise)
+    {
+        return await trainingRepository.UpdateExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
+    }
+
+    public void DeleteExercise(ExerciseTrainingModel exercise)
+    {
+        trainingRepository.DeleteExercise(mapper.Map<ExerciseTrainingEntity>(exercise));
+    }
+    */
 }
+

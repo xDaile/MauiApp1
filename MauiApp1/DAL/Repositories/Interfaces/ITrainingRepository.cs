@@ -9,15 +9,19 @@ namespace MauiApp1.DAL.Repositories.Interfaces
 {
     public interface ITrainingRepository : IRepository<TrainingEntity>
     {
-        Task<int> AddExercise(ExerciseTrainingEntity exerciseTraining);
-        Task<int> UpdateExercise(ExerciseTrainingEntity exerciseTraining);
-        Task DeleteExercise(ExerciseTrainingEntity exerciseTraining);
         Task<List<TrainingEntity>?> GetByTrainingPlanId(int id);
         Task<int> GetExistingTrainingsOfTPCount(int trainingPlanId);
 
         Task MoveTrainingUp(int trainingId);
         Task MoveTrainingDown(int trainingId);
 
-        Task<List<ExerciseTrainingEntity>> GetAllExerciseTrainingByTrainingId(int trainingId);
+        Task<List<TrainingItemEntity>> GetAllTrainingItemsByTrainingId(int trainingId);
+
+        Task<int> CreateTrainingItem(TrainingItemEntity entity);
+        Task<int> UpdateTrainingItem(TrainingItemEntity entity);
+        Task DeleteTrainingItem(TrainingItemEntity entity);
+        Task MoveTrainingItemUp(TrainingItemEntity entity);
+        Task MoveTrainingItemDown(TrainingItemEntity entity);
+        Task<int> GetExistingTrainingItemsCount(int trainingPlanId);
     }
 }

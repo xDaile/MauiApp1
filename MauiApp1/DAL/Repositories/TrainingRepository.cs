@@ -64,8 +64,8 @@ namespace MauiApp1.DAL.Repositories
             var query = connection.Table<TrainingEntity>().Where(training => training.TrainingPlanId.Equals(id));
             List<TrainingEntity> result = await query.ToListAsync();
             await connection.CloseAsync();
-            result = result.OrderBy(x=> x.Order).ToList();
-            
+            result = result.OrderBy(x => x.Order).ToList();
+
             return result;
             //string Query = String.Format("Select * from training where training.id = {0}", id);
         }
@@ -90,19 +90,6 @@ namespace MauiApp1.DAL.Repositories
         {
             return await storage.SetAsync(training);
             // string Query = String.Format("Update training (name, order, description, training_plan) values ('{0}', {1}, '{2}', {3}) where training.id={4}", training.Name, training.Order, training.Description, training.TrainingPlanId, training.Id);
-        }
-
-        public async Task<int> AddExercise(ExerciseTrainingEntity exerciseTraining)
-        {
-            return await storage.SetAsync(exerciseTraining);
-        }
-        public async Task<int> UpdateExercise(ExerciseTrainingEntity exerciseTraining)
-        {
-            return await storage.SetAsync(exerciseTraining);
-        }
-        public async Task DeleteExercise(ExerciseTrainingEntity exerciseTraining)
-        {
-            await storage.DeleteAsync(exerciseTraining);
         }
 
         public async Task<List<ExerciseTrainingEntity>> GetAllExerciseTrainingByTrainingId(int trainingId)
@@ -165,6 +152,207 @@ namespace MauiApp1.DAL.Repositories
             //await storage.SetAsync<TrainingEntity>(trainingForUpdate);
             //await storage.SetAsync<TrainingEntity>(originalTraining);
             return;
+        }
+
+        public async Task<List<TrainingItemEntity>> GetAllTrainingItemsByTrainingId(int trainingId)
+        {
+            List<TrainingItemEntity> entities = new List<TrainingItemEntity>();
+            List<PauseEntity> pauses = await storage.GetAllAsync<PauseEntity>();
+            List<ExerciseTrainingEntity> exerciseTrainings = await storage.GetAllAsync<ExerciseTrainingEntity>();
+            entities.Concat(pauses);
+            entities.Concat(exerciseTrainings);
+            return entities;
+        }
+
+        public async Task<int> CreateTrainingItem(TrainingItemEntity entity)
+        {
+            if (entity.GetType().Equals(typeof(ExerciseTrainingEntity)))
+            {
+                return await storage.SetAsync((ExerciseTrainingEntity)entity);
+            }
+            else if (entity.GetType().Equals(typeof(PauseEntity)))
+            {
+                return await storage.SetAsync<PauseEntity>((PauseEntity)entity);
+            }
+            else throw new Exception("Bad usage of CreateTrainingItem method");
+        }
+
+        public async Task<int> UpdateTrainingItem(TrainingItemEntity entity)
+        {
+            if (entity.GetType().Equals(typeof(ExerciseTrainingEntity)))
+            {
+                return await storage.SetAsync((ExerciseTrainingEntity)entity);
+            }
+            else if (entity.GetType().Equals(typeof(PauseEntity)))
+            {
+                return await storage.SetAsync((PauseEntity)entity);
+            }
+            else throw new Exception("Bad usage of UpdateTrainingItem method");
+        }
+
+        public async Task DeleteTrainingItem(TrainingItemEntity entity)
+        {
+            if (entity.GetType().Equals(typeof(ExerciseTrainingEntity)))
+            {
+                await storage.DeleteAsync((ExerciseTrainingEntity)entity);
+                return;
+            }
+            else if (entity.GetType().Equals(typeof(PauseEntity)))
+            {
+                await storage.DeleteAsync((PauseEntity)entity);
+                return;
+            }
+            else throw new Exception("Bad usage of UpdateTrainingItem method");
+        }
+
+        public async Task MoveTrainingItemUp(TrainingItemEntity entity)
+        {
+            Type entityType = entity.GetType();
+            int TrainingId;
+            int OriginalOrder;
+            SQLiteAsyncConnection connection = null;
+
+            //It is okay here to update original TItem, as order is not zero, therefore entity with order -1 exists for sure
+            if (entityType.Equals(typeof(ExerciseTrainingEntity)))
+            {
+                TrainingId = ((ExerciseTrainingEntity)entity).TrainingId;
+                OriginalOrder = ((ExerciseTrainingEntity)entity).Order;
+                if (OriginalOrder.Equals(0)) return;
+                ExerciseTrainingEntity updatedExerciseTrainingEntity = (ExerciseTrainingEntity)entity;
+                updatedExerciseTrainingEntity.Order = OriginalOrder - 1;
+                await connection.UpdateAsync(updatedExerciseTrainingEntity);
+
+            }
+            else if (entityType.Equals(typeof(PauseEntity)))
+            {
+                TrainingId = ((PauseEntity)entity).TrainingId;
+                OriginalOrder = ((PauseEntity)entity).Order;
+                if (OriginalOrder.Equals(0)) return;
+                PauseEntity updatedPauseEntity = (PauseEntity)entity;
+                updatedPauseEntity.Order = OriginalOrder - 1;
+                await connection.UpdateAsync(updatedPauseEntity);
+                //TODO later needs to be done because of checks on order max
+            }
+            else throw new Exception("Bad usage of MoveTrainingItemUp method");
+
+
+
+            while (connection == null)
+            {
+                connection = await storage.GetConnection();
+            }
+
+            var queryGetPauses = connection.Table<PauseEntity>().Where(pause => pause.TrainingId.Equals(TrainingId));
+            List<PauseEntity> pauseEntities = await queryGetPauses.ToListAsync();
+            PauseEntity? pauseEntity = pauseEntities.Find(x => x.Order.Equals(OriginalOrder - 1));
+
+            var queryGetExerciseTrainings = connection.Table<ExerciseTrainingEntity>().Where(exerciseTraining => exerciseTraining.TrainingId.Equals(TrainingId));
+            List<ExerciseTrainingEntity> exerciseTrainingEntities = await queryGetExerciseTrainings.ToListAsync();
+            ExerciseTrainingEntity? exerciseTrainingEntity = exerciseTrainingEntities.Find(x => x.Order.Equals(OriginalOrder - 1));
+
+            //This should also provide that order will not be set higher than max
+            if (exerciseTrainingEntity == null && pauseEntity == null) { throw new Exception("Unexpected error with orders of training items"); return; }
+            else if (exerciseTrainingEntity != null)
+            {
+                exerciseTrainingEntity.Order = exerciseTrainingEntity.Order + 1;
+                await connection.UpdateAsync(exerciseTrainingEntity);
+            }
+            else if (pauseEntity != null)
+            {
+                pauseEntity.Order = pauseEntity.Order + 1;
+                await connection.UpdateAsync(exerciseTrainingEntity);
+            }
+
+
+            await connection.CloseAsync();
+
+
+            return;
+        }
+
+        public async Task MoveTrainingItemDown(TrainingItemEntity entity)
+        {
+            Type entityType = entity.GetType();
+            int TrainingId;
+            int OriginalOrder;
+            SQLiteAsyncConnection connection = null;
+
+            //It is okay here to update original TItem, as order is not zero, therefore entity with order -1 exists for sure
+            if (entityType.Equals(typeof(ExerciseTrainingEntity)))
+            {
+                TrainingId = ((ExerciseTrainingEntity)entity).TrainingId;
+                OriginalOrder = ((ExerciseTrainingEntity)entity).Order;
+            }
+            else if (entityType.Equals(typeof(PauseEntity)))
+            {
+                TrainingId = ((PauseEntity)entity).TrainingId;
+                OriginalOrder = ((PauseEntity)entity).Order;
+            }
+            else throw new Exception("Bad usage of MoveTrainingItemUp method");
+
+
+
+            while (connection == null)
+            {
+                connection = await storage.GetConnection();
+            }
+
+            var queryGetPauses = connection.Table<PauseEntity>().Where(pause => pause.TrainingId.Equals(TrainingId));
+            List<PauseEntity> pauseEntities = await queryGetPauses.ToListAsync();
+            PauseEntity? pauseEntity = pauseEntities.Find(x => x.Order.Equals(OriginalOrder + 1));
+
+            var queryGetExerciseTrainings = connection.Table<ExerciseTrainingEntity>().Where(exerciseTraining => exerciseTraining.TrainingId.Equals(TrainingId));
+            List<ExerciseTrainingEntity> exerciseTrainingEntities = await queryGetExerciseTrainings.ToListAsync();
+            ExerciseTrainingEntity? exerciseTrainingEntity = exerciseTrainingEntities.Find(x => x.Order.Equals(OriginalOrder + 1));
+
+            //This should provide that order will not be set higher than max
+            if (exerciseTrainingEntity == null && pauseEntity == null) { throw new Exception("Unexpected error with orders of training items"); return; }
+            else if (exerciseTrainingEntity != null)
+            {
+                exerciseTrainingEntity.Order = exerciseTrainingEntity.Order - 1;
+                await connection.UpdateAsync(exerciseTrainingEntity);
+            }
+            else if (pauseEntity != null)
+            {
+                pauseEntity.Order = pauseEntity.Order - 1;
+                await connection.UpdateAsync(exerciseTrainingEntity);
+            }
+
+
+            if (entityType.Equals(typeof(ExerciseTrainingEntity)))
+            {
+                ExerciseTrainingEntity updatedExerciseTrainingEntity = (ExerciseTrainingEntity)entity;
+                updatedExerciseTrainingEntity.Order = OriginalOrder + 1;
+                await connection.UpdateAsync(updatedExerciseTrainingEntity);
+
+            }
+            else if (entityType.Equals(typeof(PauseEntity)))
+            {
+                PauseEntity updatedPauseEntity = (PauseEntity)entity;
+                updatedPauseEntity.Order = OriginalOrder + 1;
+                await connection.UpdateAsync(updatedPauseEntity);
+            }
+
+            await connection.CloseAsync();
+
+
+            return;
+        }
+
+        public async Task<int> GetExistingTrainingItemsCount(int trainingPlanId)
+        {
+            SQLiteAsyncConnection connection = null;
+            while (connection == null)
+            {
+                connection = await storage.GetConnection();
+            }
+
+            var queryGetPauses = connection.Table<PauseEntity>().Where(pause => pause.TrainingId.Equals(trainingPlanId));
+            List<PauseEntity> pauseEntities = await queryGetPauses.ToListAsync();
+
+            var queryGetExerciseTrainings = connection.Table<ExerciseTrainingEntity>().Where(exerciseTraining => exerciseTraining.TrainingId.Equals(trainingPlanId));
+            List<ExerciseTrainingEntity> exerciseTrainingEntities = await queryGetExerciseTrainings.ToListAsync();
+            return pauseEntities.Count + exerciseTrainingEntities.Count;
         }
     }
 }

@@ -61,6 +61,24 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add exercise to training.
+        /// </summary>
+        internal static string Add_Exercise_To_Training {
+            get {
+                return ResourceManager.GetString("Add_Exercise_To_Training", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add exercise to training.
+        /// </summary>
+        internal static string Add_Exercise_To_Training_Page_Title {
+            get {
+                return ResourceManager.GetString("Add_Exercise_To_Training_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New exercise.
         /// </summary>
         internal static string Add_new_exercise {
@@ -232,6 +250,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter description.
+        /// </summary>
+        internal static string Enter_new_description {
+            get {
+                return ResourceManager.GetString("Enter_new_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter exercise description.
         /// </summary>
         internal static string Enter_new_exercise_description {
@@ -304,6 +331,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter rest time.
+        /// </summary>
+        internal static string Enter_rest_duration {
+            get {
+                return ResourceManager.GetString("Enter_rest_duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exercises.
         /// </summary>
         internal static string Exercise_List_Page_Title {
@@ -313,11 +349,56 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reps:.
+        /// </summary>
+        internal static string Label_Reps {
+            get {
+                return ResourceManager.GetString("Label_Reps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sets:.
+        /// </summary>
+        internal static string Label_Sets {
+            get {
+                return ResourceManager.GetString("Label_Sets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight:.
+        /// </summary>
+        internal static string Label_Weight {
+            get {
+                return ResourceManager.GetString("Label_Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name:.
         /// </summary>
         internal static string Name_label_double_quote {
             get {
                 return ResourceManager.GetString("Name_label_double_quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick exercise.
+        /// </summary>
+        internal static string Pick_Exercise {
+            get {
+                return ResourceManager.GetString("Pick_Exercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick exercise.
+        /// </summary>
+        internal static string Pick_Exercise_label {
+            get {
+                return ResourceManager.GetString("Pick Exercise_label", resourceCulture);
             }
         }
         
@@ -435,6 +516,33 @@ namespace MauiApp1.Resources {
         internal static string Prompt_Training_plan_options {
             get {
                 return ResourceManager.GetString("Prompt_Training_plan_options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rep duration.
+        /// </summary>
+        internal static string Rep_duration_label {
+            get {
+                return ResourceManager.GetString("Rep_duration_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rest after last set.
+        /// </summary>
+        internal static string Rest_after_last_set_label {
+            get {
+                return ResourceManager.GetString("Rest_after_last_set_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rest duration.
+        /// </summary>
+        internal static string Rest_duration_label {
+            get {
+                return ResourceManager.GetString("Rest_duration_label", resourceCulture);
             }
         }
         

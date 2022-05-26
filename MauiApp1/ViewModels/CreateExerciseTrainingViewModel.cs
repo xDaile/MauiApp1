@@ -16,18 +16,32 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
     public string TrainingId { private get; set; }
 
     public ITrainingFacade TrainingFacade;
+    public IExerciseFacade ExerciseFacade;
 
     [ObservableProperty]
     private string errorMessage;
 
     [ObservableProperty]
+    private List<ExerciseModel> exerciseList;
+    
+    [ObservableProperty]
     private ExerciseTrainingModel newExerciseTraining;
 
-    public CreateExerciseTrainingViewModel(ITrainingFacade trainingFacade)
+    [ObservableProperty]
+    private TimeSpan duration;
+
+    public CreateExerciseTrainingViewModel(ITrainingFacade trainingFacade, IExerciseFacade exerciseFacade)
     {
         this.TrainingFacade = trainingFacade;
+        this.ExerciseFacade = exerciseFacade;
         //Be aware that TrainingPlanID and Order are just temporary in the model, because they are not accessible during constructor
-        newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0,0, true, "Description", 0, Convert.ToInt32(TrainingId));
+        newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, Convert.ToInt32(TrainingId));
+    }
+
+    public override async Task OnAppearingAsync()
+    {
+        await base.OnAppearingAsync();
+        this.ExerciseList = await ExerciseFacade.GetAll();
     }
 
     [ICommand]
@@ -41,11 +55,11 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
             newExerciseTraining.RestSeconds,
             newExerciseTraining.ExerciseSeconds,
             newExerciseTraining.Reps,
-            newExerciseTraining.Weight, 
-            newExerciseTraining.Sets, 
-            order, 
+            newExerciseTraining.Weight,
+            newExerciseTraining.Sets,
+            order,
             newExerciseTraining.RestAfterLastSet,
-            newExerciseTraining.Description, 
+            newExerciseTraining.Description,
             newExerciseTraining.ExerciseId,
             trainingId);
         if (model.ExerciseId == 0)
@@ -59,5 +73,52 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         return;
     }
 
+    [ICommand]
+    private async Task GetSecondsForNewExerciseTrainingPromptAsync()
+    {
+        //int result = Convert.ToInt32(await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString()));
+        //NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, result), newPause.Order, newPause.TrainingId);
+    }
+    
+    [ICommand]
+    private async Task SetRepsForNewExerciseTrainingPromptAsync()
+    {
+        //int result = Convert.ToInt32(await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString()));
+        //NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, result), newPause.Order, newPause.TrainingId);
+    }
 
+    [ICommand]
+    private async Task SetSetsForNewExerciseTrainingPromptAsync()
+    {
+        //int result = Convert.ToInt32(await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString()));
+        //NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, result), newPause.Order, newPause.TrainingId);
+    }
+
+    
+    [ICommand]
+    private async Task SetWeightForNewExerciseTrainingPromptAsync()
+    {
+        //int result = Convert.ToInt32(await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString()));
+        //NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, result), newPause.Order, newPause.TrainingId);
+    }
+
+    [ICommand]
+    private async Task SetRepDurationForNewExerciseTrainingPromptAsync()
+    {
+        //int result = Convert.ToInt32(await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString()));
+        //NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, result), newPause.Order, newPause.TrainingId);
+    }
+
+    [ICommand]
+    private async Task SetRestDurationForNewExerciseTrainingPromptAsync()
+    {
+        //int result = Convert.ToInt32(await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString()));
+        //NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, result), newPause.Order, newPause.TrainingId);
+    }
+
+    [ICommand]
+    private async Task CreateExerciseTrainingAsync()
+    {
+        return;
+    }
 }

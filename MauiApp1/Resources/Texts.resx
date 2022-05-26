@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add_Exercise_To_Training" xml:space="preserve">
+    <value>Add exercise to training</value>
+  </data>
+  <data name="Add_Exercise_To_Training_Page_Title" xml:space="preserve">
+    <value>Add exercise to training</value>
+  </data>
   <data name="Add_new_exercise" xml:space="preserve">
     <value>New exercise</value>
   </data>
@@ -174,6 +180,9 @@
   <data name="Edit_Training_Page_Title" xml:space="preserve">
     <value>Detail of training</value>
   </data>
+  <data name="Enter_new_description" xml:space="preserve">
+    <value>Enter description</value>
+  </data>
   <data name="Enter_new_exercise_description" xml:space="preserve">
     <value>Enter exercise description</value>
   </data>
@@ -198,11 +207,29 @@
   <data name="Enter_pause_duration" xml:space="preserve">
     <value>Enter pause duration in seconds</value>
   </data>
+  <data name="Enter_rest_duration" xml:space="preserve">
+    <value>Enter rest time</value>
+  </data>
   <data name="Exercise_List_Page_Title" xml:space="preserve">
     <value>Exercises</value>
   </data>
+  <data name="Label_Reps" xml:space="preserve">
+    <value>Reps:</value>
+  </data>
+  <data name="Label_Sets" xml:space="preserve">
+    <value>Sets:</value>
+  </data>
+  <data name="Label_Weight" xml:space="preserve">
+    <value>Weight:</value>
+  </data>
   <data name="Name_label_double_quote" xml:space="preserve">
     <value>Name:</value>
+  </data>
+  <data name="Pick Exercise_label" xml:space="preserve">
+    <value>Pick exercise</value>
+  </data>
+  <data name="Pick_Exercise" xml:space="preserve">
+    <value>Pick exercise</value>
   </data>
   <data name="Prompt_Are_you_sure" xml:space="preserve">
     <value>Are you sure?</value>
@@ -242,6 +269,15 @@
   </data>
   <data name="Prompt_Training_plan_options" xml:space="preserve">
     <value>Training plan options</value>
+  </data>
+  <data name="Rep_duration_label" xml:space="preserve">
+    <value>Rep duration</value>
+  </data>
+  <data name="Rest_after_last_set_label" xml:space="preserve">
+    <value>Rest after last set</value>
+  </data>
+  <data name="Rest_duration_label" xml:space="preserve">
+    <value>Rest duration</value>
   </data>
   <data name="Save_Exercise_Button" xml:space="preserve">
     <value>Save exercise</value>
