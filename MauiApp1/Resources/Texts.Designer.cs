@@ -250,6 +250,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter exercise time duration.
+        /// </summary>
+        internal static string Enter_exercise_seconds {
+            get {
+                return ResourceManager.GetString("Enter_exercise_seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter description.
         /// </summary>
         internal static string Enter_new_description {
@@ -331,11 +340,47 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter reps.
+        /// </summary>
+        internal static string Enter_reps {
+            get {
+                return ResourceManager.GetString("Enter_reps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter rest time.
         /// </summary>
         internal static string Enter_rest_duration {
             get {
                 return ResourceManager.GetString("Enter_rest_duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter rest time duration.
+        /// </summary>
+        internal static string Enter_rest_seconds {
+            get {
+                return ResourceManager.GetString("Enter_rest_seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter sets.
+        /// </summary>
+        internal static string Enter_sets {
+            get {
+                return ResourceManager.GetString("Enter_sets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter weight.
+        /// </summary>
+        internal static string Enter_weight {
+            get {
+                return ResourceManager.GetString("Enter_weight", resourceCulture);
             }
         }
         
@@ -354,6 +399,15 @@ namespace MauiApp1.Resources {
         internal static string Label_Reps {
             get {
                 return ResourceManager.GetString("Label_Reps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds.
+        /// </summary>
+        internal static string Label_Seconds {
+            get {
+                return ResourceManager.GetString("Label_Seconds", resourceCulture);
             }
         }
         

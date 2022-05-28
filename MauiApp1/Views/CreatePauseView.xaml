@@ -13,52 +13,70 @@
         <ScrollView Grid.Row="1"
                     Margin="15">
 
-            <Grid RowDefinitions="Auto,10,Auto,20,Auto,10,Auto,20,Auto,10,Auto,10">
+            <Grid RowDefinitions="Auto,10,Auto,20,Auto,10,Auto,20,Auto,10,Auto,10"
+                  ColumnDefinitions="Auto, 10, *">
 
                 <Label Grid.Row="0"
+                       Grid.Column="0"
                        Text="{x:Static resources:Texts.Name_label_double_quote}"
                        FontSize="25"
                        VerticalOptions="Center"
                        HorizontalOptions="Start" />
-                <Editor x:Name="entry_name"
-                        Grid.Row="2"
-                        MaxLength="75"
-                        HeightRequest="80"
-                        BackgroundColor="WhiteSmoke"
-                        FontSize="21"
-                        Text="{Binding NewPause.Name}"
-                        Placeholder="{x:Static resources:Texts.Enter_new_pause_name}" />
+                <Entry x:Name="entry_name"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalOptions="EndAndExpand"
+                       MaxLength="75"
+                       MinimumWidthRequest="180"
+                       BackgroundColor="WhiteSmoke"
+                       FontSize="21"
+                       Text="{Binding NewPause.Name}" />
+
+
+                <Label Grid.Column="0"
+                       Grid.Row="2"
+                       Text="{x:Static resources:Texts.Duration_label_double_quote}"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Grid Grid.Row="2"
+                      Grid.Column="2"
+                      
+                      ColumnDefinitions="Auto,10,Auto"
+                      HorizontalOptions="End">
+                    <Entry Grid.Column="0"
+                           MinimumWidthRequest="50"
+                           Text="{Binding NewPause.Duration.TotalSeconds}"
+                           FontSize="25"
+                           HorizontalOptions="Start">
+                        <Entry.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GetSecondsForNewPausePromptCommand}" />
+                        </Entry.GestureRecognizers>
+                    </Entry>
+                    <Label Grid.Column="2"
+                           Text="{x:Static resources:Texts.Label_Seconds}"
+                           FontSize="22"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End" />
+                </Grid>
+
+
                 <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
                        Text="{x:Static resources:Texts.Description_label_double_quote}"
                        FontSize="25"
                        VerticalOptions="Center"
                        HorizontalOptions="Start" />
                 <Editor x:Name="entry_name2"
                         Grid.Row="6"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
                         MaxLength="100"
                         HeightRequest="110"
                         BackgroundColor="WhiteSmoke"
                         FontSize="21"
-                        Text="{Binding NewPause.Description}"
-                        Placeholder="{x:Static resources:Texts.Enter_new_pause_description}" />
-                <Grid Grid.Row="8"
-                      ColumnDefinitions="Auto,10,*">
-                    <Label Grid.Column="0"
-                           Text="{x:Static resources:Texts.Duration_label_double_quote}"
-                           FontSize="25"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Start" />
-                    <Entry Grid.Column="2"
-                           Text="{Binding NewPause.Duration.TotalSeconds}"
-                           Placeholder="{x:Static resources:Texts.Enter_new_pause_duration}"
-                           FontSize="25"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Start">
-                        <Entry.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GetSecondsForNewPausePromptCommand}" />
-                        </Entry.GestureRecognizers>
-                    </Entry>
-                </Grid>
+                        Text="{Binding NewPause.Description}" />
 
 
             </Grid>
