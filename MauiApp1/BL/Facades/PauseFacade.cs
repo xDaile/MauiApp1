@@ -13,37 +13,37 @@ namespace MauiApp1.BL.Facades
 {
     public class PauseFacade : IPauseFacade
     {
-        private readonly IPauseRepository exerciseRepository;
+        private readonly IPauseRepository pauseRepository;
         private readonly IMapper mapper;
-        public PauseFacade(IPauseRepository exerciseRepository, IMapper mapper)
+        public PauseFacade(IPauseRepository pauseRepository, IMapper mapper)
         {
-            this.exerciseRepository = exerciseRepository;
+            this.pauseRepository = pauseRepository;
             this.mapper = mapper;
         }
         public async Task<int> Create(PauseModel model)
         {
-            return await exerciseRepository.Insert(mapper.Map<PauseEntity>(model));
+            return await pauseRepository.Insert(mapper.Map<PauseEntity>(model));
         }
 
         public async Task Delete(PauseModel model)
         {
-            await exerciseRepository.Delete(mapper.Map<PauseEntity>(model));
+            await pauseRepository.Delete(mapper.Map<PauseEntity>(model));
             return;
         }
 
         public async Task<List<PauseModel>> GetAll()
         {
-            return mapper.Map<List<PauseModel>>(await exerciseRepository.GetAll());
+            return mapper.Map<List<PauseModel>>(await pauseRepository.GetAll());
         }
 
         public async Task<PauseModel?> GetById(int id)
         {
-            return mapper.Map<PauseModel>(await exerciseRepository.GetById(id));
+            return mapper.Map<PauseModel>(await pauseRepository.GetById(id));
         }
 
         public async Task<int?> Update(PauseModel model)
         {
-            return await exerciseRepository.Update(mapper.Map<PauseEntity>(model));
+            return await pauseRepository.Update(mapper.Map<PauseEntity>(model));
         }
     }
 }

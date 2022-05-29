@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
-    public record TrainingItemModel() : ModelBase
+    public record TrainingItemModel(int Order) : ModelBase
     { }
 }

@@ -174,6 +174,12 @@
   <data name="Edit_Exercise_Page_Title" xml:space="preserve">
     <value>Detail of exercise</value>
   </data>
+  <data name="Edit_Pause_Button" xml:space="preserve">
+    <value>Edit pause</value>
+  </data>
+  <data name="Edit_Pause_Page_Title" xml:space="preserve">
+    <value>Edit pause</value>
+  </data>
   <data name="Edit_TrainingPlan_Page_Title" xml:space="preserve">
     <value>Detail of training plan</value>
   </data>
@@ -272,6 +278,12 @@
   </data>
   <data name="Prompt_Exercise_options" xml:space="preserve">
     <value>Exercise options</value>
+  </data>
+  <data name="Prompt_pause" xml:space="preserve">
+    <value>pause</value>
+  </data>
+  <data name="Prompt_Remove" xml:space="preserve">
+    <value>Remove </value>
   </data>
   <data name="Prompt_training" xml:space="preserve">
     <value>training</value>

@@ -232,6 +232,24 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit pause.
+        /// </summary>
+        internal static string Edit_Pause_Button {
+            get {
+                return ResourceManager.GetString("Edit_Pause_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit pause.
+        /// </summary>
+        internal static string Edit_Pause_Page_Title {
+            get {
+                return ResourceManager.GetString("Edit_Pause_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detail of training.
         /// </summary>
         internal static string Edit_Training_Page_Title {
@@ -525,6 +543,24 @@ namespace MauiApp1.Resources {
         internal static string Prompt_Exercise_options {
             get {
                 return ResourceManager.GetString("Prompt_Exercise_options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pause.
+        /// </summary>
+        internal static string Prompt_pause {
+            get {
+                return ResourceManager.GetString("Prompt_pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove .
+        /// </summary>
+        internal static string Prompt_Remove {
+            get {
+                return ResourceManager.GetString("Prompt_Remove", resourceCulture);
             }
         }
         

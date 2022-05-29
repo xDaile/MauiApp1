@@ -61,7 +61,7 @@ public partial class CreatePauseViewModel : ViewModelBase
     [ICommand]
     private async Task GetSecondsForNewPausePromptAsync()
     {
-        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_confirm, null, 3, null, newPause.Duration.TotalSeconds.ToString());
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, newPause.Duration.TotalSeconds.ToString());
         if (result.Equals(null)) return;
         int duration = Convert.ToInt32(result);
         NewPause = new PauseModel(null, newPause.Name, newPause.Description, new TimeSpan(0, 0, duration), newPause.Order, newPause.TrainingId);

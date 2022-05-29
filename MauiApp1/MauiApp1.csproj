@@ -81,6 +81,12 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Texts.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\EditPauseView.xaml.cs">
+	    <DependentUpon>EditPauseView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EditExerciseTrainingView.xaml.cs">
+	    <DependentUpon>EditExerciseTrainingView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\CreateExerciseTrainingView.xaml.cs">
 	    <DependentUpon>CreateExerciseTrainingView.xaml</DependentUpon>
 	  </Compile>
@@ -131,6 +137,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Base\ContentPageBase.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EditPauseView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EditExerciseTrainingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CreateExerciseTrainingView.xaml">

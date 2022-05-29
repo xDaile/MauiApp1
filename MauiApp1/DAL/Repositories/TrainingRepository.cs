@@ -157,9 +157,11 @@ namespace MauiApp1.DAL.Repositories
         public async Task<List<TrainingItemEntity>> GetAllTrainingItemsByTrainingId(int trainingId)
         {
             List<TrainingItemEntity> entities = new List<TrainingItemEntity>();
+
             List<PauseEntity> pauses = await storage.GetAllAsync<PauseEntity>();
+            
             List<ExerciseTrainingEntity> exerciseTrainings = await storage.GetAllAsync<ExerciseTrainingEntity>();
-            return entities.Concat(pauses).Concat(exerciseTrainings).ToList();
+            return entities.Concat(pauses.Where(x => x.TrainingId == trainingId)).Concat(exerciseTrainings.Where(x => x.TrainingId == trainingId)).ToList();
             
         }
 

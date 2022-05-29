@@ -24,15 +24,20 @@ public partial class TrainingViewModel : ViewModelBase
     [ObservableProperty]
     private TrainingModel training;
 
+    [ObservableProperty]
+    private List<TrainingItemModel> trainingItems;
+
     //[ObservableProperty]
     //private List<TrainingListModel> trainings;
 
     public ITrainingFacade TrainingFacade;
+    public IExerciseFacade ExerciseFacade;
 
-    public TrainingViewModel(IRoutingService routingService, ITrainingFacade trainingFacade)
+    public TrainingViewModel(IRoutingService routingService, ITrainingFacade trainingFacade, IExerciseFacade exerciseFacade)
     {
         this.TrainingFacade = trainingFacade;
         this.routingService = routingService;
+        this.ExerciseFacade = exerciseFacade;
     }
 
     public override async Task OnAppearingAsync()
@@ -46,6 +51,8 @@ public partial class TrainingViewModel : ViewModelBase
     public async Task RefreshTraining()
     {
         Training = await TrainingFacade.GetById(this.id);
+        
+        TrainingItems = Training.TrainingItems.OrderBy(t => t.Order).ToList();
     }
 
     [ICommand]
@@ -60,7 +67,7 @@ public partial class TrainingViewModel : ViewModelBase
     {
         var route = routingService.GetRouteByViewModel<CreatePauseViewModel>();
         await Shell.Current.GoToAsync($"{route}?trainingId={id}");
-        
+
     }
 
     [ICommand]
@@ -68,29 +75,52 @@ public partial class TrainingViewModel : ViewModelBase
     {
         var route = routingService.GetRouteByViewModel<CreateExerciseTrainingViewModel>();
         await Shell.Current.GoToAsync($"{route}?trainingId={id}");
-        
+
     }
 
     [ICommand]
-    private async Task ShowMenuTrainingAsync(int id)
+    private async Task ShowMenuTrainingItemAsync(int orderInTrainingItemsList)
     {
         string promptActionResult = await Shell.Current.DisplayActionSheet(Resources.Texts.Prompt_Training_options, Resources.Texts.Prompt_Cancel, null, Resources.Texts.Prompt_Edit, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Create_copy);
 
 
         if (promptActionResult.Equals(Resources.Texts.Prompt_Edit))
         {
-            var route = routingService.GetRouteByViewModel<EditTrainingViewModel>();
-            await Shell.Current.GoToAsync($"{route}?trainingId={id}");
-            return;
+            if (TrainingItems[orderInTrainingItemsList].GetType().Equals(typeof(PauseModel)))
+            {
+
+                var route = routingService.GetRouteByViewModel<EditPauseViewModel>();
+                await Shell.Current.GoToAsync($"{route}?pauseId={((PauseModel)TrainingItems[orderInTrainingItemsList]).Id}");
+                return;
+            }
+            else
+            {
+                var route = routingService.GetRouteByViewModel<EditExerciseTrainingViewModel>();
+                await Shell.Current.GoToAsync($"{route}?trainingId={((ExerciseTrainingModel)TrainingItems[orderInTrainingItemsList]).TrainingId}&exerciseId={((ExerciseTrainingModel)TrainingItems[orderInTrainingItemsList]).ExerciseId}");
+                return;
+            }
         }
 
         if (promptActionResult.Equals(Resources.Texts.Prompt_Delete))
         {
-            TrainingListModel selectedTraining = await TrainingFacade.GetByIdLM(id);
-            bool promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Delete} {selectedTraining.Name} {Resources.Texts.Prompt_training}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
+            Type TrainingItemType = TrainingItems[orderInTrainingItemsList].GetType();
+            bool promptConfirmationResult;
+            if (TrainingItemType.Equals(typeof(PauseModel)))
+            {
+                promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Delete} {((PauseModel)TrainingItems[orderInTrainingItemsList]).Name} {Resources.Texts.Prompt_pause}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
+
+            }
+            else
+            {
+                ExerciseModel exercise = await ExerciseFacade.GetById(((ExerciseTrainingModel)TrainingItems[orderInTrainingItemsList]).ExerciseId);
+                promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Remove} {exercise.Name} {Resources.Texts.Prompt_exercise}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
+
+            }
+
             if (promptConfirmationResult.Equals(true))
             {
-                await TrainingFacade.DeleteLM(selectedTraining);
+                await TrainingFacade.DeleteTrainingItem(TrainingItems[orderInTrainingItemsList]);
+
             }
             await this.OnAppearingAsync();
             return;
@@ -105,16 +135,16 @@ public partial class TrainingViewModel : ViewModelBase
     [ICommand]
     private async Task MoveTrainingItemDownAsync(int id)
     {
-       // await TrainingFacade.MoveTrainingDown(id);
-       // await RefreshTrainingPlan();
+        // await TrainingFacade.MoveTrainingDown(id);
+        // await RefreshTrainingPlan();
         return;
     }
 
     [ICommand]
     private async Task MoveTrainingItemUpAsync(int id)
     {
-       // await TrainingFacade.MoveTrainingUp(id);
-       // await RefreshTrainingPlan();
+        // await TrainingFacade.MoveTrainingUp(id);
+        // await RefreshTrainingPlan();
         return;
     }
 }
