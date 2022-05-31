@@ -9,6 +9,7 @@
     <ContentPage.Resources>
         <DataTemplate x:DataType="models:PauseModel"
                       x:Key="PauseItem">
+            <ContentPage>
             <Frame>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToPauseDetailCommand}"
@@ -111,6 +112,7 @@
                 </Grid>
 
             </Frame>
+            </ContentPage>
         </DataTemplate>
         <DataTemplate x:DataType="models:ExerciseTrainingModel"
                       x:Key="ExerciseTrainingItem">
@@ -218,7 +220,7 @@
             </Frame>
         </DataTemplate>
         <local:TrainingItemTemplateSelector x:Key="trainingItemTemplateSelector"
-                                            ExerciseTrainingTemplate="ExerciseTrainingItem"
-                                            PauseTemplate="PauseItem" />
+                                            PauseTemplate="{StaticResource PauseItem}"
+                                            ExerciseTrainingTemplate="{StaticResource ExerciseTrainingItem}" />
     </ContentPage.Resources>
 </ContentPage>
