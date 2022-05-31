@@ -4,11 +4,227 @@
                        x:Class="MauiApp1.Views.TrainingView"
                        Title="{x:Static resources:Texts.Training_List_Page_Title}"
                        xmlns:models="clr-namespace:MauiApp1.Models"
+                       xmlns:locaĺ="clr=namespace:MauiApp1.Views.Selector"
                        xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
                        xmlns:resources="clr-namespace:MauiApp1.Resources"
                        xmlns:views="clr-namespace:MauiApp1.Views"
                        x:DataType="viewModels:TrainingViewModel"
                        x:Name="Root">
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="models:PauseModel"
+                      x:Key="PauseItem">
+            <Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToPauseDetailCommand}"
+                                          CommandParameter="{Binding Id}" />
+                </Frame.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,10">
+                    <Grid HorizontalOptions="CenterAndExpand"
+                          Grid.Column="0"
+                          ColumnDefinitions="5,65,20,*"
+                          RowDefinitions="10,Auto,8,Auto,8,Auto">
+                        <Label Grid.Row="1"
+                               Grid.Column="3"
+                               LineBreakMode="CharacterWrap"
+                               Text="{Binding Name}"
+                               FontSize="25"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                        <Label Grid.Row="3"
+                               Grid.Column="3"
+                               LineBreakMode="CharacterWrap"
+                               Text="{Binding Description}"
+                               FontSize="21"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                        <Grid Grid.Row="5"
+                              Grid.Column="3"
+                              ColumnDefinitions="30, 45, Auto">
+                            <Image Grid.Column="0"
+                                   Source="/Images/clock.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="Center"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="30"
+                                   MaximumWidthRequest="30"
+                                   HorizontalOptions="Center" />
+
+                            <Label Grid.Column="1"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{Binding Duration.TotalSeconds}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                            <Label Grid.Column="2"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{x:Static resources:Texts.Label_Seconds}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+
+
+
+                        </Grid>
+                        <Image Grid.Column="1"
+                               Grid.RowSpan="6"
+                               Source="/Images/pause.png"
+                               Aspect="AspectFit"
+                               VerticalOptions="CenterAndExpand"
+                               Margin="10,10,10,10"
+                               MaximumHeightRequest="60"
+                               MaximumWidthRequest="60"
+                               HorizontalOptions="CenterAndExpand" />
+
+
+                    </Grid>
+                    <Grid Grid.Column="1"
+                          RowDefinitions="5,Auto,15,Auto,5,Auto"
+                          ColumnDefinitions="*,5,Auto,5"
+                          HorizontalOptions="End">
+                        <ImageButton Grid.Row="1"
+                                     Grid.Column="2"
+                                     Aspect="AspectFill"
+                                     MaximumHeightRequest="40"
+                                     MaximumWidthRequest="40"
+                                     Source="/Images/edit_button.png"
+                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.ShowMenuTrainingItemCommand}"
+                                     CommandParameter="{Binding Order}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
+                        <ImageButton Grid.Row="3"
+                                     Grid.Column="2"
+                                     Aspect="AspectFill"
+                                     MaximumHeightRequest="40"
+                                     MaximumWidthRequest="40"
+                                     Source="/Images/up_button.png"
+                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemUpCommand}"
+                                     CommandParameter="{Binding Order}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="End" />
+                        <ImageButton Grid.Row="5"
+                                     Grid.Column="2"
+                                     Aspect="AspectFill"
+                                     MaximumHeightRequest="40"
+                                     MaximumWidthRequest="40"
+                                     Source="/Images/down_button.png"
+                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemDownCommand}"
+                                     CommandParameter="{Binding Order}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="End" />
+                    </Grid>
+                </Grid>
+
+            </Frame>
+        </DataTemplate>
+        <DataTemplate x:DataType="models:ExerciseTrainingModel"
+                      x:Key="ExerciseTrainingItem">
+            <Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToExerciseTrainingDetailCommand}"
+                                          CommandParameter="{Binding Id}" />
+                </Frame.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,10">
+                    <Grid HorizontalOptions="CenterAndExpand"
+                          Grid.Column="0"
+                          ColumnDefinitions="5,65,20,*"
+                          RowDefinitions="10,Auto,8,Auto,8,Auto">
+                        <Label Grid.Row="1"
+                               Grid.Column="3"
+                               LineBreakMode="CharacterWrap"
+                               Text="{Binding ExerciseId}"
+                               FontSize="25"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                        <Label Grid.Row="3"
+                               Grid.Column="3"
+                               LineBreakMode="CharacterWrap"
+                               Text="{Binding Description}"
+                               FontSize="21"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                        <Grid Grid.Row="5"
+                              Grid.Column="3"
+                              ColumnDefinitions="30, 45, Auto">
+                            <Image Grid.Column="0"
+                                   Source="/Images/clock.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="Center"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="30"
+                                   MaximumWidthRequest="30"
+                                   HorizontalOptions="Center" />
+
+                            <Label Grid.Column="1"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{Binding RestSeconds.TotalSeconds}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                            <Label Grid.Column="2"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{x:Static resources:Texts.Label_Seconds}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+
+
+
+                        </Grid>
+                        <Image Grid.Column="1"
+                               Grid.RowSpan="6"
+                               Source="/Images/exercise.png"
+                               Aspect="AspectFit"
+                               VerticalOptions="CenterAndExpand"
+                               Margin="10,10,10,10"
+                               MaximumHeightRequest="60"
+                               MaximumWidthRequest="60"
+                               HorizontalOptions="CenterAndExpand" />
+
+
+                    </Grid>
+                    <Grid Grid.Column="1"
+                          RowDefinitions="5,Auto,15,Auto,5,Auto"
+                          ColumnDefinitions="*,5,Auto,5"
+                          HorizontalOptions="End">
+                        <ImageButton Grid.Row="1"
+                                     Grid.Column="2"
+                                     Aspect="AspectFill"
+                                     MaximumHeightRequest="40"
+                                     MaximumWidthRequest="40"
+                                     Source="/Images/edit_button.png"
+                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.ShowMenuTrainingItemCommand}"
+                                     CommandParameter="{Binding Order}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
+                        <ImageButton Grid.Row="3"
+                                     Grid.Column="2"
+                                     Aspect="AspectFill"
+                                     MaximumHeightRequest="40"
+                                     MaximumWidthRequest="40"
+                                     Source="/Images/up_button.png"
+                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemUpCommand}"
+                                     CommandParameter="{Binding Order}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="End" />
+                        <ImageButton Grid.Row="5"
+                                     Grid.Column="2"
+                                     Aspect="AspectFill"
+                                     MaximumHeightRequest="40"
+                                     MaximumWidthRequest="40"
+                                     Source="/Images/down_button.png"
+                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemDownCommand}"
+                                     CommandParameter="{Binding Order}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="End" />
+                    </Grid>
+                </Grid>
+
+            </Frame>
+        </DataTemplate>
+        <views:TrainingItemTemplateSelector x:Key="trainingItemTemplateSelector"
+                                            PauseTemplate="{StaticResource PauseItem}"
+                                            ExerciseTrainingTemplate="{StaticResource ExerciseTrainingItem}" />
+    </ContentPage.Resources>
     <Grid RowDefinitions="10,35,10,25,10,*,10, 60">
         <Label Grid.Row="1"
                LineBreakMode="CharacterWrap"
@@ -30,7 +246,7 @@
                     <LinearItemsLayout Orientation="Vertical"
                                        ItemSpacing="25" />
                 </CollectionView.ItemsLayout>
-               
+
 
             </CollectionView>
 
