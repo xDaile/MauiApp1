@@ -240,6 +240,9 @@
   <data name="Label_Reps" xml:space="preserve">
     <value>Reps:</value>
   </data>
+  <data name="Label_Rest" xml:space="preserve">
+    <value>Rest</value>
+  </data>
   <data name="Label_Seconds" xml:space="preserve">
     <value>Seconds</value>
   </data>
@@ -248,6 +251,12 @@
   </data>
   <data name="Label_Weight" xml:space="preserve">
     <value>Weight:</value>
+  </data>
+  <data name="Label_Work" xml:space="preserve">
+    <value>Work</value>
+  </data>
+  <data name="Last_Rest_label" xml:space="preserve">
+    <value>Last rest</value>
   </data>
   <data name="Name_label_double_quote" xml:space="preserve">
     <value>Name:</value>

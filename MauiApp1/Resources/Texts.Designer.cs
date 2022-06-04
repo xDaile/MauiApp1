@@ -430,6 +430,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rest.
+        /// </summary>
+        internal static string Label_Rest {
+            get {
+                return ResourceManager.GetString("Label_Rest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Seconds.
         /// </summary>
         internal static string Label_Seconds {
@@ -453,6 +462,24 @@ namespace MauiApp1.Resources {
         internal static string Label_Weight {
             get {
                 return ResourceManager.GetString("Label_Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work.
+        /// </summary>
+        internal static string Label_Work {
+            get {
+                return ResourceManager.GetString("Label_Work", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last rest.
+        /// </summary>
+        internal static string Last_Rest_label {
+            get {
+                return ResourceManager.GetString("Last_Rest_label", resourceCulture);
             }
         }
         

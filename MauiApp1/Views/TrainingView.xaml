@@ -48,12 +48,12 @@
                             <Label Grid.Column="1"
                                    Text="{Binding Duration.TotalSeconds}"
                                    FontSize="18"
-                                   BackgroundColor="LightGrey"
+                                   StyleClass="FakeEntry"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetPauseSecondsForListPausePromptCommand}" 
-                                                          CommandParameter="{Binding Id}"/>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetPauseSecondsForListPausePromptCommand}"
+                                                          CommandParameter="{Binding Id}" />
                                 </Label.GestureRecognizers>
                             </Label>
                             <Label Grid.Column="2"
@@ -124,102 +124,260 @@
                     <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToExerciseTrainingDetailCommand}"
                                           CommandParameter="{Binding Id}" />
                 </Frame.GestureRecognizers>
-                <Grid ColumnDefinitions="Auto,*,10">
-                    <Grid HorizontalOptions="CenterAndExpand"
-                          Grid.Column="0"
-                          ColumnDefinitions="5,65,20,*"
-                          RowDefinitions="10,Auto,8,Auto,8,Auto">
-                        <Label Grid.Row="1"
-                               Grid.Column="3"
-                               LineBreakMode="CharacterWrap"
-                               Text="{Binding ExerciseName}"
-                               FontSize="25"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Start" />
-                        <Label Grid.Row="3"
-                               Grid.Column="3"
-                               LineBreakMode="CharacterWrap"
-                               Text="{Binding Description}"
-                               FontSize="21"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Start" />
-                        <Grid Grid.Row="5"
-                              Grid.Column="3"
-                              ColumnDefinitions="30, 45, Auto">
-                            <Image Grid.Column="0"
+                <Grid RowDefinitions="10,Auto,*,*">
+                    <Grid Grid.Row="1"
+                          ColumnDefinitions="Auto,*,10"
+                          RowDefinitions="Auto,10,Auto">
+                        <Grid HorizontalOptions="CenterAndExpand"
+                              Grid.Column="0"
+                              Grid.Row="0"
+                              ColumnDefinitions="15,65,20,*"
+                              RowDefinitions="Auto,8,Auto,8">
+                            <Label Grid.Row="0"
+                                   Grid.Column="3"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{Binding ExerciseName}"
+                                   FontSize="25"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="3"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{Binding Description}"
+                                   FontSize="21"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+
+                            <Image Grid.Column="1"
+                                   Grid.RowSpan="4"
+                                   Source="/Images/exercise.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="CenterAndExpand"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="60"
+                                   MaximumWidthRequest="60"
+                                   HorizontalOptions="EndAndExpand" />
+
+
+                        </Grid>
+                        <Grid Grid.Column="1"
+                              Grid.Row="0"
+                              RowDefinitions="5,Auto,15,Auto,5,Auto"
+                              ColumnDefinitions="*,5,Auto,5"
+                              HorizontalOptions="End">
+                            <ImageButton Grid.Row="1"
+                                         Grid.Column="2"
+                                         Aspect="AspectFill"
+                                         MaximumHeightRequest="40"
+                                         MaximumWidthRequest="40"
+                                         Source="/Images/edit_button.png"
+                                         Command="{Binding Source={x:Reference Root}, Path=BindingContext.ShowMenuTrainingItemCommand}"
+                                         CommandParameter="{Binding Order}"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center" />
+                            <ImageButton Grid.Row="3"
+                                         Grid.Column="2"
+                                         Aspect="AspectFill"
+                                         MaximumHeightRequest="40"
+                                         MaximumWidthRequest="40"
+                                         Source="/Images/up_button.png"
+                                         Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemUpCommand}"
+                                         CommandParameter="{Binding Order}"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="End" />
+                            <ImageButton Grid.Row="5"
+                                         Grid.Column="2"
+                                         Aspect="AspectFill"
+                                         MaximumHeightRequest="40"
+                                         MaximumWidthRequest="40"
+                                         Source="/Images/down_button.png"
+                                         Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemDownCommand}"
+                                         CommandParameter="{Binding Order}"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="End" />
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          ColumnDefinitions="10,*,*,10">
+                        <Grid Grid.Column="1"
+                              HorizontalOptions="Start"
+                              BackgroundColor="IndianRed"
+                              RowDefinitions="Auto,Auto"
+                              ColumnDefinitions="5,*, 5, *">
+
+                            <Image Grid.Row="0"
+                                   Grid.Column="1"
                                    Source="/Images/clock.png"
                                    Aspect="AspectFit"
-                                   VerticalOptions="Center"
+                                   VerticalOptions="End"
                                    Margin="10,10,10,10"
                                    MaximumHeightRequest="30"
                                    MaximumWidthRequest="30"
-                                   HorizontalOptions="Center" />
-
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="3"
+                                   Grid.Row="0"
+                                   Text="{x:Static resources:Texts.Label_Work}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
                             <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   StyleClass="FakeEntry"
                                    LineBreakMode="CharacterWrap"
                                    Text="{Binding RestSeconds.TotalSeconds}"
                                    FontSize="18"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
-                            <Label Grid.Column="2"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="3"
+                                   Grid.Row="1"
                                    LineBreakMode="CharacterWrap"
                                    Text="{x:Static resources:Texts.Label_Seconds}"
+                                   FontSize="15"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </Grid>
+                        <Grid Grid.Column="2"
+                              HorizontalOptions="End"
+                              RowDefinitions="Auto,Auto"
+                              BackgroundColor="LightGreen"
+                              ColumnDefinitions="5,*, 5, *">
+
+                            <Image Grid.Row="0"
+                                   Grid.Column="1"
+                                   Source="/Images/clock.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="30"
+                                   MaximumWidthRequest="30"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="3"
+                                   Grid.Row="0"
+                                   Text="{x:Static resources:Texts.Label_Rest}"
                                    FontSize="18"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Start" />
-
-
-
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   StyleClass="FakeEntry"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{Binding RestSeconds.TotalSeconds}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="3"
+                                   Grid.Row="1"
+                                   LineBreakMode="CharacterWrap"
+                                   Text="{x:Static resources:Texts.Label_Seconds}"
+                                   FontSize="15"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
                         </Grid>
-                        <Image Grid.Column="1"
-                               Grid.RowSpan="6"
-                               Source="/Images/exercise.png"
-                               Aspect="AspectFit"
-                               VerticalOptions="CenterAndExpand"
-                               Margin="10,10,10,10"
-                               MaximumHeightRequest="60"
-                               MaximumWidthRequest="60"
-                               HorizontalOptions="CenterAndExpand" />
+                    </Grid>
+                    <Grid Grid.Row="3"
+                          ColumnDefinitions="10,*,*,10"
+                          RowDefinitions="Auto,0,Auto">
+                        <Grid Grid.Column="1"
+                              Grid.Row="0"
+                              ColumnDefinitions="*,*,*"
+                              BackgroundColor="Beige">
+                            <Image Grid.Column="0"
+                                   Source="/Images/sets2.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="35"
+                                   MaximumWidthRequest="35"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="1"
+                                   Text="{x:Static resources:Texts.Label_Sets}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                            <Label Grid.Column="2"
+                                   StyleClass="FakeEntry"
+                                   Text="{Binding Sets}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </Grid>
+                        <Grid Grid.Column="2"
+                              Grid.Row="0"
+                              ColumnDefinitions="*,*,*"
+                              BackgroundColor="Beige">
+                            <Image Grid.Column="0"
+                                   Source="/Images/reps.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="30"
+                                   MaximumWidthRequest="30"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="1"
+                                   Text="{x:Static resources:Texts.Label_Reps}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                            <Label Grid.Column="2"
+                                   StyleClass="FakeEntry"
+                                   Text="{Binding Reps}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </Grid>
+                        <Grid Grid.Column="1"
+                              Grid.Row="2"
+                              ColumnDefinitions="*,*,*"
+                              BackgroundColor="Beige">
+                            <Image Grid.Column="0"
+                                   Source="/Images/weight.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="25"
+                                   MaximumWidthRequest="25"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="1"
+                                   Text="{x:Static resources:Texts.Label_Weight}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                            <Label Grid.Column="2"
+                                   StyleClass="FakeEntry"
+                                   Text="{Binding Weight}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </Grid>
+                        <Grid Grid.Column="2"
+                              Grid.Row="2"
+                              ColumnDefinitions="*,*,*"
+                              BackgroundColor="Beige">
+                            <Image Grid.Column="0"
+                                   Source="/Images/last_rest.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="35"
+                                   MaximumWidthRequest="35"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="1"
+                                   Text="{x:Static resources:Texts.Last_Rest_label}"
+                                   FontSize="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                            <Switch Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    IsToggled="{Binding RestAfterLastSet}"></Switch>
+                        </Grid>
 
 
                     </Grid>
-                    <Grid Grid.Column="1"
-                          RowDefinitions="5,Auto,15,Auto,5,Auto"
-                          ColumnDefinitions="*,5,Auto,5"
-                          HorizontalOptions="End">
-                        <ImageButton Grid.Row="1"
-                                     Grid.Column="2"
-                                     Aspect="AspectFill"
-                                     MaximumHeightRequest="40"
-                                     MaximumWidthRequest="40"
-                                     Source="/Images/edit_button.png"
-                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.ShowMenuTrainingItemCommand}"
-                                     CommandParameter="{Binding Order}"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="Center" />
-                        <ImageButton Grid.Row="3"
-                                     Grid.Column="2"
-                                     Aspect="AspectFill"
-                                     MaximumHeightRequest="40"
-                                     MaximumWidthRequest="40"
-                                     Source="/Images/up_button.png"
-                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemUpCommand}"
-                                     CommandParameter="{Binding Order}"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="End" />
-                        <ImageButton Grid.Row="5"
-                                     Grid.Column="2"
-                                     Aspect="AspectFill"
-                                     MaximumHeightRequest="40"
-                                     MaximumWidthRequest="40"
-                                     Source="/Images/down_button.png"
-                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingItemDownCommand}"
-                                     CommandParameter="{Binding Order}"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="End" />
-                    </Grid>
+
                 </Grid>
-
             </Frame>
         </DataTemplate>
         <views:TrainingItemTemplateSelector x:Key="trainingItemTemplateSelector"
@@ -240,7 +398,7 @@
                VerticalOptions="Center"
                HorizontalOptions="Center" />
         <ScrollView Grid.Row="5"
-                    Margin="10">
+                    Margin="8">
             <CollectionView ItemsSource="{Binding Training.TrainingItems}"
                             ItemTemplate="{StaticResource trainingItemTemplateSelector}">
                 <CollectionView.ItemsLayout>
