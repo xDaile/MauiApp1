@@ -19,7 +19,7 @@ namespace MauiApp1.DAL
         public IList<ExerciseTrainingEntity> ExerciseTraining { get; }
         public Storage()
         {
-            databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database2.db3");
+            databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database3.db3");
             _storage = new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
 
             _storage.CreateTableAsync<ExerciseEntity>();

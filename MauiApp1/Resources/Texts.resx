@@ -171,6 +171,9 @@
   <data name="Duration_label_double_quote" xml:space="preserve">
     <value>Duration:</value>
   </data>
+  <data name="Edit_Exercise_In_Training_Page_Title" xml:space="preserve">
+    <value>Edit exercise in training</value>
+  </data>
   <data name="Edit_Exercise_Page_Title" xml:space="preserve">
     <value>Detail of exercise</value>
   </data>

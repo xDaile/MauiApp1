@@ -223,6 +223,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit exercise in training.
+        /// </summary>
+        internal static string Edit_Exercise_In_Training_Page_Title {
+            get {
+                return ResourceManager.GetString("Edit_Exercise_In_Training_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detail of exercise.
         /// </summary>
         internal static string Edit_Exercise_Page_Title {

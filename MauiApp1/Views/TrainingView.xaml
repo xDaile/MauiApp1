@@ -14,10 +14,6 @@
         <DataTemplate x:DataType="models:PauseModel"
                       x:Key="PauseItem">
             <Frame>
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToPauseDetailCommand}"
-                                          CommandParameter="{Binding Id}" />
-                </Frame.GestureRecognizers>
                 <Grid ColumnDefinitions="Auto,*,10">
                     <Grid HorizontalOptions="CenterAndExpand"
                           Grid.Column="0"
@@ -50,11 +46,16 @@
                                    HorizontalOptions="Center" />
 
                             <Label Grid.Column="1"
-                                   LineBreakMode="CharacterWrap"
                                    Text="{Binding Duration.TotalSeconds}"
                                    FontSize="18"
+                                   BackgroundColor="LightGrey"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetPauseSecondsForListPausePromptCommand}" 
+                                                          CommandParameter="{Binding Id}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                             <Label Grid.Column="2"
                                    LineBreakMode="CharacterWrap"
                                    Text="{x:Static resources:Texts.Label_Seconds}"
@@ -131,7 +132,7 @@
                         <Label Grid.Row="1"
                                Grid.Column="3"
                                LineBreakMode="CharacterWrap"
-                               Text="{Binding ExerciseId}"
+                               Text="{Binding ExerciseName}"
                                FontSize="25"
                                VerticalOptions="Center"
                                HorizontalOptions="Start" />

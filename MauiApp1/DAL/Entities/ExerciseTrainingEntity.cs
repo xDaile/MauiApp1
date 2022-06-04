@@ -23,5 +23,7 @@ namespace MauiApp1.DAL.Entities
         [Indexed]
         public int ExerciseId { get; set; }
 
+        public string ExerciseName { get; set; } 
+
     }
 }

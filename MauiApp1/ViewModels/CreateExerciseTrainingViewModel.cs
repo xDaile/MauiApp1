@@ -1,4 +1,4 @@
-﻿using MauiApp1.Models;
+﻿ using MauiApp1.Models;
 using MauiApp1.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -39,7 +39,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         this.ExerciseFacade = exerciseFacade;
         ExerciseIndex = 0;
         //Be aware that TrainingPlanID and Order are just temporary in the model, because they are not accessible during constructor
-        newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, 0);
+        newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, 0,null);
     }
 
     public override async Task OnAppearingAsync()
@@ -157,8 +157,9 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
             order, 
             NewExerciseTraining.RestAfterLastSet, 
             NewExerciseTraining.Description,
-            exerciseIndex,
-            trainingId);
+            ExerciseIndex,
+            trainingId,
+            exerciseList[ExerciseIndex].Name);
        
 
         await TrainingFacade.CreateTrainingItem(model);

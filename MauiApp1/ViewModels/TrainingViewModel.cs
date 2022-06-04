@@ -27,17 +27,21 @@ public partial class TrainingViewModel : ViewModelBase
     [ObservableProperty]
     private List<TrainingItemModel> trainingItems;
 
+    private List<ExerciseModel> exercises;
+
     //[ObservableProperty]
     //private List<TrainingListModel> trainings;
 
     public ITrainingFacade TrainingFacade;
     public IExerciseFacade ExerciseFacade;
+    public IPauseFacade PauseFacade;
 
-    public TrainingViewModel(IRoutingService routingService, ITrainingFacade trainingFacade, IExerciseFacade exerciseFacade)
+    public TrainingViewModel(IRoutingService routingService, ITrainingFacade trainingFacade, IExerciseFacade exerciseFacade, IPauseFacade pauseFacade)
     {
         this.TrainingFacade = trainingFacade;
         this.routingService = routingService;
         this.ExerciseFacade = exerciseFacade;
+        this.PauseFacade = pauseFacade;
     }
 
     public override async Task OnAppearingAsync()
@@ -51,15 +55,8 @@ public partial class TrainingViewModel : ViewModelBase
     public async Task RefreshTraining()
     {
         Training = await TrainingFacade.GetById(this.id);
-        
-        TrainingItems = Training.TrainingItems.OrderBy(t => t.Order).ToList();
-    }
 
-    [ICommand]
-    private async Task GoToDetailAsync(int id)
-    {
-        //var route = routingService.GetRouteByViewModel<TrainingViewModel>();
-        //await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+        TrainingItems = Training.TrainingItems.OrderBy(t => t.Order).ToList();
     }
 
     [ICommand]
@@ -147,4 +144,18 @@ public partial class TrainingViewModel : ViewModelBase
         // await RefreshTrainingPlan();
         return;
     }
+
+    [ICommand]
+    private async Task GetPauseSecondsForListPausePromptAsync(int id)
+    {
+        PauseModel existingPauseModel = await PauseFacade.GetById(id);
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_pause_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, existingPauseModel.Duration.TotalSeconds.ToString());
+        if (result.Equals(null)) return;
+        TimeSpan newDuration = new TimeSpan(0, 0, Convert.ToInt32(result));
+        existingPauseModel = existingPauseModel with { Duration = newDuration };
+        await PauseFacade.Update(existingPauseModel);
+        this.OnAppearingAsync();
+    }
+
+
 }

@@ -77,6 +77,7 @@ namespace MauiApp1.BL.Facades
             foreach (TrainingItemEntity trainingItemEntity in trainingItemEntities)
             {
                 trainingItems.Add(MapTrainingItemEntityToModel(trainingItemEntity));
+                
             }
 
             TrainingModel result = new TrainingModel(trainingEntity.Id, trainingEntity.Name, trainingEntity.Description, trainingEntity.TrainingPlanId, trainingEntity.Order, trainingItems);
@@ -131,7 +132,7 @@ namespace MauiApp1.BL.Facades
             return await trainingRepository.CreateTrainingItem(MapTrainingItemModelToEntity(model));
 
         }
-
+        
         public async Task<int> UpdateTrainingItem(TrainingItemModel model)
         {
             return await trainingRepository.UpdateTrainingItem(MapTrainingItemModelToEntity(model));
