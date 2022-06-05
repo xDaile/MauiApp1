@@ -37,7 +37,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
     {
         this.TrainingFacade = trainingFacade;
         this.ExerciseFacade = exerciseFacade;
-        ExerciseIndex = 0;
+        ExerciseIndex = -1;
         //Be aware that TrainingPlanID and Order are just temporary in the model, because they are not accessible during constructor
         newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, 0,null);
     }
@@ -143,7 +143,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
     {
         int trainingId = Convert.ToInt32(TrainingId);
         var order = await TrainingFacade.GetExistingTrainingItemsCount(trainingId);
-        if (ExerciseIndex < 1)
+        if (ExerciseIndex == -1)
         {
             ErrorMessage = "You have to pick some exercise";
             return;

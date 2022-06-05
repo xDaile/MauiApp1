@@ -102,25 +102,27 @@ public partial class TrainingViewModel : ViewModelBase
         {
             Type TrainingItemType = TrainingItems[orderInTrainingItemsList].GetType();
             bool promptConfirmationResult;
+            
             if (TrainingItemType.Equals(typeof(PauseModel)))
             {
                 promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Delete} {((PauseModel)TrainingItems[orderInTrainingItemsList]).Name} {Resources.Texts.Prompt_pause}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
-
+                if (promptConfirmationResult.Equals(false)) return;
+                await TrainingFacade.DeleteTrainingItem(trainingItems[orderInTrainingItemsList]);
+                await this.OnAppearingAsync();
+                return;
             }
             else
             {
-                ExerciseModel exercise = await ExerciseFacade.GetById(((ExerciseTrainingModel)TrainingItems[orderInTrainingItemsList]).ExerciseId);
-                promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Remove} {exercise.Name} {Resources.Texts.Prompt_exercise}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
-
+                string exerciseName = ((ExerciseTrainingModel)TrainingItems[orderInTrainingItemsList]).ExerciseName;
+                promptConfirmationResult = await Shell.Current.DisplayAlert($"{Resources.Texts.Prompt_Remove} {exerciseName} {Resources.Texts.Prompt_exercise}", Resources.Texts.Prompt_Are_you_sure, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Cancel);
+                if (promptConfirmationResult.Equals(false)) return;
+                await TrainingFacade.DeleteTrainingItem(trainingItems[orderInTrainingItemsList]);
+                await this.OnAppearingAsync();
+                return;
             }
 
-            if (promptConfirmationResult.Equals(true))
-            {
-                await TrainingFacade.DeleteTrainingItem(TrainingItems[orderInTrainingItemsList]);
-
-            }
-            await this.OnAppearingAsync();
-            return;
+            
+           
         }
         if (promptActionResult.Equals(Resources.Texts.Prompt_Create_copy))
         {

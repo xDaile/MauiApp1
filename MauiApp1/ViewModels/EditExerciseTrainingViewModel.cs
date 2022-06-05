@@ -72,7 +72,7 @@ public partial class EditExerciseTrainingViewModel : ViewModelBase
         int ExerciseId = Convert.ToInt32(ExerciseList[ExerciseIndex].Id);
         ExerciseModel exercise = await ExerciseFacade.GetById(ExerciseId);
         ExerciseTrainingModel model = new ExerciseTrainingModel(
-            null,
+            existingExerciseTraining.Id,
             existingExerciseTraining.RestSeconds,
             existingExerciseTraining.ExerciseSeconds,
             existingExerciseTraining.Reps,
