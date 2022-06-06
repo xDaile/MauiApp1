@@ -637,6 +637,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Training item options.
+        /// </summary>
+        internal static string Prompt_Training_item_options {
+            get {
+                return ResourceManager.GetString("Prompt_Training_item_options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Training options.
         /// </summary>
         internal static string Prompt_Training_options {

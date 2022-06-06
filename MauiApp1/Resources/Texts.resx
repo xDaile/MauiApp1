@@ -309,6 +309,9 @@
   <data name="Prompt_training" xml:space="preserve">
     <value>training</value>
   </data>
+  <data name="Prompt_Training_item_options" xml:space="preserve">
+    <value>Training item options</value>
+  </data>
   <data name="Prompt_Training_options" xml:space="preserve">
     <value>Training options</value>
   </data>

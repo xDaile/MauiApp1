@@ -164,13 +164,13 @@ namespace MauiApp1.DAL.Repositories
             var queryGetExerciseTrainingEntities = connection.Table<ExerciseTrainingEntity>().Where(exerciseTraining => exerciseTraining.TrainingId.Equals(trainingId));
             var queryGetPauseEntities = connection.Table<PauseEntity>().Where(pause => pause.TrainingId.Equals(trainingId));
 
-            
+
             List<ExerciseTrainingEntity> exerciseTrainingList = await queryGetExerciseTrainingEntities.ToListAsync();
             List<PauseEntity> pauseList = await queryGetPauseEntities.ToListAsync();
 
             await connection.CloseAsync();
             return entities.Concat(pauseList).Concat(exerciseTrainingList).ToList();
-            
+
         }
 
         public async Task<int> CreateTrainingItem(TrainingItemEntity entity)
@@ -219,7 +219,10 @@ namespace MauiApp1.DAL.Repositories
             Type entityType = entity.GetType();
             int TrainingId;
             int OriginalOrder;
+            ExerciseTrainingEntity updatedExerciseTrainingEntity=null;
+            PauseEntity updatedPauseEntity=null;
             SQLiteAsyncConnection connection = null;
+
 
             //It is okay here to update original TItem, as order is not zero, therefore entity with order -1 exists for sure
             if (entityType.Equals(typeof(ExerciseTrainingEntity)))
@@ -227,9 +230,9 @@ namespace MauiApp1.DAL.Repositories
                 TrainingId = ((ExerciseTrainingEntity)entity).TrainingId;
                 OriginalOrder = ((ExerciseTrainingEntity)entity).Order;
                 if (OriginalOrder.Equals(0)) return;
-                ExerciseTrainingEntity updatedExerciseTrainingEntity = (ExerciseTrainingEntity)entity;
+                updatedExerciseTrainingEntity = (ExerciseTrainingEntity)entity;
                 updatedExerciseTrainingEntity.Order = OriginalOrder - 1;
-                await connection.UpdateAsync(updatedExerciseTrainingEntity);
+                //await connection.UpdateAsync(updatedExerciseTrainingEntity);
 
             }
             else if (entityType.Equals(typeof(PauseEntity)))
@@ -237,19 +240,19 @@ namespace MauiApp1.DAL.Repositories
                 TrainingId = ((PauseEntity)entity).TrainingId;
                 OriginalOrder = ((PauseEntity)entity).Order;
                 if (OriginalOrder.Equals(0)) return;
-                PauseEntity updatedPauseEntity = (PauseEntity)entity;
+                updatedPauseEntity = (PauseEntity)entity;
                 updatedPauseEntity.Order = OriginalOrder - 1;
-                await connection.UpdateAsync(updatedPauseEntity);
+
+
+
+                //await connection.UpdateAsync(updatedPauseEntity);
                 //TODO later needs to be done because of checks on order max
             }
             else throw new Exception("Bad usage of MoveTrainingItemUp method");
 
+            connection = await storage.GetConnection();
 
 
-            while (connection == null)
-            {
-                connection = await storage.GetConnection();
-            }
 
             var queryGetPauses = connection.Table<PauseEntity>().Where(pause => pause.TrainingId.Equals(TrainingId));
             List<PauseEntity> pauseEntities = await queryGetPauses.ToListAsync();
@@ -260,7 +263,7 @@ namespace MauiApp1.DAL.Repositories
             ExerciseTrainingEntity? exerciseTrainingEntity = exerciseTrainingEntities.Find(x => x.Order.Equals(OriginalOrder - 1));
 
             //This should also provide that order will not be set higher than max
-            if (exerciseTrainingEntity == null && pauseEntity == null) { throw new Exception("Unexpected error with orders of training items"); return; }
+            if (exerciseTrainingEntity == null && pauseEntity == null) { return; }
             else if (exerciseTrainingEntity != null)
             {
                 exerciseTrainingEntity.Order = exerciseTrainingEntity.Order + 1;
@@ -269,9 +272,18 @@ namespace MauiApp1.DAL.Repositories
             else if (pauseEntity != null)
             {
                 pauseEntity.Order = pauseEntity.Order + 1;
-                await connection.UpdateAsync(exerciseTrainingEntity);
+                await connection.UpdateAsync(pauseEntity);
             }
+            if (entityType.Equals(typeof(ExerciseTrainingEntity)))
+            {
 
+                await connection.UpdateAsync(updatedExerciseTrainingEntity);
+
+            }
+            else if (entityType.Equals(typeof(PauseEntity)))
+            {
+                await connection.UpdateAsync(updatedPauseEntity);
+            }
 
             await connection.CloseAsync();
 
@@ -315,7 +327,7 @@ namespace MauiApp1.DAL.Repositories
             ExerciseTrainingEntity? exerciseTrainingEntity = exerciseTrainingEntities.Find(x => x.Order.Equals(OriginalOrder + 1));
 
             //This should provide that order will not be set higher than max
-            if (exerciseTrainingEntity == null && pauseEntity == null) { throw new Exception("Unexpected error with orders of training items"); return; }
+            if (exerciseTrainingEntity == null && pauseEntity == null) { return; }
             else if (exerciseTrainingEntity != null)
             {
                 exerciseTrainingEntity.Order = exerciseTrainingEntity.Order - 1;

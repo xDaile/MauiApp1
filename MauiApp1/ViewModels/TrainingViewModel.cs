@@ -78,7 +78,7 @@ public partial class TrainingViewModel : ViewModelBase
     [ICommand]
     private async Task ShowMenuTrainingItemAsync(int orderInTrainingItemsList)
     {
-        string promptActionResult = await Shell.Current.DisplayActionSheet(Resources.Texts.Prompt_Training_options, Resources.Texts.Prompt_Cancel, null, Resources.Texts.Prompt_Edit, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Create_copy);
+        string promptActionResult = await Shell.Current.DisplayActionSheet(Resources.Texts.Prompt_Training_item_options, Resources.Texts.Prompt_Cancel, null, Resources.Texts.Prompt_Edit, Resources.Texts.Prompt_Delete, Resources.Texts.Prompt_Create_copy);
 
 
         if (promptActionResult.Equals(Resources.Texts.Prompt_Edit))
@@ -132,18 +132,18 @@ public partial class TrainingViewModel : ViewModelBase
     }
 
     [ICommand]
-    private async Task MoveTrainingItemDownAsync(int id)
+    private async Task MoveTrainingItemDownAsync(int order)
     {
-        // await TrainingFacade.MoveTrainingDown(id);
-        // await RefreshTrainingPlan();
+        await TrainingFacade.MoveTrainingItemDown(trainingItems[order]);
+        this.OnAppearingAsync();
         return;
     }
 
     [ICommand]
-    private async Task MoveTrainingItemUpAsync(int id)
+    private async Task MoveTrainingItemUpAsync(int order)
     {
-        // await TrainingFacade.MoveTrainingUp(id);
-        // await RefreshTrainingPlan();
+        await TrainingFacade.MoveTrainingItemUp(trainingItems[order]);
+        this.OnAppearingAsync();
         return;
     }
 
