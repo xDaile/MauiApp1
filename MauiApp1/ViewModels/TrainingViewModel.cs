@@ -159,5 +159,78 @@ public partial class TrainingViewModel : ViewModelBase
         this.OnAppearingAsync();
     }
 
+    [ICommand]
+    private async Task GetWorkSecondsForListExerciseTrainingPromptAsync(int order)
+    {
+        ExerciseTrainingModel existingExerciseTrainingModel = (ExerciseTrainingModel)trainingItems.Find(x=>x.Order.Equals(order));
+        
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_rep_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, existingExerciseTrainingModel.ExerciseSeconds.TotalSeconds.ToString());
+        if (result.Equals(null)) return;
+        TimeSpan newDuration = new TimeSpan(0, 0, Convert.ToInt32(result));
+        existingExerciseTrainingModel = existingExerciseTrainingModel with { ExerciseSeconds = newDuration };
+        await TrainingFacade.UpdateTrainingItem(existingExerciseTrainingModel);
+        this.OnAppearingAsync();
+    }
+
+    [ICommand]
+    private async Task GetRestSecondsForListExerciseTrainingPromptAsync(int order)
+    {
+        ExerciseTrainingModel existingExerciseTrainingModel = (ExerciseTrainingModel)trainingItems.Find(x => x.Order.Equals(order));
+
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_rest_duration, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, existingExerciseTrainingModel.ExerciseSeconds.TotalSeconds.ToString());
+        if (result.Equals(null)) return;
+        TimeSpan newDuration = new TimeSpan(0, 0, Convert.ToInt32(result));
+        existingExerciseTrainingModel = existingExerciseTrainingModel with { RestSeconds = newDuration };
+        await TrainingFacade.UpdateTrainingItem(existingExerciseTrainingModel);
+        this.OnAppearingAsync();
+    }
+
+    [ICommand]
+    private async Task GetSetsForListExerciseTrainingPromptAsync(int order)
+    {
+        ExerciseTrainingModel existingExerciseTrainingModel = (ExerciseTrainingModel)trainingItems.Find(x => x.Order.Equals(order));
+
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_sets, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, existingExerciseTrainingModel.Sets.ToString());
+        if (result.Equals(null)) return;
+        existingExerciseTrainingModel = existingExerciseTrainingModel with { Sets = Convert.ToInt32(result) };
+        await TrainingFacade.UpdateTrainingItem(existingExerciseTrainingModel);
+        this.OnAppearingAsync();
+    }
+
+    [ICommand]
+    private async Task GetRepsForListExerciseTrainingPromptAsync(int order)
+    {
+        ExerciseTrainingModel existingExerciseTrainingModel = (ExerciseTrainingModel)trainingItems.Find(x => x.Order.Equals(order));
+
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_reps, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, existingExerciseTrainingModel.Reps.ToString());
+        if (result.Equals(null)) return;
+        existingExerciseTrainingModel = existingExerciseTrainingModel with { Reps = Convert.ToInt32(result) };
+        await TrainingFacade.UpdateTrainingItem(existingExerciseTrainingModel);
+        this.OnAppearingAsync();
+    }
+
+    [ICommand]
+    private async Task GetWeightForListExerciseTrainingPromptAsync(int order)
+    {
+        ExerciseTrainingModel existingExerciseTrainingModel = (ExerciseTrainingModel)trainingItems.Find(x => x.Order.Equals(order));
+
+        var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_weight, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 7, null, existingExerciseTrainingModel.Weight.ToString());
+        if (result.Equals(null)) return;
+        float resultValue = float.Parse(result.Replace(".",","));
+        existingExerciseTrainingModel = existingExerciseTrainingModel with { Weight = resultValue };
+        await TrainingFacade.UpdateTrainingItem(existingExerciseTrainingModel);
+        this.OnAppearingAsync();
+    }
+
+    [ICommand]
+    private async Task ChangeLastPauseForListExerciseTrainingPromptAsync(int order)
+    {
+        ExerciseTrainingModel existingExerciseTrainingModel = (ExerciseTrainingModel)trainingItems.Find(x => x.Order.Equals(order));
+        existingExerciseTrainingModel = existingExerciseTrainingModel with { RestAfterLastSet = !(existingExerciseTrainingModel.RestAfterLastSet) };
+        await TrainingFacade.UpdateTrainingItem(existingExerciseTrainingModel);
+        this.OnAppearingAsync();
+    }
+
+
 
 }

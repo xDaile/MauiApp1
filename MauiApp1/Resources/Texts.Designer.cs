@@ -340,6 +340,24 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter new training description.
+        /// </summary>
+        internal static string Enter_new_training_description {
+            get {
+                return ResourceManager.GetString("Enter_new_training_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter new training name.
+        /// </summary>
+        internal static string Enter_new_training_name {
+            get {
+                return ResourceManager.GetString("Enter_new_training_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter training plan description.
         /// </summary>
         internal static string Enter_new_training_plan_description {
@@ -363,6 +381,15 @@ namespace MauiApp1.Resources {
         internal static string Enter_pause_duration {
             get {
                 return ResourceManager.GetString("Enter_pause_duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter rep duration.
+        /// </summary>
+        internal static string Enter_rep_duration {
+            get {
+                return ResourceManager.GetString("Enter_rep_duration", resourceCulture);
             }
         }
         
@@ -723,6 +750,15 @@ namespace MauiApp1.Resources {
         internal static string Training_Plans_Page_Title {
             get {
                 return ResourceManager.GetString("Training_Plans_Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update exercise.
+        /// </summary>
+        internal static string Update_Exercise {
+            get {
+                return ResourceManager.GetString("Update_Exercise", resourceCulture);
             }
         }
         

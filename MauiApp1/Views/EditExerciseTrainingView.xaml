@@ -222,6 +222,6 @@
                 FontFamily="MontserratRegular"
                 FontSize="20"
                 Command="{Binding EditExerciseTrainingCommand}"
-                Text="{x:Static resources:Texts.Add_Exercise_To_Training}"></Button>
+                Text="{x:Static resources:Texts.Update_Exercise}"></Button>
     </Grid>
 </views:ContentPageBase>

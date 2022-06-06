@@ -157,7 +157,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
             order, 
             NewExerciseTraining.RestAfterLastSet, 
             NewExerciseTraining.Description,
-            ExerciseIndex,
+            ExerciseIndex+1,
             trainingId,
             exerciseList[ExerciseIndex].Name);
        

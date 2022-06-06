@@ -225,11 +225,16 @@
                                    Grid.Row="1"
                                    StyleClass="FakeEntry"
                                    LineBreakMode="CharacterWrap"
-                                   Text="{Binding RestSeconds.TotalSeconds}"
+                                   Text="{Binding ExerciseSeconds.TotalSeconds}"
                                    FontSize="18"
                                    VerticalOptions="Center"
                                    HorizontalTextAlignment="Center"
-                                   HorizontalOptions="End" />
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetWorkSecondsForListExerciseTrainingPromptCommand}"
+                                                          CommandParameter="{Binding Order}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                             <Label Grid.Column="3"
                                    Grid.Row="1"
                                    LineBreakMode="CharacterWrap"
@@ -267,7 +272,12 @@
                                    FontSize="18"
                                    VerticalOptions="Center"
                                    HorizontalTextAlignment="Center"
-                                   HorizontalOptions="End" />
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetRestSecondsForListExerciseTrainingPromptCommand}"
+                                                          CommandParameter="{Binding Order}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                             <Label Grid.Column="3"
                                    Grid.Row="1"
                                    LineBreakMode="CharacterWrap"
@@ -302,7 +312,12 @@
                                    Text="{Binding Sets}"
                                    FontSize="16"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Start" />
+                                   HorizontalOptions="Start">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetSetsForListExerciseTrainingPromptCommand}"
+                                                          CommandParameter="{Binding Order}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Grid>
                         <Grid Grid.Column="2"
                               Grid.Row="0"
@@ -326,7 +341,12 @@
                                    Text="{Binding Reps}"
                                    FontSize="16"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Start" />
+                                   HorizontalOptions="Start">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetRepsForListExerciseTrainingPromptCommand}"
+                                                          CommandParameter="{Binding Order}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Grid>
                         <Grid Grid.Column="1"
                               Grid.Row="2"
@@ -347,10 +367,16 @@
                                    HorizontalOptions="Start" />
                             <Label Grid.Column="2"
                                    StyleClass="FakeEntry"
+                                   
                                    Text="{Binding Weight}"
                                    FontSize="16"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="Start" />
+                                   HorizontalOptions="Start">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.GetWeightForListExerciseTrainingPromptCommand}"
+                                                          CommandParameter="{Binding Order}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Grid>
                         <Grid Grid.Column="2"
                               Grid.Row="2"
@@ -371,7 +397,13 @@
                                    HorizontalOptions="Start" />
                             <Switch Grid.Column="2"
                                     HorizontalOptions="Center"
-                                    IsToggled="{Binding RestAfterLastSet}"></Switch>
+                                    IsToggled="{Binding RestAfterLastSet}">
+                                <Switch.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.ChangeLastPauseForListExerciseTrainingPromptCommand}"
+                                                          CommandParameter="{Binding Order}" />
+                                </Switch.GestureRecognizers>
+                            </Switch>
+                            
                         </Grid>
 
 
