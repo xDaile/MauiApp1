@@ -23,6 +23,20 @@ namespace MauiApp1.DAL.Repositories
         {
             SQLiteAsyncConnection connection = await storage.GetConnection();
             var query = connection.Table<TrainingEntity>().Where(trainingTable => trainingTable.TrainingPlanId.Equals(training.TrainingPlanId));
+            
+            var queryForPauses= connection.Table<PauseEntity>().Where(pause=>pause.TrainingId.Equals(training.Id));
+            var queryForExerciseTrainingEntities= connection.Table<ExerciseTrainingEntity>().Where(pause => pause.TrainingId.Equals(training.Id));
+            List<PauseEntity> pauseEntities = await queryForPauses.ToListAsync();
+            List<ExerciseTrainingEntity> exerciseTrainingEntities = await queryForExerciseTrainingEntities.ToListAsync();
+
+            foreach (var pauseEntity in pauseEntities)
+            {
+                storage.DeleteAsync(pauseEntity);
+            }
+            foreach(var exerciseTraining in exerciseTrainingEntities)
+            {
+                storage.DeleteAsync(exerciseTraining);
+            }
             List<TrainingEntity> result = await query.ToListAsync();
             await connection.CloseAsync();
             foreach (TrainingEntity trainingForUpdate in result)

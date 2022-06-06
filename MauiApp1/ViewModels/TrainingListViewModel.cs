@@ -79,7 +79,7 @@ public partial class TrainingListViewModel : ViewModelBase
             await Shell.Current.GoToAsync($"{route}?trainingId={id}");
             return;
         }
-
+        
         if (promptActionResult.Equals(Resources.Texts.Prompt_Delete))
         {
             TrainingListModel selectedTraining = await TrainingFacade.GetByIdLM(id);
