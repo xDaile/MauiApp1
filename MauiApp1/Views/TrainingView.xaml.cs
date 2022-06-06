@@ -10,4 +10,9 @@ public partial class TrainingView:ContentPageBase
 		BindingContext = trainingViewModel;
 		InitializeComponent();
 	}
+
+    private void Switch_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+
+    }
 }

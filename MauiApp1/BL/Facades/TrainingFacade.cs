@@ -73,11 +73,13 @@ namespace MauiApp1.BL.Facades
             TrainingEntity trainingEntity = await trainingRepository.GetById(id);
             List<TrainingItemEntity> trainingItemEntities = await trainingRepository.GetAllTrainingItemsByTrainingId(id);
             List<TrainingItemModel> trainingItems = new List<TrainingItemModel>();
-
             foreach (TrainingItemEntity trainingItemEntity in trainingItemEntities)
             {
                 trainingItems.Add(MapTrainingItemEntityToModel(trainingItemEntity));
+                
             }
+            trainingItems = trainingItems.OrderBy(x => x.Order).ToList();
+
 
             TrainingModel result = new TrainingModel(trainingEntity.Id, trainingEntity.Name, trainingEntity.Description, trainingEntity.TrainingPlanId, trainingEntity.Order, trainingItems);
             return result;
@@ -131,7 +133,7 @@ namespace MauiApp1.BL.Facades
             return await trainingRepository.CreateTrainingItem(MapTrainingItemModelToEntity(model));
 
         }
-
+        
         public async Task<int> UpdateTrainingItem(TrainingItemModel model)
         {
             return await trainingRepository.UpdateTrainingItem(MapTrainingItemModelToEntity(model));
@@ -140,6 +142,14 @@ namespace MauiApp1.BL.Facades
         public async Task DeleteTrainingItem(TrainingItemModel model)
         {
             await trainingRepository.DeleteTrainingItem(MapTrainingItemModelToEntity(model));
+            int currentOrder = model.Order;
+            List<TrainingItemEntity> trainingItems = await trainingRepository.GetAllTrainingItemsByTrainingId(model.TrainingId);
+            foreach (TrainingItemEntity trainingItemEntity in trainingItems)
+            {
+                if (trainingItemEntity.Order < currentOrder) continue;
+                TrainingItemEntity updatedTrainingItemEntity = trainingItemEntity with { Order = trainingItemEntity.Order - 1 };
+                await trainingRepository.UpdateTrainingItem(updatedTrainingItemEntity);
+            }
         }
 
         public async Task<int> GetExistingTrainingItemsCount(int trainingPlanId)

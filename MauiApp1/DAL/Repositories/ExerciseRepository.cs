@@ -41,6 +41,7 @@ namespace MauiApp1.DAL.Repositories
 
         public async Task<ExerciseEntity?> GetById(int id)
         {
+
             return await storage.GetByIdAsync<ExerciseEntity>(id);
             //string Query = String.Format("Select * from exercise where exercise.id = {0}", id);
 

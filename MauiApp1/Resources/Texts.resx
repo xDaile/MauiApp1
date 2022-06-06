@@ -171,6 +171,9 @@
   <data name="Duration_label_double_quote" xml:space="preserve">
     <value>Duration:</value>
   </data>
+  <data name="Edit_Exercise_In_Training_Page_Title" xml:space="preserve">
+    <value>Edit exercise in training</value>
+  </data>
   <data name="Edit_Exercise_Page_Title" xml:space="preserve">
     <value>Detail of exercise</value>
   </data>
@@ -207,6 +210,12 @@
   <data name="Enter_new_pause_name" xml:space="preserve">
     <value>Enter pause name</value>
   </data>
+  <data name="Enter_new_training_description" xml:space="preserve">
+    <value>Enter new training description</value>
+  </data>
+  <data name="Enter_new_training_name" xml:space="preserve">
+    <value>Enter new training name</value>
+  </data>
   <data name="Enter_new_training_plan_description" xml:space="preserve">
     <value>Enter training plan description</value>
   </data>
@@ -218,6 +227,9 @@
   </data>
   <data name="Enter_reps" xml:space="preserve">
     <value>Enter reps</value>
+  </data>
+  <data name="Enter_rep_duration" xml:space="preserve">
+    <value>Enter rep duration</value>
   </data>
   <data name="Enter_rest_duration" xml:space="preserve">
     <value>Enter rest time</value>
@@ -237,6 +249,9 @@
   <data name="Label_Reps" xml:space="preserve">
     <value>Reps:</value>
   </data>
+  <data name="Label_Rest" xml:space="preserve">
+    <value>Rest</value>
+  </data>
   <data name="Label_Seconds" xml:space="preserve">
     <value>Seconds</value>
   </data>
@@ -245,6 +260,12 @@
   </data>
   <data name="Label_Weight" xml:space="preserve">
     <value>Weight:</value>
+  </data>
+  <data name="Label_Work" xml:space="preserve">
+    <value>Work</value>
+  </data>
+  <data name="Last_Rest_label" xml:space="preserve">
+    <value>Last rest</value>
   </data>
   <data name="Name_label_double_quote" xml:space="preserve">
     <value>Name:</value>
@@ -326,6 +347,9 @@
   </data>
   <data name="Training_Plans_Page_Title" xml:space="preserve">
     <value>Training plans</value>
+  </data>
+  <data name="Update_Exercise" xml:space="preserve">
+    <value>Update exercise</value>
   </data>
   <data name="User_Page_Title" xml:space="preserve">
     <value>User</value>

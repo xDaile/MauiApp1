@@ -12,8 +12,5 @@ namespace MauiApp1.DAL.Entities
     {
         public string Name { get; set; }
         public TimeSpan Duration { get; set; }
-        public int Order { get; set; }
-        [Indexed]
-        public int TrainingId { get; set; }
     }
 }

@@ -27,7 +27,7 @@
                         BackgroundColor="WhiteSmoke"
                         FontSize="21"
                         Text="{Binding NewTraining.Name}"
-                        Placeholder="{x:Static resources:Texts.Enter_new_exercise_name}" />
+                        Placeholder="{x:Static resources:Texts.Enter_new_training_name}" />
                 <Label Grid.Row="4"
                        Text="{x:Static resources:Texts.Description_label_double_quote}"
                        FontSize="25"
@@ -40,7 +40,7 @@
                         BackgroundColor="WhiteSmoke"
                         FontSize="21"
                         Text="{Binding NewTraining.Description}"
-                        Placeholder="{x:Static resources:Texts.Enter_new_exercise_description}" />
+                        Placeholder="{x:Static resources:Texts.Enter_new_training_description}" />
             </Grid>
         </ScrollView>
         <Label Grid.Row="2"

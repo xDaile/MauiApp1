@@ -1,4 +1,4 @@
-﻿using MauiApp1.Models;
+﻿ using MauiApp1.Models;
 using MauiApp1.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -37,9 +37,9 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
     {
         this.TrainingFacade = trainingFacade;
         this.ExerciseFacade = exerciseFacade;
-        ExerciseIndex = 0;
+        ExerciseIndex = -1;
         //Be aware that TrainingPlanID and Order are just temporary in the model, because they are not accessible during constructor
-        newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, Convert.ToInt32(TrainingId));
+        newExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, 0,null);
     }
 
     public override async Task OnAppearingAsync()
@@ -48,34 +48,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         this.ExerciseList = await ExerciseFacade.GetAll();
     }
 
-    [ICommand]
-    private async Task CreateTrainingAsync()
-    {
-
-        int trainingId = Convert.ToInt32(TrainingId);
-        var order = await TrainingFacade.GetExistingTrainingItemsCount(trainingId);
-        ExerciseTrainingModel model = new ExerciseTrainingModel(
-            null,
-            newExerciseTraining.RestSeconds,
-            newExerciseTraining.ExerciseSeconds,
-            newExerciseTraining.Reps,
-            newExerciseTraining.Weight,
-            newExerciseTraining.Sets,
-            order,
-            newExerciseTraining.RestAfterLastSet,
-            newExerciseTraining.Description,
-            newExerciseTraining.ExerciseId,
-            trainingId);
-        if (model.ExerciseId == 0)
-        {
-            ErrorMessage = "You have to select exercise";
-            return;
-        }
-
-        await TrainingFacade.CreateTrainingItem(model);
-        await Shell.Current.GoToAsync("..");
-        return;
-    }
+   
 
 
     [ICommand]
@@ -84,7 +57,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_reps, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, NewExerciseTraining.Reps.ToString());
         if (result.Equals(null)) return;
         int reps = Convert.ToInt32(result);
-        NewExerciseTraining = newExerciseTraining with { Reps = reps };
+        NewExerciseTraining = NewExerciseTraining with { Reps = reps };
     }
 
     [ICommand]
@@ -93,7 +66,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_sets, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, NewExerciseTraining.Sets.ToString());
         if (result.Equals(null)) return;
         int sets = Convert.ToInt32(result);
-        NewExerciseTraining = newExerciseTraining with { Sets = sets };
+        NewExerciseTraining = NewExerciseTraining with { Sets = sets };
     }
 
 
@@ -104,7 +77,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         if (result.Equals(null)) return;
         Console.WriteLine(result);
         int weight = Convert.ToInt32(result);
-        NewExerciseTraining = newExerciseTraining with { Weight = weight };
+        NewExerciseTraining = NewExerciseTraining with { Weight = weight };
     }
 
     [ICommand]
@@ -114,7 +87,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         if (result.Equals(null)) return;
         int exerciseSeconds = Convert.ToInt32(result);
 
-        NewExerciseTraining = newExerciseTraining with { ExerciseSeconds = new TimeSpan(0, 0, exerciseSeconds) };
+        NewExerciseTraining = NewExerciseTraining with { ExerciseSeconds = new TimeSpan(0, 0, exerciseSeconds) };
     }
 
     [ICommand]
@@ -123,46 +96,46 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
         var result = await Shell.Current.DisplayPromptAsync(Resources.Texts.Enter_rest_seconds, "", Resources.Texts.Prompt_confirm, Resources.Texts.Prompt_Cancel, null, 3, null, NewExerciseTraining.RestSeconds.TotalSeconds.ToString());
         if (result.Equals(null)) return;
         int restSeconds = Convert.ToInt32(result);
-        NewExerciseTraining = newExerciseTraining with { RestSeconds = new TimeSpan(0, 0, restSeconds) };
+        NewExerciseTraining = NewExerciseTraining with { RestSeconds = new TimeSpan(0, 0, restSeconds) };
     }
 
     [ICommand]
     private async Task AddWeightAsync()
     {
-        NewExerciseTraining = newExerciseTraining with { Weight = NewExerciseTraining.Weight+1 };
+        NewExerciseTraining = NewExerciseTraining with { Weight = NewExerciseTraining.Weight+1 };
     }
 
     [ICommand]
     private async Task RemoveWeightAsync()
     {
         if (NewExerciseTraining.Weight - 1 < 0) return;
-        NewExerciseTraining = newExerciseTraining with { Weight = NewExerciseTraining.Weight - 1 };
+        NewExerciseTraining = NewExerciseTraining with { Weight = NewExerciseTraining.Weight - 1 };
     }
 
     [ICommand]
     private async Task AddRepAsync()
     {
-        NewExerciseTraining = newExerciseTraining with { Reps = NewExerciseTraining.Reps + 1 };
+        NewExerciseTraining = NewExerciseTraining with { Reps = NewExerciseTraining.Reps + 1 };
     }
 
     [ICommand]
     private async Task RemoveRepAsync()
     {
         if (NewExerciseTraining.Reps - 1 < 0) return;
-        NewExerciseTraining = newExerciseTraining with { Reps = NewExerciseTraining.Reps - 1 };
+        NewExerciseTraining = NewExerciseTraining with { Reps = NewExerciseTraining.Reps - 1 };
     }
 
     [ICommand]
     private async Task AddSetAsync()
     {
-        NewExerciseTraining = newExerciseTraining with { Sets = NewExerciseTraining.Sets + 1 };
+        NewExerciseTraining = NewExerciseTraining with { Sets = NewExerciseTraining.Sets + 1 };
     }
 
     [ICommand]
     private async Task RemoveSetAsync()
     {
         if (NewExerciseTraining.Sets - 1 < 0) return;
-        NewExerciseTraining = newExerciseTraining with { Sets = NewExerciseTraining.Sets - 1 };
+        NewExerciseTraining = NewExerciseTraining with { Sets = NewExerciseTraining.Sets - 1 };
     }
 
     [ICommand]
@@ -170,7 +143,7 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
     {
         int trainingId = Convert.ToInt32(TrainingId);
         var order = await TrainingFacade.GetExistingTrainingItemsCount(trainingId);
-        if (ExerciseIndex < 1)
+        if (ExerciseIndex == -1)
         {
             ErrorMessage = "You have to pick some exercise";
             return;
@@ -183,9 +156,10 @@ public partial class CreateExerciseTrainingViewModel : ViewModelBase
             NewExerciseTraining.Sets,  
             order, 
             NewExerciseTraining.RestAfterLastSet, 
-            NewExerciseTraining.Description, 
-            Convert.ToInt32(ExerciseList[ExerciseIndex].Id),
-            NewExerciseTraining.TrainingId);
+            NewExerciseTraining.Description,
+            ExerciseIndex+1,
+            trainingId,
+            exerciseList[ExerciseIndex].Name);
        
 
         await TrainingFacade.CreateTrainingItem(model);

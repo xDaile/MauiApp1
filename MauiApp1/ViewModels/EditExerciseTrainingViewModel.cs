@@ -24,10 +24,10 @@ public partial class EditExerciseTrainingViewModel : ViewModelBase
     private string errorMessage;
 
     [ObservableProperty]
-    private ExerciseTrainingModel existingExerciseTraining;
+    private ExerciseTrainingModel existingExerciseTraining = null;
 
     [ObservableProperty]
-    private int exerciseIndex;
+    private int exerciseIndex=-1;
 
     [ObservableProperty]
     private List<ExerciseModel> exerciseList;
@@ -36,54 +36,64 @@ public partial class EditExerciseTrainingViewModel : ViewModelBase
     {
         this.TrainingFacade = trainingFacade;
         this.ExerciseFacade = exerciseFacade;
-        ExerciseIndex = 0;
-        //Be aware that TrainingPlanID and Order are just temporary in the model, because they are not accessible during constructor
-        existingExerciseTraining = new ExerciseTrainingModel(null, new TimeSpan(), new TimeSpan(), 0, 0, 0, 0, true, "Description", 0, Convert.ToInt32(TrainingId));
+        ExistingExerciseTraining = new ExerciseTrainingModel(-1, TimeSpan.Zero, TimeSpan.Zero, 0, 0, 0, 0, false, "", 0, 0, "");
+        this.OnAppearingAsync();
     }
 
     public override async Task OnAppearingAsync()
     {
-        
-        this.ExerciseList = await ExerciseFacade.GetAll();
-        TrainingModel training = await TrainingFacade.GetById(Convert.ToInt32(TrainingId));
-        foreach (TrainingItemModel trainingItem in training.TrainingItems)
+        if (existingExerciseTraining.Id == -1)
         {
-            if (trainingItem.GetType().Equals(typeof(ExerciseTrainingModel)) && ((ExerciseTrainingModel)trainingItem).ExerciseId.Equals(this.ExerciseId))
+            ExerciseList = (await ExerciseFacade.GetAll()).OrderBy(x=>x.Id).ToList();
+
+
+            TrainingModel training = await TrainingFacade.GetById(Convert.ToInt32(TrainingId));
+            foreach (TrainingItemModel trainingItem in training.TrainingItems)
             {
-                existingExerciseTraining = (ExerciseTrainingModel)trainingItem;
+                if (trainingItem.GetType().Equals(typeof(ExerciseTrainingModel)) && ((ExerciseTrainingModel)trainingItem).ExerciseId.Equals(Convert.ToInt32(this.ExerciseId)))
+                {
+                    this.ExistingExerciseTraining = (ExerciseTrainingModel)trainingItem;
+                    break;
+                }
             }
+            ExerciseList = ExerciseList.OrderBy(x => x.Id).ToList();
+            ExerciseIndex = this.ExistingExerciseTraining.ExerciseId-1;
+            exerciseIndex = ExerciseIndex;
         }
         await base.OnAppearingAsync();
 
     }
 
     [ICommand]
-    private async Task EditTrainingAsync()
+    private async Task EditExerciseTrainingAsync()
     {
+        int ExerciseId = Convert.ToInt32(ExerciseList[ExerciseIndex].Id);
 
-        int trainingId = Convert.ToInt32(TrainingId);
-        var order = await TrainingFacade.GetExistingTrainingItemsCount(trainingId);
+        ExerciseModel exercise = await ExerciseFacade.GetById(ExerciseId);
         ExerciseTrainingModel model = new ExerciseTrainingModel(
-            null,
+            existingExerciseTraining.Id,
             existingExerciseTraining.RestSeconds,
             existingExerciseTraining.ExerciseSeconds,
             existingExerciseTraining.Reps,
             existingExerciseTraining.Weight,
             existingExerciseTraining.Sets,
-            order,
+            existingExerciseTraining.Order,
             existingExerciseTraining.RestAfterLastSet,
             existingExerciseTraining.Description,
-            Convert.ToInt32(ExerciseList[ExerciseIndex].Id),
-            trainingId);
+            ExerciseId,
+            existingExerciseTraining.TrainingId,
+            exercise.Name);
         if (model.ExerciseId == 0)
         {
             ErrorMessage = "You have to select exercise";
             return;
         }
-
         await TrainingFacade.UpdateTrainingItem(model);
         await Shell.Current.GoToAsync("..");
         return;
+
+
+
     }
 
 
@@ -138,7 +148,7 @@ public partial class EditExerciseTrainingViewModel : ViewModelBase
     [ICommand]
     private async Task AddWeightAsync()
     {
-        ExistingExerciseTraining = existingExerciseTraining with { Weight = ExistingExerciseTraining.Weight+1 };
+        ExistingExerciseTraining = existingExerciseTraining with { Weight = ExistingExerciseTraining.Weight + 1 };
     }
 
     [ICommand]
@@ -173,32 +183,5 @@ public partial class EditExerciseTrainingViewModel : ViewModelBase
         if (ExistingExerciseTraining.Sets - 1 < 0) return;
         ExistingExerciseTraining = existingExerciseTraining with { Sets = ExistingExerciseTraining.Sets - 1 };
     }
-
-    [ICommand]
-    private async Task EditExerciseTrainingAsync()
-    {
-        if (ExerciseIndex < 1)
-        {
-            ErrorMessage = "You have to pick some exercise";
-            return;
-        }
-        ExerciseTrainingModel model = new ExerciseTrainingModel(null, 
-            ExistingExerciseTraining.RestSeconds,
-            ExistingExerciseTraining.ExerciseSeconds, 
-            ExistingExerciseTraining.Reps, 
-            ExistingExerciseTraining.Weight, 
-            ExistingExerciseTraining.Sets,  
-            ExistingExerciseTraining.Order, 
-            ExistingExerciseTraining.RestAfterLastSet, 
-            ExistingExerciseTraining.Description, 
-            ExistingExerciseTraining.ExerciseId,
-            ExistingExerciseTraining.TrainingId);
-       
-
-        await TrainingFacade.UpdateTrainingItem(model);
-        await Shell.Current.GoToAsync("..");
-        return;
-    }
-
 
 }

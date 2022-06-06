@@ -14,14 +14,13 @@ namespace MauiApp1.DAL.Entities
         public TimeSpan RestSeconds { get; set; }
         public TimeSpan ExerciseSeconds { get; set; }
         public int Reps { get; set; }
-        public int Weight { get; set; }
+        public float Weight { get; set; }
         public int Sets { get; set; }
-        public int Order { get; set; }
         public bool RestAfterLastSet { get; set; }
         [Indexed]
-        public int TrainingId { get; set; }
-        [Indexed]
         public int ExerciseId { get; set; }
+
+        public string ExerciseName { get; set; } 
 
     }
 }

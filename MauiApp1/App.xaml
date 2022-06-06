@@ -46,6 +46,20 @@
                 <Setter Property="BackgroundColor"
                         Value="LightGray" />
             </Style>
+
+            <Style TargetType="Label"
+                   Class="FakeEntry">
+                <Setter Property="FontSize"
+                        Value="25" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="BackgroundColor"
+                        Value="LightGrey" />
+                <Setter Property="MinimumWidthRequest"
+                        Value="50" />
+            </Style>
             
 
 
