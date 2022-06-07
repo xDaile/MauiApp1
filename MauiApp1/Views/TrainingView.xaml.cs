@@ -11,8 +11,4 @@ public partial class TrainingView:ContentPageBase
 		InitializeComponent();
 	}
 
-    private void Switch_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-
-    }
 }

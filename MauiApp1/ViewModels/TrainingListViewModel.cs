@@ -113,4 +113,13 @@ public partial class TrainingListViewModel : ViewModelBase
         await RefreshTrainingPlan();
         return;
     }
+
+
+    [ICommand]
+    private async Task StartTrainingAsync(int id)
+    {
+        var route = routingService.GetRouteByViewModel<TrainingPlayViewModel>();
+        await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+        return;
+    }
 }

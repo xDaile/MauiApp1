@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="MauiApp1.Views.TrainingPlayView"
+                       Title="{x:Static resources:Texts.Training_List_Page_Title}"
+                       xmlns:models="clr-namespace:MauiApp1.Models"
+                       xmlns:locaĺ="clr=namespace:MauiApp1.Views.Selector"
+                       xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
+                       xmlns:resources="clr-namespace:MauiApp1.Resources"
+                       xmlns:views="clr-namespace:MauiApp1.Views"
+                       x:DataType="viewModels:TrainingPlayViewModel"
+                       x:Name="Root">
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="models:PauseModel"
+                      x:Key="PauseItem">
+
+
+            <Grid HorizontalOptions="CenterAndExpand"
+                  Grid.Column="0"
+                  ColumnDefinitions="10,*,10"
+                  RowDefinitions="10,Auto,8,Auto,8">
+                <Label Grid.Row="1"
+                       Grid.Column="3"
+                       LineBreakMode="CharacterWrap"
+                       Text="{Binding Name}"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Label Grid.Row="3"
+                       Grid.Column="3"
+                       LineBreakMode="CharacterWrap"
+                       Text="{Binding Description}"
+                       FontSize="21"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+            </Grid>
+
+        </DataTemplate>
+        <DataTemplate x:DataType="models:ExerciseTrainingModel"
+                      x:Key="ExerciseTrainingItem">
+            <Grid HorizontalOptions="CenterAndExpand"
+                  Grid.Column="0"
+                  ColumnDefinitions="10,*,10"
+                  RowDefinitions="10,Auto,8,Auto,8,Auto">
+                <Label Grid.Row="1"
+                       Grid.Column="3"
+                       LineBreakMode="CharacterWrap"
+                       Text="{Binding ExerciseName}"
+                       FontSize="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Label Grid.Row="3"
+                       Grid.Column="3"
+                       LineBreakMode="CharacterWrap"
+                       Text="{Binding Description}"
+                       FontSize="21"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Grid Grid.Row="5"
+                      ColumnDefinitions="*,5,*,5,*"
+                      RowDefinitions="Auto,5,Auto">
+
+                    <Grid Grid.Row="0"
+                          Grid.Column="0"
+                          ColumnDefinitions="Auto,5,Auto">
+                        <Image Grid.Column="0"
+                               Source="/Images/sets.png"
+                               Aspect="AspectFit"
+                               VerticalOptions="End"
+                               Margin="10,10,10,10"
+                               MaximumHeightRequest="30"
+                               MaximumWidthRequest="30"
+                               HorizontalOptions="End" />
+                        <Label Grid.Column="2"
+                               Text="{x:Static resources:Texts.Label_Sets}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                    </Grid>
+                    <Grid Grid.Row="0"
+                          Grid.Column="2"
+                          ColumnDefinitions="Auto,5,Auto">
+                        <Image Grid.Column="0"
+                               Source="/Images/reps.png"
+                               Aspect="AspectFit"
+                               VerticalOptions="End"
+                               Margin="10,10,10,10"
+                               MaximumHeightRequest="30"
+                               MaximumWidthRequest="30"
+                               HorizontalOptions="End" />
+                        <Label Grid.Column="2"
+                               Text="{x:Static resources:Texts.Label_Rest}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                    </Grid>
+                    <Grid Grid.Row="0"
+                          Grid.Column="4"
+                          ColumnDefinitions="Auto,5,Auto">
+                        <Image Grid.Column="0"
+                               Source="/Images/weight.png"
+                               Aspect="AspectFit"
+                               VerticalOptions="End"
+                               Margin="10,10,10,10"
+                               MaximumHeightRequest="30"
+                               MaximumWidthRequest="30"
+                               HorizontalOptions="End" />
+                        <Label Grid.Column="2"
+                               Text="{x:Static resources:Texts.Label_Weight}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                    </Grid>
+
+                    <Label Grid.Column="0"
+                           Grid.Row="2"
+                           StyleClass="FakeEntry"
+                           LineBreakMode="CharacterWrap"
+                           Text="{Binding Sets}"
+                           FontSize="18"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="End" />
+                    <Label Grid.Column="2"
+                           Grid.Row="2"
+                           StyleClass="FakeEntry"
+                           LineBreakMode="CharacterWrap"
+                           Text="{Binding Reps}"
+                           FontSize="18"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="End" />
+                    <Label Grid.Column="4"
+                           Grid.Row="2"
+                           StyleClass="FakeEntry"
+                           LineBreakMode="CharacterWrap"
+                           Text="{Binding Weight}"
+                           FontSize="18"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="End" />
+
+
+                    <Grid Grid.Row="0"
+                          ColumnDefinitions="Auto,*,10"
+                          RowDefinitions="Auto,10,Auto">
+                        <Grid Grid.Row="0"
+                              Grid.Column="0"
+                              ColumnDefinitions="Auto,5,Auto">
+                            <Image Grid.Column="0"
+                                   Source="/Images/sets.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="30"
+                                   MaximumWidthRequest="30"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="2"
+                                   Text="{x:Static resources:Texts.Label_Sets}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </Grid>
+
+                        <Label Grid.Column="0"
+                               Grid.Row="2"
+                               StyleClass="FakeEntry"
+                               LineBreakMode="CharacterWrap"
+                               Text="{Binding Sets}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="End" />
+
+
+                    </Grid>
+                    <Grid Grid.Row="0"
+                          ColumnDefinitions="Auto,*,10"
+                          RowDefinitions="Auto,10,Auto">
+                        <Grid Grid.Row="0"
+                              Grid.Column="0"
+                              ColumnDefinitions="Auto,5,Auto">
+                            <Image Grid.Column="0"
+                                   Source="/Images/sets.png"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="End"
+                                   Margin="10,10,10,10"
+                                   MaximumHeightRequest="30"
+                                   MaximumWidthRequest="30"
+                                   HorizontalOptions="End" />
+                            <Label Grid.Column="2"
+                                   Text="{x:Static resources:Texts.Label_Sets}"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </Grid>
+
+                        <Label Grid.Column="0"
+                               Grid.Row="2"
+                               StyleClass="FakeEntry"
+                               LineBreakMode="CharacterWrap"
+                               Text="{Binding Sets}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="End" />
+
+
+                    </Grid>
+
+
+                </Grid>
+
+
+
+
+            </Grid>
+        </DataTemplate>
+
+        <views:TrainingItemTemplateSelector x:Key="trainingItemTemplateSelector"
+                                            PauseTemplate="{StaticResource PauseItem}"
+                                            ExerciseTrainingTemplate="{StaticResource ExerciseTrainingItem}" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions="5,50,20,55,20,25,10, 75,10, 155,*,10,25">
+        <Grid Grid.Row="1"
+              ColumnDefinitions="10,40,10,*,10">
+            <Image Grid.Column="1"
+                   Grid.Row="1"
+                   Source="/Images/sound.png"
+                   Aspect="AspectFit"
+                   VerticalOptions="CenterAndExpand"
+                   Margin="10,10,10,10"
+                   MaximumHeightRequest="35"
+                   MaximumWidthRequest="35"
+                   HorizontalOptions="CenterAndExpand" />
+            <Slider Grid.Column="3"
+                    Value="{Binding SoundLevel}"></Slider>
+        </Grid>
+        <Grid Grid.Row="3"
+              ColumnDefinitions="10,40,10,*,10,40,10">
+            <ImageButton Grid.Column="1"
+                         Aspect="AspectFill"
+                         MaximumHeightRequest="50"
+                         MaximumWidthRequest="50"
+                         Source="/Images/previous.png"
+                         Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToPreviousItemCommand}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End" />
+            <Button Grid.Column="3"
+                    MaximumHeightRequest="50"
+                    FontSize="20"
+                    Text="{x:Static resources:Texts.Hold_to_exit_label}"
+                    Command="{Binding Source={x:Reference Root}, Path=BindingContext.ExitTrainingSessionCommand}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End" />
+            <ImageButton Grid.Column="5"
+                         Aspect="AspectFill"
+                         MaximumHeightRequest="50"
+                         MaximumWidthRequest="50"
+                         Source="/Images/next.png"
+                         Command="{Binding Source={x:Reference Root}, Path=BindingContext.GoToNextItemCommand}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End" />
+        </Grid>
+        <Label Grid.Row="5"
+               HorizontalOptions="Center"
+               Text="{Binding NextInRow}"
+               FontSize="15" />
+        <Label Grid.Row="7"
+               HorizontalOptions="Center"
+               Text="{Binding CurrentStatus}"
+               FontSize="65" />
+
+        <Label Grid.Row="9"
+               HorizontalOptions="Center"
+               Text="{Binding Timer}"
+               FontSize="125" />
+        <CollectionView Grid.Row="11"
+                        ItemsSource="{Binding TrainingCurrentItem}"
+                        ItemTemplate="{StaticResource trainingItemTemplateSelector}" />
+
+
+
+        <ImageButton Grid.Row="11"
+                     Aspect="AspectFill"
+                     Margin="20"
+                     MaximumHeightRequest="70"
+                     MaximumWidthRequest="70"
+                     Source="{Binding CurrentPlayStopImage}"
+                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.PauseStartCommand}"
+                     HorizontalOptions="End"
+                     VerticalOptions="End" />
+
+    </Grid>
+
+
+</views:ContentPageBase>

@@ -448,6 +448,15 @@ namespace MauiApp1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hold to exit.
+        /// </summary>
+        internal static string Hold_to_exit_label {
+            get {
+                return ResourceManager.GetString("Hold_to_exit_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reps:.
         /// </summary>
         internal static string Label_Reps {

@@ -40,10 +40,11 @@
                             <Grid ColumnDefinitions="*,45,5">
                                 <Grid HorizontalOptions="CenterAndExpand"
                                       Grid.Column="0"
-                                      ColumnDefinitions="5,65,20,*"
-                                      RowDefinitions="10,Auto,8,Auto">
+                                      ColumnDefinitions="10,65,20,*"
+                                      RowDefinitions="10,Auto,8,Auto,Auto">
                                     <Image Grid.Column="1"
-                                           Grid.RowSpan="4"
+                                           Grid.Row="1"
+                                           Grid.RowSpan="3"
                                            Source="/Images/training_plan.png"
                                            Aspect="AspectFit"
                                            VerticalOptions="CenterAndExpand"
@@ -59,15 +60,29 @@
                                            FontSize="22"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Start" />
-                                    <Label Grid.Column="3"
+                                    <Grid  Grid.Column="3"
                                            Grid.Row="3"
                                            Grid.ColumnSpan="2"
-                                           Text="{Binding Description}"
-                                           FontSize="15"
-                                           LineBreakMode="CharacterWrap"
-                                           FontAttributes="Italic"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
+                                           ColumnDefinitions="*,5,50,15"
+                                           VerticalOptions="End">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Description}"
+                                               FontSize="15"
+                                               LineBreakMode="CharacterWrap"
+                                               FontAttributes="Italic"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start" />
+                                        <ImageButton Grid.Column="2"
+                                                     Aspect="AspectFill"
+                                                     MaximumHeightRequest="50"
+                                                     MaximumWidthRequest="50"
+                                                     Source="/Images/play.png"
+                                                     Command="{Binding Source={x:Reference Root}, Path=BindingContext.StartTrainingCommand}"
+                                                     CommandParameter="{Binding Id}"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="End" />
+                                    </Grid>
+
                                 </Grid>
                                 <Grid Grid.Column="1"
                                       RowDefinitions="5,Auto,15,Auto,5,Auto"
