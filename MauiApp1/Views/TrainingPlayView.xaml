@@ -2,7 +2,7 @@
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        x:Class="MauiApp1.Views.TrainingPlayView"
-                       Title="{x:Static resources:Texts.Training_List_Page_Title}"
+                       Title="{Binding Training.Name}"
                        xmlns:models="clr-namespace:MauiApp1.Models"
                        xmlns:locaĺ="clr=namespace:MauiApp1.Views.Selector"
                        xmlns:viewModels="clr-namespace:MauiApp1.ViewModels"
@@ -16,18 +16,17 @@
 
 
             <Grid HorizontalOptions="CenterAndExpand"
-                  Grid.Column="0"
-                  ColumnDefinitions="10,*,10"
-                  RowDefinitions="10,Auto,8,Auto,8">
+                  ColumnDefinitions="35,*,10"
+                  RowDefinitions="20,Auto,18,Auto,8">
                 <Label Grid.Row="1"
-                       Grid.Column="3"
+                       Grid.Column="1"
                        LineBreakMode="CharacterWrap"
                        Text="{Binding Name}"
                        FontSize="25"
                        VerticalOptions="Center"
                        HorizontalOptions="Start" />
                 <Label Grid.Row="3"
-                       Grid.Column="3"
+                       Grid.Column="1"
                        LineBreakMode="CharacterWrap"
                        Text="{Binding Description}"
                        FontSize="21"
@@ -40,23 +39,24 @@
                       x:Key="ExerciseTrainingItem">
             <Grid HorizontalOptions="CenterAndExpand"
                   Grid.Column="0"
-                  ColumnDefinitions="10,*,10"
-                  RowDefinitions="10,Auto,8,Auto,8,Auto">
+                  ColumnDefinitions="35,*,10"
+                  RowDefinitions="20,Auto,15,Auto,12,Auto">
                 <Label Grid.Row="1"
-                       Grid.Column="3"
+                       Grid.Column="1"
                        LineBreakMode="CharacterWrap"
                        Text="{Binding ExerciseName}"
                        FontSize="25"
                        VerticalOptions="Center"
                        HorizontalOptions="Start" />
                 <Label Grid.Row="3"
-                       Grid.Column="3"
+                       Grid.Column="1"
                        LineBreakMode="CharacterWrap"
                        Text="{Binding Description}"
                        FontSize="21"
                        VerticalOptions="Center"
                        HorizontalOptions="Start" />
                 <Grid Grid.Row="5"
+                      Grid.Column="1"
                       ColumnDefinitions="*,5,*,5,*"
                       RowDefinitions="Auto,5,Auto">
 
@@ -66,8 +66,8 @@
                         <Image Grid.Column="0"
                                Source="/Images/sets.png"
                                Aspect="AspectFit"
-                               VerticalOptions="End"
-                               Margin="10,10,10,10"
+                               VerticalOptions="Center"
+                               
                                MaximumHeightRequest="30"
                                MaximumWidthRequest="30"
                                HorizontalOptions="End" />
@@ -83,8 +83,7 @@
                         <Image Grid.Column="0"
                                Source="/Images/reps.png"
                                Aspect="AspectFit"
-                               VerticalOptions="End"
-                               Margin="10,10,10,10"
+                               VerticalOptions="Center"
                                MaximumHeightRequest="30"
                                MaximumWidthRequest="30"
                                HorizontalOptions="End" />
@@ -100,8 +99,7 @@
                         <Image Grid.Column="0"
                                Source="/Images/weight.png"
                                Aspect="AspectFit"
-                               VerticalOptions="End"
-                               Margin="10,10,10,10"
+                               VerticalOptions="Center"
                                MaximumHeightRequest="30"
                                MaximumWidthRequest="30"
                                HorizontalOptions="End" />
@@ -118,9 +116,9 @@
                            LineBreakMode="CharacterWrap"
                            Text="{Binding Sets}"
                            FontSize="18"
-                           VerticalOptions="Center"
+                           VerticalOptions="Start"
                            HorizontalTextAlignment="Center"
-                           HorizontalOptions="End" />
+                           HorizontalOptions="Center" />
                     <Label Grid.Column="2"
                            Grid.Row="2"
                            StyleClass="FakeEntry"
@@ -129,7 +127,7 @@
                            FontSize="18"
                            VerticalOptions="Center"
                            HorizontalTextAlignment="Center"
-                           HorizontalOptions="End" />
+                           HorizontalOptions="Center" />
                     <Label Grid.Column="4"
                            Grid.Row="2"
                            StyleClass="FakeEntry"
@@ -138,75 +136,7 @@
                            FontSize="18"
                            VerticalOptions="Center"
                            HorizontalTextAlignment="Center"
-                           HorizontalOptions="End" />
-
-
-                    <Grid Grid.Row="0"
-                          ColumnDefinitions="Auto,*,10"
-                          RowDefinitions="Auto,10,Auto">
-                        <Grid Grid.Row="0"
-                              Grid.Column="0"
-                              ColumnDefinitions="Auto,5,Auto">
-                            <Image Grid.Column="0"
-                                   Source="/Images/sets.png"
-                                   Aspect="AspectFit"
-                                   VerticalOptions="End"
-                                   Margin="10,10,10,10"
-                                   MaximumHeightRequest="30"
-                                   MaximumWidthRequest="30"
-                                   HorizontalOptions="End" />
-                            <Label Grid.Column="2"
-                                   Text="{x:Static resources:Texts.Label_Sets}"
-                                   FontSize="18"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Start" />
-                        </Grid>
-
-                        <Label Grid.Column="0"
-                               Grid.Row="2"
-                               StyleClass="FakeEntry"
-                               LineBreakMode="CharacterWrap"
-                               Text="{Binding Sets}"
-                               FontSize="18"
-                               VerticalOptions="Center"
-                               HorizontalTextAlignment="Center"
-                               HorizontalOptions="End" />
-
-
-                    </Grid>
-                    <Grid Grid.Row="0"
-                          ColumnDefinitions="Auto,*,10"
-                          RowDefinitions="Auto,10,Auto">
-                        <Grid Grid.Row="0"
-                              Grid.Column="0"
-                              ColumnDefinitions="Auto,5,Auto">
-                            <Image Grid.Column="0"
-                                   Source="/Images/sets.png"
-                                   Aspect="AspectFit"
-                                   VerticalOptions="End"
-                                   Margin="10,10,10,10"
-                                   MaximumHeightRequest="30"
-                                   MaximumWidthRequest="30"
-                                   HorizontalOptions="End" />
-                            <Label Grid.Column="2"
-                                   Text="{x:Static resources:Texts.Label_Sets}"
-                                   FontSize="18"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Start" />
-                        </Grid>
-
-                        <Label Grid.Column="0"
-                               Grid.Row="2"
-                               StyleClass="FakeEntry"
-                               LineBreakMode="CharacterWrap"
-                               Text="{Binding Sets}"
-                               FontSize="18"
-                               VerticalOptions="Center"
-                               HorizontalTextAlignment="Center"
-                               HorizontalOptions="End" />
-
-
-                    </Grid>
+                           HorizontalOptions="Center" />
 
 
                 </Grid>
@@ -221,7 +151,8 @@
                                             PauseTemplate="{StaticResource PauseItem}"
                                             ExerciseTrainingTemplate="{StaticResource ExerciseTrainingItem}" />
     </ContentPage.Resources>
-    <Grid RowDefinitions="5,50,20,55,20,25,10, 75,10, 155,*,10,25">
+    <Grid RowDefinitions="0,40,5,55,15,20,5, 75,5, 155,1,*,1,95"  HorizontalOptions="CenterAndExpand"
+          BackgroundColor="{Binding CurrentColor}">
         <Grid Grid.Row="1"
               ColumnDefinitions="10,40,10,*,10">
             <Image Grid.Column="1"
@@ -273,15 +204,17 @@
 
         <Label Grid.Row="9"
                HorizontalOptions="Center"
-               Text="{Binding Timer}"
+               Text="{Binding RemainingTime}"
                FontSize="125" />
         <CollectionView Grid.Row="11"
+                        
+                        HorizontalOptions="Center"
                         ItemsSource="{Binding TrainingCurrentItem}"
                         ItemTemplate="{StaticResource trainingItemTemplateSelector}" />
 
 
 
-        <ImageButton Grid.Row="11"
+        <ImageButton Grid.Row="13"
                      Aspect="AspectFill"
                      Margin="20"
                      MaximumHeightRequest="70"

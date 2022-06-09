@@ -8,43 +8,72 @@
        Shell.TabBarTitleColor="{DynamicResource PauseColor}"
        Shell.UnselectedColor="{DynamicResource PauseColor}"
        Shell.TabBarBackgroundColor="{DynamicResource PauseColor}"
-       FlyoutBackgroundColor="{DynamicResource PrimaryColor}">
-    
+       FlyoutBackgroundColor="#247bff">
+    <Shell.FlyoutHeader>
+        
+        <Grid HorizontalOptions="Start"
+              VerticalOptions="Center"
+               IsClippedToBounds="True"
+              ColumnDefinitions="5,*,5"
+              BackgroundColor="DarkGray"
+              HeightRequest="200"
+              
+             
+              Margin="10,10,10,10">
+            <Image VerticalOptions="Center"
+                   Grid.Column="1"
+                   Aspect="AspectFit"
+                   MaximumHeightRequest="180"
+                   
+                   HorizontalOptions="Center"
+                   Source="/Images/menu_header.png"
+                   />
+        </Grid>
+    </Shell.FlyoutHeader>
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid ColumnDefinitions="20, *"
+            <Grid ColumnDefinitions="20,35,10, *"
                   ColumnSpacing="10"
-                  Padding="10">
-                <Label Grid.Column="1"
+                  Padding="15">
+                <Image Grid.Column="1"
+                       Source="{Binding FlyoutIcon}"
+                       HeightRequest="45"
+                       Margin="5" />
+                <Label Grid.Column="3"
                        FontSize="15"
-                        Text="{Binding Title}"
+                       Text="{Binding Title}"
                        VerticalOptions="CenterAndExpand"
                        TextColor="{DynamicResource SecondaryColor}" />
             </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>
+    
 
-
-    <FlyoutItem Title="{x:Static resources:Texts.Training_Plans_Page_Title}">
+    <FlyoutItem Title="{x:Static resources:Texts.Training_Plans_Page_Title}"
+                Icon="/Images/training_plan_menu.png">
 
         <ShellContent ContentTemplate="{DataTemplate views:TrainingPlanListView}"
                       Route="training_plans" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static resources:Texts.Exercise_List_Page_Title}">
+    <FlyoutItem Title="{x:Static resources:Texts.Exercise_List_Page_Title}"
+                Icon="/Images/exercise_menu.png">
         <ShellContent ContentTemplate="{DataTemplate views:ExerciseListView}"
                       Route="exercises" />
     </FlyoutItem>
 
 
-    <FlyoutItem Title="{x:Static resources:Texts.Settings_Page_Title}">
+    <FlyoutItem Title="{x:Static resources:Texts.Settings_Page_Title}"
+                Icon="/Images/settings.png">
         <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"
                       Route="settings" />
     </FlyoutItem>
 
 
-    <FlyoutItem Title="{x:Static resources:Texts.User_Page_Title}">
+    <FlyoutItem Title="{x:Static resources:Texts.User_Page_Title}"
+                Icon="/Images/user.png">
         <ShellContent ContentTemplate="{DataTemplate views:UserView}"
                       Route="user" />
     </FlyoutItem>
+    
 </Shell>

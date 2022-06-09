@@ -4,11 +4,12 @@
              xmlns:local="clr-namespace:MauiApp1"
              x:Class="MauiApp1.App">
     <Application.Resources>
+        
         <ResourceDictionary>
 
-            <Color x:Key="PrimaryColor">#512bdf</Color>
-            <Color x:Key="ButtonColor">#34179b</Color>
-            <Color x:Key="ButtonBorderColor">#25116f</Color>
+            <Color x:Key="PrimaryColor">#355c7d</Color>
+            <Color x:Key="ButtonColor">#0447c9</Color>
+            <Color x:Key="ButtonBorderColor">#022b7a</Color>
             <Color x:Key="SecondaryColor">White</Color>
             <Color x:Key="RunningColor">Green</Color>
             <Color x:Key="RestColor">#e0f542</Color>

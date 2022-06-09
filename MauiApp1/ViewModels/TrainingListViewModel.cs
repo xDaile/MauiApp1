@@ -119,7 +119,7 @@ public partial class TrainingListViewModel : ViewModelBase
     private async Task StartTrainingAsync(int id)
     {
         var route = routingService.GetRouteByViewModel<TrainingPlayViewModel>();
-        await Shell.Current.GoToAsync($"{route}?trainingId={id}");
+        await Shell.Current.GoToAsync($"{route}?trainingId={id}&Order=0");
         return;
     }
 }

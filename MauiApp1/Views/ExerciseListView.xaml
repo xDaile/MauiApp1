@@ -30,7 +30,7 @@
                                 <Image Grid.Column="1"
                                        Grid.RowSpan="4"
                                        
-                                       Source="/Images/training_plan.png"
+                                       Source="/Images/exercise.png"
                                        Aspect="AspectFit"
                                        VerticalOptions="CenterAndExpand"
                                        

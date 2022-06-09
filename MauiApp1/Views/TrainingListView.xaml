@@ -85,7 +85,7 @@
 
                                 </Grid>
                                 <Grid Grid.Column="1"
-                                      RowDefinitions="5,Auto,15,Auto,5,Auto"
+                                      RowDefinitions="5,Auto,25,Auto,15,Auto"
                                       HorizontalOptions="End">
                                     <ImageButton Grid.Row="1"
                                                  Aspect="AspectFill"
@@ -98,8 +98,8 @@
                                                  VerticalOptions="Center" />
                                     <ImageButton Grid.Row="3"
                                                  Aspect="AspectFill"
-                                                 MaximumHeightRequest="40"
-                                                 MaximumWidthRequest="40"
+                                                 MaximumHeightRequest="20"
+                                                 MaximumWidthRequest="30"
                                                  Source="/Images/up_button.png"
                                                  Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingUpCommand}"
                                                  CommandParameter="{Binding Id}"
@@ -107,8 +107,8 @@
                                                  VerticalOptions="End" />
                                     <ImageButton Grid.Row="5"
                                                  Aspect="AspectFill"
-                                                 MaximumHeightRequest="40"
-                                                 MaximumWidthRequest="40"
+                                                 MaximumHeightRequest="20"
+                                                 MaximumWidthRequest="30"
                                                  Source="/Images/down_button.png"
                                                  Command="{Binding Source={x:Reference Root}, Path=BindingContext.MoveTrainingDownCommand}"
                                                  CommandParameter="{Binding Id}"
